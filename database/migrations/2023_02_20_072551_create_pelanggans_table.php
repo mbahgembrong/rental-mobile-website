@@ -15,11 +15,11 @@ class CreatePelanggansTable extends Migration
     public function up()
     {
         Schema::create('pelanggans', function (Blueprint $table) {
-            $table->string('nik')->12();
+            $table->string('nik',12);
             $table->string('nama');
             $table->date('tanggal_lahir');
             $table->text('alamat');
-            $table->string('hp')->15();
+            $table->string('hp', 15);
             $table->string('ktp');
             $table->string('email');
             $table->string('password');

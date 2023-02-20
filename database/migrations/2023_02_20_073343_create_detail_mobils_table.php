@@ -16,7 +16,7 @@ class CreateDetailMobilsTable extends Migration
     {
         Schema::create('detail_mobils', function (Blueprint $table) {
             $table->uuid('mobil_id');
-            $table->string('plat')->12();
+            $table->string('plat',12);
             $table->string('stnk');
             $table->string('tahun_mobil');
             $table->string('status');
