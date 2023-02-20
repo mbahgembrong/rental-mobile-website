@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    use \App\Traits\TraitUuid;
+
     /**
      * The attributes that are mass assignable.
      *

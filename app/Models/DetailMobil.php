@@ -23,8 +23,10 @@ class DetailMobil extends Model
 
     use HasFactory;
 
+    use \App\Traits\TraitUuid;
+
     public $table = 'detail_mobils';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -63,5 +65,5 @@ class DetailMobil extends Model
         'status' => 'required'
     ];
 
-    
+
 }

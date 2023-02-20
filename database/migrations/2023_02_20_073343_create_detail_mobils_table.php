@@ -15,6 +15,7 @@ class CreateDetailMobilsTable extends Migration
     public function up()
     {
         Schema::create('detail_mobils', function (Blueprint $table) {
+             $table->uuid('id')->primary();
             $table->uuid('mobil_id');
             $table->string('plat',12);
             $table->string('stnk');

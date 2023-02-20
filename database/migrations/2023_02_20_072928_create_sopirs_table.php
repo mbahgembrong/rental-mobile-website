@@ -15,6 +15,7 @@ class CreateSopirsTable extends Migration
     public function up()
     {
         Schema::create('sopirs', function (Blueprint $table) {
+             $table->uuid('id')->primary();
             $table->string('nik',12);
             $table->string('nomor_sim',12);
             $table->string('nama');

@@ -29,8 +29,10 @@ class Sopir extends Model
 
     use HasFactory;
 
+    use \App\Traits\TraitUuid;
+
     public $table = 'sopirs';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -88,5 +90,5 @@ class Sopir extends Model
         'foto' => 'required|image'
     ];
 
-    
+
 }

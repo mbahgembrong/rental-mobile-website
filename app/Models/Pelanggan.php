@@ -27,8 +27,10 @@ class Pelanggan extends Model
 
     use HasFactory;
 
+    use \App\Traits\TraitUuid;
+
     public $table = 'pelanggans';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -80,5 +82,5 @@ class Pelanggan extends Model
         'foto' => 'required|image'
     ];
 
-    
+
 }

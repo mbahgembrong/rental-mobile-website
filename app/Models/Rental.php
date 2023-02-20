@@ -28,8 +28,10 @@ class Rental extends Model
 
     use HasFactory;
 
+    use \App\Traits\TraitUuid;
+
     public $table = 'rentals';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -81,5 +83,5 @@ class Rental extends Model
         'grand_total' => 'required|integer'
     ];
 
-    
+
 }

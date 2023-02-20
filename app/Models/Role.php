@@ -19,8 +19,10 @@ class Role extends Model
 
     use HasFactory;
 
+    use \App\Traits\TraitUuid;
+
     public $table = 'roles';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -48,5 +50,5 @@ class Role extends Model
         'nama' => 'required|string'
     ];
 
-    
+
 }

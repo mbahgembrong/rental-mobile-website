@@ -26,8 +26,10 @@ class Mobil extends Model
 
     use HasFactory;
 
+    use \App\Traits\TraitUuid;
+
     public $table = 'mobils';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -75,5 +77,5 @@ class Mobil extends Model
         'denda' => 'required|numeric'
     ];
 
-    
+
 }

@@ -19,8 +19,10 @@ class KategoriMobil extends Model
 
     use HasFactory;
 
+    use \App\Traits\TraitUuid;
+
     public $table = 'kategori_mobils';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -48,5 +50,5 @@ class KategoriMobil extends Model
         'nama' => 'required'
     ];
 
-    
+
 }
