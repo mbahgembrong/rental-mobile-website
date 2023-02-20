@@ -7,7 +7,7 @@
 <!-- Jenis Kelamin Field -->
 <div class="form-group">
     {!! Form::label('jenis kelamin', 'Jenis Kelamin:') !!}
-    <p>{{ $user->jenis kelamin }}</p>
+    <p>{{ $user->jenis_kelamin }}</p>
 </div>
 
 <!-- Alamat Field -->
@@ -27,4 +27,3 @@
     {!! Form::label('password', 'Password:') !!}
     <p>{{ $user->password }}</p>
 </div>
-

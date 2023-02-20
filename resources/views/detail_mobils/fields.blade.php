@@ -1,7 +1,7 @@
 <!-- Mobil Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('mobil_id', 'Mobil Id:') !!}
-    {!! Form::select('mobil_id', ], null, ['class' => 'form-control']) !!}
+    {!! Form::select('mobil_id', $mobils, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Plat Field -->

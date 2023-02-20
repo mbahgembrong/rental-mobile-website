@@ -1,7 +1,7 @@
 <!-- Kategori Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('kategori_id', 'Kategori Id:') !!}
-    {!! Form::select('kategori_id', ], null, ['class' => 'form-control']) !!}
+    {!! Form::select('kategori_id', $kategori_mobils, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Nama Field -->
@@ -37,7 +37,7 @@
 <!-- Satuan Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('satuan', 'Satuan:') !!}
-    {!! Form::select('satuan', ], null, ['class' => 'form-control']) !!}
+    {!! Form::select('satuan', ['hari' => 'hari', 'jam' => 'jam'], null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Denda Field -->

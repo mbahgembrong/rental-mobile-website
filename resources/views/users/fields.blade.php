@@ -7,7 +7,7 @@
 <!-- Jenis Kelamin Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('jenis kelamin', 'Jenis Kelamin:') !!}
-    {!! Form::select('jenis kelamin', ], null, ['class' => 'form-control']) !!}
+    {!! Form::select('jenis kelamin', ['L' => 'Laki-laki', 'P' => 'Perempuan'], null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Alamat Field -->
@@ -25,7 +25,7 @@
 <!-- Password Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('password', 'Password:') !!}
-    {!! Form::password('password', ['class' => 'form-control','minlength' => 6]) !!}
+    {!! Form::password('password', ['class' => 'form-control', 'minlength' => 6]) !!}
 </div>
 
 <!-- Submit Field -->
