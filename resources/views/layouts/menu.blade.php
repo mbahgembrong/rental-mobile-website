@@ -22,3 +22,9 @@
         <span>Sopirs</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('kategoriMobils*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('kategoriMobils.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Kategori Mobils</span>
+    </a>
+</li>

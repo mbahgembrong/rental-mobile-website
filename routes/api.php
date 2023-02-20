@@ -26,3 +26,5 @@ Route::resource('pelanggans', App\Http\Controllers\API\PelangganAPIController::c
 Route::resource('roles', App\Http\Controllers\API\RoleAPIController::class);
 
 Route::resource('sopirs', App\Http\Controllers\API\SopirAPIController::class);
+
+Route::resource('kategori_mobils', App\Http\Controllers\API\KategoriMobilAPIController::class);
