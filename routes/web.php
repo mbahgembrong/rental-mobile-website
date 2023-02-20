@@ -25,3 +25,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('users', App\Http\Controllers\UserController::class);
 
 Route::resource('pelanggans', App\Http\Controllers\PelangganController::class);
+
+Route::resource('roles', App\Http\Controllers\RoleController::class);
