@@ -16,3 +16,9 @@
         <span>Roles</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('sopirs*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('sopirs.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Sopirs</span>
+    </a>
+</li>

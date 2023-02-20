@@ -24,3 +24,5 @@ Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
 Route::resource('pelanggans', App\Http\Controllers\API\PelangganAPIController::class);
 
 Route::resource('roles', App\Http\Controllers\API\RoleAPIController::class);
+
+Route::resource('sopirs', App\Http\Controllers\API\SopirAPIController::class);

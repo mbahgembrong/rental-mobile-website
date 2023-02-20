@@ -27,3 +27,5 @@ Route::resource('users', App\Http\Controllers\UserController::class);
 Route::resource('pelanggans', App\Http\Controllers\PelangganController::class);
 
 Route::resource('roles', App\Http\Controllers\RoleController::class);
+
+Route::resource('sopirs', App\Http\Controllers\SopirController::class);
