@@ -1,0 +1,62 @@
+[
+	{
+		"name": "mobil_id",
+		"dbType": "uuid",
+		"htmlType": "select",
+		"validations": "required|in_array:mobils.id",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "plat",
+		"dbType": "string:12",
+		"htmlType": "text",
+		"validations": "required|digits_between:8,12",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "stnk",
+		"dbType": "string",
+		"htmlType": "text",
+		"validations": "required",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "tahun_mobil",
+		"dbType": "string",
+		"htmlType": "text",
+		"validations": "required",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "status",
+		"dbType": "string",
+		"htmlType": "text",
+		"validations": "required",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	}
+]

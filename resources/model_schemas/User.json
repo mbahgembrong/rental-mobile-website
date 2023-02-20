@@ -1,0 +1,62 @@
+[
+	{
+		"name": "nama",
+		"dbType": "string",
+		"htmlType": "text",
+		"validations": "required",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "jenis kelamin",
+		"dbType": "string",
+		"htmlType": "select",
+		"validations": "required|in:L,P",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "alamat",
+		"dbType": "text",
+		"htmlType": "textarea",
+		"validations": "required",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "email",
+		"dbType": "string",
+		"htmlType": "email",
+		"validations": "required|email",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "password",
+		"dbType": "string",
+		"htmlType": "password",
+		"validations": "required|min:6",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	}
+]

@@ -1,0 +1,122 @@
+[
+	{
+		"name": "pelanggan_id",
+		"dbType": "uuid",
+		"htmlType": "select",
+		"validations": "required|in_array:pelanggans.id",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "detail_mobil_id",
+		"dbType": "uuid",
+		"htmlType": "select",
+		"validations": "required|in_array:detail_mobils.id",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+    {
+		"name": "sopir_id",
+		"dbType": "uuid",
+		"htmlType": "select",
+		"validations": "nullable",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "waktu_peminjaman",
+		"dbType": "integer",
+		"htmlType": "number",
+		"validations": "required|integer",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "waktu_mulai",
+		"dbType": "integer",
+		"htmlType": "date",
+		"validations": "required|integer",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "waktu_selesai",
+		"dbType": "integer",
+		"htmlType": "date",
+		"validations": "required|integer",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "waktu_denda",
+		"dbType": "integer",
+		"htmlType": "number",
+		"validations": "required|numeric",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "total",
+		"dbType": "integer",
+		"htmlType": "number",
+		"validations": "required|integer",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "denda",
+		"dbType": "integer",
+		"htmlType": "number",
+		"validations": "required|integer",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	},
+	{
+		"name": "grand_total",
+		"dbType": "integer",
+		"htmlType": "number",
+		"validations": "required|integer",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	}
+]

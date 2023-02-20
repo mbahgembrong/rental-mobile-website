@@ -1,0 +1,14 @@
+[
+	{
+		"name": "nama",
+		"dbType": "string",
+		"htmlType": "text",
+		"validations": "required",
+		"searchable": true,
+		"fillable": true,
+		"primary": false,
+		"inForm": true,
+		"inIndex": true,
+		"inView": true
+	}
+]
