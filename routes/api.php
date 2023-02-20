@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
+
+Route::resource('pelanggans', App\Http\Controllers\API\PelangganAPIController::class);

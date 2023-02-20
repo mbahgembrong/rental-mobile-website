@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreatePelanggansTable extends Migration
+{
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('pelanggans', function (Blueprint $table) {
+            $table->string('nik')->12();
+            $table->string('nama');
+            $table->date('tanggal_lahir');
+            $table->text('alamat');
+            $table->string('hp')->15();
+            $table->string('ktp');
+            $table->string('email');
+            $table->string('password');
+            $table->string('foto');
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('pelanggans');
+    }
+}
