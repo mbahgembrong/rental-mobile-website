@@ -32,3 +32,5 @@ Route::resource('kategori_mobils', App\Http\Controllers\API\KategoriMobilAPICont
 Route::resource('mobils', App\Http\Controllers\API\MobilAPIController::class);
 
 Route::resource('detail_mobils', App\Http\Controllers\API\DetailMobilAPIController::class);
+
+Route::resource('rentals', App\Http\Controllers\API\RentalAPIController::class);

@@ -40,3 +40,9 @@
         <span>Detail Mobils</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('rentals*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('rentals.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Rentals</span>
+    </a>
+</li>

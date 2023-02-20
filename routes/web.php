@@ -35,3 +35,5 @@ Route::resource('kategoriMobils', App\Http\Controllers\KategoriMobilController::
 Route::resource('mobils', App\Http\Controllers\MobilController::class);
 
 Route::resource('detailMobils', App\Http\Controllers\DetailMobilController::class);
+
+Route::resource('rentals', App\Http\Controllers\RentalController::class);
