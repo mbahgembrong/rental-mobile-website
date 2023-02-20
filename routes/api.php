@@ -28,3 +28,5 @@ Route::resource('roles', App\Http\Controllers\API\RoleAPIController::class);
 Route::resource('sopirs', App\Http\Controllers\API\SopirAPIController::class);
 
 Route::resource('kategori_mobils', App\Http\Controllers\API\KategoriMobilAPIController::class);
+
+Route::resource('mobils', App\Http\Controllers\API\MobilAPIController::class);

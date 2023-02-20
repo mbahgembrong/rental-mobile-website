@@ -31,3 +31,5 @@ Route::resource('roles', App\Http\Controllers\RoleController::class);
 Route::resource('sopirs', App\Http\Controllers\SopirController::class);
 
 Route::resource('kategoriMobils', App\Http\Controllers\KategoriMobilController::class);
+
+Route::resource('mobils', App\Http\Controllers\MobilController::class);

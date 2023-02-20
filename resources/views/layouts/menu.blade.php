@@ -28,3 +28,9 @@
         <span>Kategori Mobils</span>
     </a>
 </li>
+<li class="nav-item {{ Request::is('mobils*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('mobils.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Mobils</span>
+    </a>
+</li>
