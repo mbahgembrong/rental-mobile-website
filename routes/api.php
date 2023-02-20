@@ -30,3 +30,5 @@ Route::resource('sopirs', App\Http\Controllers\API\SopirAPIController::class);
 Route::resource('kategori_mobils', App\Http\Controllers\API\KategoriMobilAPIController::class);
 
 Route::resource('mobils', App\Http\Controllers\API\MobilAPIController::class);
+
+Route::resource('detail_mobils', App\Http\Controllers\API\DetailMobilAPIController::class);
