@@ -2,7 +2,7 @@
 
 @section('content')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">Users</li>
+        <li class="breadcrumb-item">Pegawai</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
@@ -12,13 +12,13 @@
                      <div class="card">
                          <div class="card-header">
                              <i class="fa fa-align-justify"></i>
-                             Users
+                             Pegawai
                              <a class="pull-right" href="{{ route('users.create') }}"><i class="fa fa-plus-square fa-lg"></i></a>
                          </div>
                          <div class="card-body">
                              @include('users.table')
                               <div class="pull-right mr-3">
-                                     
+
                               </div>
                          </div>
                      </div>

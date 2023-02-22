@@ -2,7 +2,7 @@
     <a class="nav-link" href="{{ route('users.index') }}">
         <i class="nav-icon fa fa-user" aria-hidden="true"></i>
         {{-- <i class=" icon-ion-person"></i> --}}
-        <span>Users</span>
+        <span>Pegawai</span>
     </a>
 </li>
 <li class="nav-item {{ Request::is('pelanggans*') ? 'active' : '' }}">

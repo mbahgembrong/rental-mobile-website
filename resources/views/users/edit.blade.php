@@ -3,7 +3,7 @@
 @section('content')
     <ol class="breadcrumb">
           <li class="breadcrumb-item">
-             <a href="{!! route('users.index') !!}">User</a>
+             <a href="{!! route('users.index') !!}">Pegawai</a>
           </li>
           <li class="breadcrumb-item active">Edit</li>
         </ol>
@@ -15,7 +15,7 @@
                       <div class="card">
                           <div class="card-header">
                               <i class="fa fa-edit fa-lg"></i>
-                              <strong>Edit User</strong>
+                              <strong>Edit Pegawai</strong>
                           </div>
                           <div class="card-body">
                               {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'patch']) !!}
