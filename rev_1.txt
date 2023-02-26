@@ -1,0 +1,7 @@
+mobils ->tipe dihapus
+mobils -> merk digeser kiri
+mobil -> add stock get from detail_mobil
+pegawai -> filter dan cetak
+pelanggan -> filter dan cetak dokumen
+sopir -> filter dan cetak dokumen
+
