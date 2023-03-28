@@ -6,8 +6,10 @@ use App\Http\Requests\CreateSopirRequest;
 use App\Http\Requests\UpdateSopirRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Sopir;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Storage;
 use Response;
 
 class SopirController extends AppBaseController
@@ -48,7 +50,23 @@ class SopirController extends AppBaseController
     public function store(CreateSopirRequest $request)
     {
         $input = $request->all();
-
+        $input['password'] = bcrypt($input['password']);
+        $input['tanggal_lahir'] = Carbon::createFromFormat('d/m/Y', $input['tanggal_lahir'])->format('Y-m-d');
+        if ($request->hasFile('ktp')) {
+            $imageName = time() . $request->file('ktp')->getClientOriginalName();
+            Storage::disk('public')->put('sopirs/ktp/' . $imageName, file_get_contents($request->file('ktp')->getRealPath()));
+            $input['ktp'] = $imageName;
+        }
+        if ($request->hasFile('sim')) {
+            $imageName = time() . $request->file('sim')->getClientOriginalName();
+            Storage::disk('public')->put('sopirs/sim/' . $imageName, file_get_contents($request->file('sim')->getRealPath()));
+            $input['sim'] = $imageName;
+        }
+        if ($request->hasFile('foto')) {
+            $imageName = time() . $request->file('foto')->getClientOriginalName();
+            Storage::disk('public')->put('sopirs/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
+            $input['foto'] = $imageName;
+        }
         /** @var Sopir $sopir */
         $sopir = Sopir::create($input);
 
@@ -117,8 +135,32 @@ class SopirController extends AppBaseController
 
             return redirect(route('sopirs.index'));
         }
+        $input = $request->all();
+        if ($request->hasFile('ktp') && $request->file('ktp')->getClientOriginalName() != $sopir->ktp) {
+            $imageName = time() . $request->file('ktp')->getClientOriginalName();
+            Storage::disk('public')->put('sopirs/ktp/' . $imageName, file_get_contents($request->file('ktp')->getRealPath()));
+            $input['ktp'] = $imageName;
+        } else
+            unset($input['ktp']);
+        if ($request->hasFile('sim') && $request->file('sim')->getClientOriginalName() != $sopir->sim) {
+            $imageName = time() . $request->file('sim')->getClientOriginalName();
+            Storage::disk('public')->put('sopirs/sim/' . $imageName, file_get_contents($request->file('sim')->getRealPath()));
+            $input['sim'] = $imageName;
+        } else
+            unset($input['sim']);
+        if ($request->hasFile('foto') && $request->file('foto')->getClientOriginalName() != $sopir->foto) {
+            $imageName = time() . $request->file('foto')->getClientOriginalName();
+            Storage::disk('public')->put('sopirs/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
+            $input['foto'] = $imageName;
+        } else
+            unset($input['foto']);
 
-        $sopir->fill($request->all());
+        $input['tanggal_lahir'] = Carbon::createFromFormat('d/m/Y', $input['tanggal_lahir'])->format('Y-m-d');
+        if ($input['password'] == null)
+            unset($input['password']);
+        else
+            $input['password'] = bcrypt($input['password']);
+        $sopir->fill($input);
         $sopir->save();
 
         Flash::success('Sopir updated successfully.');

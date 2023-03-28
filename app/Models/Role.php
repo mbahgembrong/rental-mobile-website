@@ -38,6 +38,7 @@ class Role extends Model
      * @var array
      */
     protected $casts = [
+
         'nama' => 'string'
     ];
 

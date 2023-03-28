@@ -19,9 +19,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'role_id',
+        'jenis_kelamin',
+        'nama',
         'email',
         'password',
+        'alamat',
     ];
 
     /**
@@ -42,4 +45,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public static $rules = [
+        'nama' => 'required',
+        'jenis_kelamin' => 'required|in:L,P',
+        'email' => 'required',
+        'role_id' => 'required|exists:roles,id',
+        'alamat' => 'required',
+    ];
+
+    /**
+     * Get the role that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
 }

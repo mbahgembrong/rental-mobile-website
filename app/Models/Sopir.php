@@ -34,7 +34,7 @@ class Sopir extends Model
     public $table = 'sopirs';
 
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'tanggal_lahir'];
 
 
 
@@ -77,16 +77,15 @@ class Sopir extends Model
      * @var array
      */
     public static $rules = [
-        'nik' => 'required|digits:12',
+        'nik' => 'required|digits:16',
         'nomor_sim' => 'required|digits:12',
         'nama' => 'required',
-        'tanggal_lahir' => 'required|date',
+        'tanggal_lahir' => 'required',
         'alamat' => 'required',
         'hp' => 'required|digits_between:10,15|numeric',
         'ktp' => 'required|image',
         'sim' => 'required|image',
         'email' => 'required|email',
-        'password' => 'required|min:8',
         'foto' => 'required|image'
     ];
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateMobilRequest;
 use App\Http\Requests\UpdateMobilRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\DetailMobil;
+use App\Models\KategoriMobil;
 use App\Models\Mobil;
 use Illuminate\Http\Request;
 use Flash;
@@ -35,7 +37,8 @@ class MobilController extends AppBaseController
      */
     public function create()
     {
-        return view('mobils.create');
+        $kategori_mobils = KategoriMobil::pluck('nama', 'id');
+        return view('mobils.create', compact('kategori_mobils'));
     }
 
     /**
@@ -51,6 +54,16 @@ class MobilController extends AppBaseController
 
         /** @var Mobil $mobil */
         $mobil = Mobil::create($input);
+        $detailMobilLength = count($input['stnk']);
+        for ($i = 0; $i < $detailMobilLength; $i++) {
+            $detailMobil = DetailMobil::create([
+                'mobil_id' => $mobil->id,
+                'plat' => $input['plat'][$i],
+                'stnk' => $input['stnk'][$i],
+                'tahun_mobil' => $input['tahun_mobil'][$i],
+                'status' => 'tersedia',
+            ]);
+        }
 
         Flash::success('Mobil saved successfully.');
 
@@ -95,8 +108,8 @@ class MobilController extends AppBaseController
 
             return redirect(route('mobils.index'));
         }
-
-        return view('mobils.edit')->with('mobil', $mobil);
+        $kategori_mobils = KategoriMobil::pluck('nama', 'id');
+        return view('mobils.edit', compact('kategori_mobils'))->with('mobil', $mobil);
     }
 
     /**
@@ -120,6 +133,24 @@ class MobilController extends AppBaseController
 
         $mobil->fill($request->all());
         $mobil->save();
+
+        $mobil->detailMobils()->each(function ($value) {
+            if ($value == 'tersedia') {
+                $value->delete();
+            }
+        });
+        if (isset($request->plat)) {
+            $detailMobilLength = count($request->plat);
+            for ($i = 0; $i < $detailMobilLength; $i++) {
+                $detailMobil = DetailMobil::create([
+                    'mobil_id' => $mobil->id,
+                    'plat' => $request->plat[$i],
+                    'stnk' => $request->stnk[$i],
+                    'tahun_mobil' => $request->tahun_mobil[$i],
+                    'status' => 'tersedia',
+                ]);
+            }
+        }
 
         Flash::success('Mobil updated successfully.');
 
@@ -151,5 +182,21 @@ class MobilController extends AppBaseController
         Flash::success('Mobil deleted successfully.');
 
         return redirect(route('mobils.index'));
+    }
+
+    public function getMobil(Request $request)
+    {
+        try {
+            $mobil = Mobil::where('kategori_id', $request->kategori_id)->get();
+            return response()->json([
+                'status' => 'success',
+                'data' => $mobil,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+            ]);
+        }
     }
 }

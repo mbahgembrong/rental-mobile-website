@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Flash;
@@ -35,7 +36,8 @@ class UserController extends AppBaseController
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::pluck('nama', 'id');
+        return view('users.create', compact(['roles']));
     }
 
     /**
@@ -48,7 +50,7 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
-
+        $input['password'] = bcrypt($input['password']);
         /** @var User $user */
         $user = User::create($input);
 
@@ -96,7 +98,9 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return view('users.edit')->with('user', $user);
+        $roles = Role::pluck('nama', 'id');
+
+        return view('users.edit', compact('roles'))->with('user', $user);
     }
 
     /**
@@ -118,7 +122,12 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        $user->fill($request->all());
+        $input = $request->all();
+        if (isset($input['password']))
+            $input['password'] = bcrypt($input['password']);
+        else
+            unset($input['password']);
+        $user->fill($input);
         $user->save();
 
         Flash::success('User updated successfully.');

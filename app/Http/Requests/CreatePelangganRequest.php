@@ -25,6 +25,13 @@ class CreatePelangganRequest extends FormRequest
      */
     public function rules()
     {
-        return Pelanggan::$rules;
+        $rules = Pelanggan::$rules;
+        $rules['nik'] = 'required|digits:16|unique:pelanggans,nik';
+        $rules['hp'] = 'required|digits_between:10,15|numeric|unique:pelanggans,hp';
+        $rules['email'] = 'required|email|unique:pelanggans,email';
+        $rules['password'] = 'required|min:8';
+        $rules['foto'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        $rules['ktp'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        return $rules;
     }
 }

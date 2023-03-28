@@ -26,7 +26,12 @@ class UpdatePelangganRequest extends FormRequest
     public function rules()
     {
         $rules = Pelanggan::$rules;
-        
+        $rules['nik'] = 'required|digits:16|unique:pelanggans,nik,' . $this->pelanggan;
+        $rules['hp'] = 'required|digits_between:10,15|numeric|unique:pelanggans,hp,' . $this->pelanggan;
+        $rules['email'] = 'required|email|unique:pelanggans,email,' . $this->pelanggan;
+        $rules['password'] = 'nullable|min:8';
+        $rules['foto'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        $rules['ktp'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
         return $rules;
     }
 }

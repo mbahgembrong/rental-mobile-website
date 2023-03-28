@@ -1,4 +1,4 @@
-mobils ->tipe dihapus
+mobils -> tipe dihapus
 mobils -> merk digeser kiri
 mobil -> add stock get from detail_mobil
 pegawai -> filter dan cetak

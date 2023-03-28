@@ -32,8 +32,11 @@ class Pelanggan extends Model
     public $table = 'pelanggans';
 
 
-    protected $dates = ['deleted_at'];
-
+    protected $dates = ['deleted_at', 'tanggal_lahir'];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
 
     public $fillable = [
@@ -71,15 +74,10 @@ class Pelanggan extends Model
      * @var array
      */
     public static $rules = [
-        'nik' => 'required|digits:12',
         'nama' => 'required',
-        'tanggal_lahir' => 'required|date',
+        'tanggal_lahir' => 'required',
         'alamat' => 'required',
-        'hp' => 'required|digits_between:10,15|numeric',
-        'ktp' => 'required|image',
-        'email' => 'required|email',
-        'password' => 'required|min:8',
-        'foto' => 'required|image'
+
     ];
 
 

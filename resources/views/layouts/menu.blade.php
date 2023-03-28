@@ -35,12 +35,6 @@
         <span>Mobils</span>
     </a>
 </li>
-{{-- <li class="nav-item {{ Request::is('detailMobils*') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('detailMobils.index') }}">
-        <i class="nav-icon icon-cursor"></i>
-        <span>Detail Mobils</span>
-    </a>
-</li> --}}
 <li class="nav-item {{ Request::is('rentals*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('rentals.index') }}">
         <i class="nav-icon fa fa-taxi"></i>

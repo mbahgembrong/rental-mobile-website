@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Eloquent as Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -33,7 +34,7 @@ class Rental extends Model
     public $table = 'rentals';
 
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'waktu_peminjaman', 'waktu_mulai', 'waktu_selesai'];
 
 
 
@@ -71,17 +72,42 @@ class Rental extends Model
      * @var array
      */
     public static $rules = [
-        'pelanggan_id' => 'required|in_array:pelanggans.id',
-        'detail_mobil_id' => 'required|in_array:detail_mobils.id',
-        'sopir_id' => 'nullable',
-        'waktu_peminjaman' => 'required|integer',
-        'waktu_mulai' => 'required|integer',
-        'waktu_selesai' => 'required|integer',
-        'waktu_denda' => 'required|numeric',
-        'total' => 'required|integer',
-        'denda' => 'required|integer',
+        'pelanggan_id' => 'required|exists:pelanggans,id',
+        'detail_mobil_id' => 'required|exists:detail_mobils,id',
+        'sopir_id' => 'nullable|exists:sopirs,id',
+        // 'waktu_peminjaman' => 'required|integer',
+        'waktu_mulai' => 'required',
+        'waktu_selesai' => 'required',
+        // 'waktu_denda' => 'required|numeric',
+        // 'total' => 'required|integer',
+        // 'denda' => 'required|integer',
         'grand_total' => 'required|integer'
     ];
-
-
+    /**
+     * Get the pelanggan that owns the Rental
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pelanggan()
+    {
+        return $this->belongsTo(Pelanggan::class, 'pelanggan_id');
+    }
+    /**
+     * Get the detailMobil that owns the Rental
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function detailMobil()
+    {
+        return $this->belongsTo(DetailMobil::class, 'detail_mobil_id');
+    }
+    /**
+     * Get the sopir that owns the Rental
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function sopir(): BelongsTo
+    {
+        return $this->belongsTo(Sopir::class, 'sopir_id');
+    }
 }

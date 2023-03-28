@@ -24,6 +24,7 @@ class CreateMobilsTable extends Migration
             $table->integer('harga');
             $table->string('satuan');
             $table->integer('denda');
+            $table->timestamps();
             $table->softDeletes();
         });
     }

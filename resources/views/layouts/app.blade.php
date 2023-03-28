@@ -6,8 +6,8 @@
     <title>{{ config('app.name') }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Favicons -->
-    <link href="{{ asset('img/logo.ico') }}" rel="icon">
-    <link href="{{ asset('img/logo.ico') }}" rel="apple-touch-icon">
+    {{-- <link href="{{ asset('img/logo.ico') }}" rel="icon">
+    <link href="{{ asset('img/logo.ico') }}" rel="apple-touch-icon"> --}}
     <!-- Bootstrap 4.1.1 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet"
@@ -32,6 +32,10 @@
             width: -webkit-fill-available;
         }
     </style>
+    {{-- filepond --}}
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet" />
     @stack('css')
 </head>
 
@@ -49,39 +53,20 @@
         </button>
 
         <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#">
-                    <i class="icon-bell"></i>
-                    <span class="badge badge-pill badge-danger">5</span>
-                </a>
-            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link" style="margin-right: 10px" data-toggle="dropdown" href="#" role="button"
                     aria-haspopup="true" aria-expanded="false">
-                    {{-- {{ Auth::user()->name }} --}}
+                    {{ Auth::user()->nama }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-header text-center">
                         <strong>Account</strong>
                     </div>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-envelope-o"></i> Messages
-                        <span class="badge badge-success">42</span>
-                    </a>
-                    <div class="dropdown-header text-center">
-                        <strong>Settings</strong>
-                    </div>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-user"></i> Profile</a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-wrench"></i> Settings</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-shield"></i> Lock Account</a>
                     <a href="{{ url('/logout') }}" class="dropdown-item btn btn-default btn-flat"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fa fa-lock"></i>Logout
                     </a>
+
                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
@@ -98,8 +83,8 @@
     </div>
     <footer class="app-footer">
         <div>
-            <a href="https://infyom.com">InfyOm </a>
-            <span>&copy; 2019 InfyOmLabs.</span>
+            <a href="https://infyom.com">{{ env('APP_NAME') }} </a>
+            <span>&copy; {{ date('Y', time()) }}</span>
         </div>
         <div class="ml-auto">
             <span>Powered by</span>
@@ -115,7 +100,21 @@
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js">
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@2.1.16/dist/js/coreui.min.js"></script>
+{{-- coreui --}}
+<script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@2.1.16/dist/js/coreui.min.js"" type=" text/javascript">
+</script>
+{{-- <script src="vendors/simplebar/js/simplebar.min.js" type="text/javascript"></script> --}}
+{{-- tinymsce --}}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+{{-- sweet alert --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{{-- filepond --}}
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+
 @stack('scripts')
 
 </html>

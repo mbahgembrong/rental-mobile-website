@@ -25,6 +25,7 @@ class CreateMobilRequest extends FormRequest
      */
     public function rules()
     {
+        
         return Mobil::$rules;
     }
 }

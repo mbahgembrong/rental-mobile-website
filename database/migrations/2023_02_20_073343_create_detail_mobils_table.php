@@ -21,6 +21,7 @@ class CreateDetailMobilsTable extends Migration
             $table->string('stnk');
             $table->string('tahun_mobil');
             $table->string('status');
+            $table->timestamps();
             $table->softDeletes();
         });
     }

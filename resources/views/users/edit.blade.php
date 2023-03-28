@@ -18,7 +18,7 @@
                               <strong>Edit Pegawai</strong>
                           </div>
                           <div class="card-body">
-                              {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'patch']) !!}
+                              {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'patch', 'class' => 'row']) !!}
 
                               @include('users.fields')
 

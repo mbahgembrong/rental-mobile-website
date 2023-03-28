@@ -6,8 +6,10 @@ use App\Http\Requests\CreatePelangganRequest;
 use App\Http\Requests\UpdatePelangganRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Pelanggan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Storage;
 use Response;
 
 class PelangganController extends AppBaseController
@@ -48,6 +50,18 @@ class PelangganController extends AppBaseController
     public function store(CreatePelangganRequest $request)
     {
         $input = $request->all();
+        if ($request->hasFile('ktp')) {
+            $imageName = time() . $request->file('ktp')->getClientOriginalName();
+            Storage::disk('public')->put('pelanggans/ktp/' . $imageName, file_get_contents($request->file('ktp')->getRealPath()));
+            $input['ktp'] = $imageName;
+        }
+        if ($request->hasFile('foto')) {
+            $imageName = time() . $request->file('foto')->getClientOriginalName();
+            Storage::disk('public')->put('pelanggans/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
+            $input['foto'] = $imageName;
+        }
+        $input['password'] = bcrypt($input['password']);
+        $input['tanggal_lahir'] = Carbon::createFromFormat('d/m/Y', $input['tanggal_lahir'])->format('Y-m-d');
 
         /** @var Pelanggan $pelanggan */
         $pelanggan = Pelanggan::create($input);
@@ -117,8 +131,27 @@ class PelangganController extends AppBaseController
 
             return redirect(route('pelanggans.index'));
         }
+        $input = $request->all();
+        if ($request->hasFile('ktp') && $request->file('ktp')->getClientOriginalName() != $pelanggan->ktp) {
+            $imageName = time() . $request->file('ktp')->getClientOriginalName();
+            Storage::disk('public')->put('pelanggans/ktp/' . $imageName, file_get_contents($request->file('ktp')->getRealPath()));
+            $input['ktp'] = $imageName;
+        } else
+            unset($input['ktp']);
+        if ($request->hasFile('foto') && $request->file('foto')->getClientOriginalName() != $pelanggan->foto) {
+            $imageName = time() . $request->file('foto')->getClientOriginalName();
+            Storage::disk('public')->put('pelanggans/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
+            $input['foto'] = $imageName;
+        } else
+            unset($input['foto']);
 
-        $pelanggan->fill($request->all());
+        $input['tanggal_lahir'] = Carbon::createFromFormat('d/m/Y', $input['tanggal_lahir'])->format('Y-m-d');
+        if ($input['password'] == null)
+            unset($input['password']);
+        else
+            $input['password'] = bcrypt($input['password']);
+
+        $pelanggan->fill($input);
         $pelanggan->save();
 
         Flash::success('Pelanggan updated successfully.');

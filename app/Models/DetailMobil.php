@@ -64,6 +64,14 @@ class DetailMobil extends Model
         'tahun_mobil' => 'required',
         'status' => 'required'
     ];
-
+    /**
+     * Get the mobil that owns the DetailMobil
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function mobil()
+    {
+        return $this->belongsTo(Mobil::class, 'mobil_id');
+    }
 
 }

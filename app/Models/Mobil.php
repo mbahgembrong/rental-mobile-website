@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Eloquent as Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -67,15 +69,35 @@ class Mobil extends Model
      * @var array
      */
     public static $rules = [
-        'kategori_id' => 'required|in_array:kategori_mobils.id',
+        'kategori_id' => 'required|exists:kategori_mobils,id',
         'nama' => 'required|string',
         'jenis' => 'required',
         'type' => 'required',
         'merk' => 'required',
         'harga' => 'required|numeric',
         'satuan' => 'required|in:jam,hari',
-        'denda' => 'required|numeric'
+        'denda' => 'required|numeric',
+        'plat.*' => 'required',
+        'stnk.*' => 'required',
+        'tahun_mobil.*' => 'required|numeric|digits:4'
     ];
-
+    /**
+     * Get the kategoriMobil that owns the Mobil
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function kategoriMobil()
+    {
+        return $this->belongsTo(KategoriMobil::class, 'kategori_id');
+    }
+    /**
+     * Get all of the detailMobils for the Mobil
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function detailMobils()
+    {
+        return $this->hasMany(DetailMobil::class, 'mobil_id', 'id');
+    }
 
 }

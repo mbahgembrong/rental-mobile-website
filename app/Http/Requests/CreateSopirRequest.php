@@ -25,6 +25,11 @@ class CreateSopirRequest extends FormRequest
      */
     public function rules()
     {
-        return Sopir::$rules;
+        $rules = Sopir::$rules;
+        $rules['nik'] = 'required|unique:sopirs,nik';
+        $rules['nomor_sim'] = 'required|unique:sopirs,nomor_sim';
+        $rules['email'] = 'required|unique:sopirs,email';
+        $rules['password'] = 'required|min:8';
+        return $rules;
     }
 }

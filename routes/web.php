@@ -18,22 +18,29 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    Route::resource('users', App\Http\Controllers\UserController::class);
 
-Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::resource('pelanggans', App\Http\Controllers\PelangganController::class);
 
-Route::resource('pelanggans', App\Http\Controllers\PelangganController::class);
+    Route::resource('roles', App\Http\Controllers\RoleController::class);
 
-Route::resource('roles', App\Http\Controllers\RoleController::class);
+    Route::resource('sopirs', App\Http\Controllers\SopirController::class);
 
-Route::resource('sopirs', App\Http\Controllers\SopirController::class);
+    Route::resource('kategoriMobils', App\Http\Controllers\KategoriMobilController::class);
 
-Route::resource('kategoriMobils', App\Http\Controllers\KategoriMobilController::class);
+    Route::resource('mobils', App\Http\Controllers\MobilController::class);
+    Route::prefix('mobil')->group(function () {
+        Route::get('getMobil/', [App\Http\Controllers\MobilController::class, 'getMobil'])->name('mobils.getmobil');
+    });
+    Route::resource('detailMobils', App\Http\Controllers\DetailMobilController::class);
 
-Route::resource('mobils', App\Http\Controllers\MobilController::class);
-
-Route::resource('detailMobils', App\Http\Controllers\DetailMobilController::class);
-
-Route::resource('rentals', App\Http\Controllers\RentalController::class);
+    Route::resource('rentals', App\Http\Controllers\RentalController::class);
+    Route::prefix('rental')->group(function () {
+        Route::get('cekKetersedianMobil', [App\Http\Controllers\RentalController::class, 'cekKetersediaanMobil'])->name('rentals.cekKetersediaanMobil');
+        Route::get('cekKetersedianSopir', [App\Http\Controllers\RentalController::class, 'cekKetersediaanSopir'])->name('rentals.cekKetersediaanSopir');
+    });
+});

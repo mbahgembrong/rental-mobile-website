@@ -18,7 +18,7 @@ class CreateRentalsTable extends Migration
              $table->uuid('id')->primary();
             $table->uuid('pelanggan_id');
             $table->uuid('detail_mobil_id');
-            $table->uuid('sopir_id');
+            $table->uuid('sopir_id')->nullable();
             $table->integer('waktu_peminjaman');
             $table->integer('waktu_mulai');
             $table->integer('waktu_selesai');
@@ -26,6 +26,7 @@ class CreateRentalsTable extends Migration
             $table->integer('total');
             $table->integer('denda');
             $table->integer('grand_total');
+            $table->timestamps();
             $table->softDeletes();
         });
     }
