@@ -2,17 +2,22 @@
     <table class="table table-striped" id="users-table">
         <thead>
             <tr>
+                <th>#</th>
                 <th>Nama</th>
                 <th>Jenis Kelamin</th>
                 <th>Email</th>
                 <th>Role</th>
                 <th>Alamat</th>
-                <th colspan="3">Action</th>
+                <th aria-colspan="3">Action</th>
             </tr>
         </thead>
         <tbody>
+            @php
+                $no = 1;
+            @endphp
             @foreach ($users as $user)
                 <tr>
+                    <td>{{ $no++ }}</td>
                     <td>{{ $user->nama }}</td>
                     <td>{{ $user->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
                     <td>{{ $user->email }}</td>

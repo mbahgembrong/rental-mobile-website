@@ -15,15 +15,15 @@ class CreateMobilsTable extends Migration
     public function up()
     {
         Schema::create('mobils', function (Blueprint $table) {
-             $table->uuid('id')->primary();
+            $table->uuid('id')->primary();
             $table->uuid('kategori_id');
             $table->string('nama');
             $table->string('jenis');
-            $table->string('type');
             $table->string('merk');
             $table->integer('harga');
             $table->string('satuan');
             $table->integer('denda');
+            $table->string('foto');
             $table->timestamps();
             $table->softDeletes();
         });

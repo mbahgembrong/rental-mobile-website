@@ -15,8 +15,9 @@ class CreateKategoriMobilsTable extends Migration
     public function up()
     {
         Schema::create('kategori_mobils', function (Blueprint $table) {
-             $table->uuid('id')->primary();
+            $table->uuid('id')->primary();
             $table->string('nama');
+            $table->string('foto');
             $table->timestamps();
             $table->softDeletes();
         });

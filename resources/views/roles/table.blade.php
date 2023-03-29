@@ -2,13 +2,18 @@
     <table class="table table-striped" id="roles-table">
         <thead>
             <tr>
+                <th>#</th>
                 <th>Nama</th>
-                <th colspan="3">Action</th>
+                <th aria-colspan="3">Action</th>
             </tr>
         </thead>
         <tbody>
+            @php
+                $no = 1;
+            @endphp
             @foreach ($roles as $role)
                 <tr>
+                    <td>{{ $no++ }}</td>
                     <td>{{ $role->nama }}</td>
                     <td>
                         {!! Form::open(['route' => ['roles.destroy', $role->id], 'method' => 'delete']) !!}

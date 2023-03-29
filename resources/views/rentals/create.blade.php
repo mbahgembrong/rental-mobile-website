@@ -5,7 +5,7 @@
         <li class="breadcrumb-item">
             <a href="{!! route('rentals.index') !!}">Rental</a>
         </li>
-        <li class="breadcrumb-item active">Create</li>
+        <li class="breadcrumb-item active">Tambah</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="card-header">
                             <i class="fa fa-plus-square-o fa-lg"></i>
-                            <strong>Create Rental</strong>
+                            <strong>Tambah Rental</strong>
                         </div>
                         <div class="card-body">
                             {!! Form::open(['route' => 'rentals.store', 'class' => 'row']) !!}

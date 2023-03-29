@@ -34,7 +34,7 @@ class Rental extends Model
     public $table = 'rentals';
 
 
-    protected $dates = ['deleted_at', 'waktu_peminjaman', 'waktu_mulai', 'waktu_selesai'];
+    protected $dates = ['deleted_at'];
 
 
 
@@ -48,7 +48,12 @@ class Rental extends Model
         'waktu_denda',
         'total',
         'denda',
-        'grand_total'
+        'grand_total',
+        'jenis_transaksi',
+        'status',
+        'status_pembayaran',
+        'keterangan',
+        'bukti_pembayaran'
     ];
 
     /**
@@ -63,7 +68,12 @@ class Rental extends Model
         'waktu_denda' => 'integer',
         'total' => 'integer',
         'denda' => 'integer',
-        'grand_total' => 'integer'
+        'grand_total' => 'integer',
+        'jenis_transaksi' => 'string',
+        'status' => 'string',
+        'status_pembayaran' => 'string',
+        'keterangan' => 'string',
+        'bukti_pembayaran' => 'string'
     ];
 
     /**

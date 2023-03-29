@@ -2,6 +2,7 @@
     <table class="table table-striped" id="sopirs-table">
         <thead>
             <tr>
+                <th>#</th>
                 <th>NIK</th>
                 <th>Nomor SIM</th>
                 <th>Nama</th>
@@ -9,12 +10,16 @@
                 <th>HP</th>
                 <th>Email</th>
                 <th>Alamat</th>
-                <th colspan="3">Action</th>
+                <th aria-colspan="3">Action</th>
             </tr>
         </thead>
         <tbody>
+            @php
+                $no = 1;
+            @endphp
             @foreach ($sopirs as $sopir)
                 <tr>
+                    <td>{{ $no++ }}</td>
                     <td>{{ $sopir->nik }}</td>
                     <td>{{ $sopir->nomor_sim }}</td>
                     <td>{{ $sopir->nama }}</td>
@@ -27,6 +32,12 @@
                         <div class='btn-group'>
                             {{-- <a href="{{ route('sopirs.show', [$sopir->id]) }}" class='btn btn-ghost-success'><i
                                     class="fa fa-eye"></i></a> --}}
+                            <a href="{{ asset('storage/sopirs/ktp/' . $sopir->ktp) }}" class='btn btn-ghost-success'
+                                download="{{ 'ktp' . '_' . $sopir->nik . '_' . $sopir->nama }}"><i
+                                    class="fa fa-id-card-o"></i></a>
+                            <a href="{{ asset('storage/sopirs/ktp/' . $sopir->sim) }}" class='btn btn-ghost-warning'
+                                download="{{ 'sim' . '_' . $sopir->nomor_sim . '_' . $sopir->nama }}"><i
+                                    class="fa fa-car"></i></a>
                             <a href="{{ route('sopirs.edit', [$sopir->id]) }}" class='btn btn-ghost-info'><i
                                     class="fa fa-edit"></i></a>
                             {!! Form::button('<i class="fa fa-trash"></i>', [

@@ -41,11 +41,11 @@ class Mobil extends Model
         'kategori_id',
         'nama',
         'jenis',
-        'type',
         'merk',
         'harga',
         'satuan',
-        'denda'
+        'denda',
+        'foto'
     ];
 
     /**
@@ -56,11 +56,11 @@ class Mobil extends Model
     protected $casts = [
         'nama' => 'string',
         'jenis' => 'string',
-        'type' => 'string',
         'merk' => 'string',
         'harga' => 'integer',
         'satuan' => 'string',
-        'denda' => 'integer'
+        'denda' => 'integer',
+        'foto' => 'string'
     ];
 
     /**
@@ -72,11 +72,11 @@ class Mobil extends Model
         'kategori_id' => 'required|exists:kategori_mobils,id',
         'nama' => 'required|string',
         'jenis' => 'required',
-        'type' => 'required',
         'merk' => 'required',
         'harga' => 'required|numeric',
         'satuan' => 'required|in:jam,hari',
         'denda' => 'required|numeric',
+        'foto' => 'required|image',
         'plat.*' => 'required',
         'stnk.*' => 'required',
         'tahun_mobil.*' => 'required|numeric|digits:4'

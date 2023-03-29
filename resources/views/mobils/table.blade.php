@@ -2,27 +2,30 @@
     <table class="table table-striped" id="mobils-table">
         <thead>
             <tr>
+                <th>#</th>
                 <th>Kategori</th>
                 <th>Nama</th>
                 <th>Jenis</th>
-                <th>Type</th>
                 <th>Merk</th>
                 <th>Harga</th>
                 <th>Denda</th>
                 <th>Stock</th>
-                <th colspan="3">Action</th>
+                <th aria-colspan="3">Action</th>
             </tr>
         </thead>
         <tbody>
+            @php
+                $no = 1;
+            @endphp
             @foreach ($mobils as $mobil)
                 <tr>
+                    <th>{{ $no++ }}</th>
                     <td>{{ $mobil->kategoriMobil->nama }}</td>
                     <td>{{ $mobil->nama }}</td>
                     <td>{{ $mobil->jenis }}</td>
-                    <td>{{ $mobil->type }}</td>
                     <td>{{ $mobil->merk }}</td>
                     <td>Rp. {{ $mobil->harga . ' / ' . $mobil->satuan }}</td>
-                    <td>Rp. {{ $mobil->denda }}</td>
+                    <td>Rp. {{ $mobil->denda . ' / ' . $mobil->satuan }}</td>
                     <td>
                         <span
                             class="badge bg-{{ count($mobil->detailMobils->where('status', 'tersedia')) > 0 ? 'success' : 'danger' }}">

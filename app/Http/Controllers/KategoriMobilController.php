@@ -8,6 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Models\KategoriMobil;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Storage;
 use Response;
 
 class KategoriMobilController extends AppBaseController
@@ -48,7 +49,11 @@ class KategoriMobilController extends AppBaseController
     public function store(CreateKategoriMobilRequest $request)
     {
         $input = $request->all();
-
+        if ($request->hasFile('foto')) {
+            $imageName = time() . $request->file('foto')->getClientOriginalName();
+            Storage::disk('public')->put('kategoriMobils/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
+            $input['foto'] = $imageName;
+        }
         /** @var KategoriMobil $kategoriMobil */
         $kategoriMobil = KategoriMobil::create($input);
 
@@ -117,8 +122,14 @@ class KategoriMobilController extends AppBaseController
 
             return redirect(route('kategoriMobils.index'));
         }
-
-        $kategoriMobil->fill($request->all());
+        $input = $request->all();
+        if ($request->hasFile('foto') && $request->file('foto')->getClientOriginalName() != $kategoriMobil->foto) {
+            $imageName = time() . $request->file('foto')->getClientOriginalName();
+            Storage::disk('public')->put('kategoriMobils/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
+            $input['foto'] = $imageName;
+        } else
+            unset($input['foto']);
+        $kategoriMobil->fill($input);
         $kategoriMobil->save();
 
         Flash::success('Kategori Mobil updated successfully.');

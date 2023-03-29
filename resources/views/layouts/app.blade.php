@@ -19,8 +19,8 @@
         href="https://cdn.jsdelivr.net/npm/@icon/coreui-icons-free@1.0.1-alpha.1/coreui-icons-free.css">
 
     <!-- PRO version // if you have PRO version licence than remove comment and use it. -->
-    {{-- <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/brand.min.css"> --}}
-    {{-- <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/flag.min.css"> --}}
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/brand.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/flag.min.css">
     <!-- PRO version -->
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -36,6 +36,8 @@
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
         rel="stylesheet" />
+    {{-- Datatables --}}
+    @include('layouts.datatables_css')
     @stack('css')
 </head>
 
@@ -114,7 +116,18 @@
 <script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
-
+{{-- Datatables --}}
+@include('layouts.datatables_js')
+<script>
+    $(function() {
+        $('table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    })
+</script>
 @stack('scripts')
 
 </html>

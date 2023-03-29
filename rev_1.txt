@@ -1,7 +1,7 @@
-mobils -> tipe dihapus
-mobils -> merk digeser kiri
-mobil -> add stock get from detail_mobil
-pegawai -> filter dan cetak
-pelanggan -> filter dan cetak dokumen
-sopir -> filter dan cetak dokumen
+mobils -> tipe dihapus (fix)
+mobils -> merk digeser kiri (fix)
+mobil -> add stock get from detail_mobil (fix)
+pegawai -> filter dan cetak (fix)
+pelanggan -> filter dan cetak dokumen (fix)
+sopir -> filter dan cetak dokumen (fix)
 

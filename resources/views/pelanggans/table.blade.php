@@ -2,6 +2,7 @@
     <table class="table table-striped" id="pelanggans-table">
         <thead>
             <tr>
+                <th>#</th>
                 <th>NIK</th>
                 <th>Nama</th>
                 <th>Tanggal Lahir</th>
@@ -10,12 +11,16 @@
                 <th>Alamat</th>
                 {{-- <th>Ktp</th>
                 <th>Foto</th> --}}
-                <th colspan="3">Action</th>
+                <th aria-colspan="3">Action</th>
             </tr>
         </thead>
         <tbody>
+            @php
+                $no = 1;
+            @endphp
             @foreach ($pelanggans as $pelanggan)
                 <tr>
+                    <td>{{ $no++ }}</td>
                     <td>{{ $pelanggan->nik }}</td>
                     <td>{{ $pelanggan->nama }}</td>
                     <td>{{ $pelanggan->tanggal_lahir->format('d/m/Y') }}</td>
@@ -29,6 +34,9 @@
                         <div class='btn-group'>
                             {{-- <a href="{{ route('pelanggans.show', [$pelanggan->id]) }}" class='btn btn-ghost-success'><i
                                     class="fa fa-eye"></i></a> --}}
+                            <a href="{{ asset('storage/pelanggans/ktp/' . $pelanggan->ktp) }}"
+                                class='btn btn-ghost-success' download="{{ $pelanggan->nik . '_' . $pelanggan->nama }}"><i
+                                    class="fa fa-id-card-o"></i></a>
                             <a href="{{ route('pelanggans.edit', [$pelanggan->id]) }}" class='btn btn-ghost-info'><i
                                     class="fa fa-edit"></i></a>
                             {!! Form::button('<i class="fa fa-trash"></i>', [

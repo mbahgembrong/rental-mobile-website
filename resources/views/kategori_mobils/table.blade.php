@@ -2,13 +2,18 @@
     <table class="table table-striped" id="kategoriMobils-table">
         <thead>
             <tr>
+                <th>#</th>
                 <th>Nama</th>
-                <th colspan="3">Action</th>
+                <th aria-colspan="3">Action</th>
             </tr>
         </thead>
         <tbody>
+            @php
+                $no = 1;
+            @endphp
             @foreach ($kategoriMobils as $kategoriMobil)
                 <tr>
+                    <td>{{ $no++ }}</td>
                     <td>{{ $kategoriMobil->nama }}</td>
                     <td>
                         {!! Form::open(['route' => ['kategoriMobils.destroy', $kategoriMobil->id], 'method' => 'delete']) !!}

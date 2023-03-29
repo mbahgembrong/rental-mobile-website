@@ -29,7 +29,8 @@ class KategoriMobil extends Model
 
 
     public $fillable = [
-        'nama'
+        'nama',
+        'foto'
     ];
 
     /**
@@ -38,7 +39,8 @@ class KategoriMobil extends Model
      * @var array
      */
     protected $casts = [
-        'nama' => 'string'
+        'nama' => 'string',
+        'foto' => 'string'
     ];
 
     /**
@@ -47,7 +49,8 @@ class KategoriMobil extends Model
      * @var array
      */
     public static $rules = [
-        'nama' => 'required'
+        'nama' => 'required',
+        'foto' => 'required|image'
     ];
 
 

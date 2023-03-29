@@ -5,7 +5,7 @@
         <li class="breadcrumb-item">
             <a href="{!! route('sopirs.index') !!}">Sopir</a>
         </li>
-        <li class="breadcrumb-item active">Create</li>
+        <li class="breadcrumb-item active">Tambah</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="card-header">
                             <i class="fa fa-plus-square-o fa-lg"></i>
-                            <strong>Create Sopir</strong>
+                            <strong>Tambah Sopir</strong>
                         </div>
                         <div class="card-body">
                             {!! Form::open(['route' => 'sopirs.store', 'files' => true, 'class' => 'row']) !!}

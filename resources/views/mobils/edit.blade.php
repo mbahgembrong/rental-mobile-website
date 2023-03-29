@@ -18,7 +18,12 @@
                             <strong>Edit Mobil</strong>
                         </div>
                         <div class="card-body">
-                            {!! Form::model($mobil, ['route' => ['mobils.update', $mobil->id], 'method' => 'patch', 'class' => 'row']) !!}
+                            {!! Form::model($mobil, [
+                                'route' => ['mobils.update', $mobil->id],
+                                'method' => 'patch',
+                                'class' => 'row',
+                                'files' => true,
+                            ]) !!}
 
                             @include('mobils.fields')
 
@@ -33,6 +38,19 @@
 @push('scripts')
     <script>
         $(function() {
+            $('input[name="foto"]').filepond({
+                labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
+                storeAsFile: true,
+                imagePreviewMaxHeight: 150,
+                imagePreviewTransparencyIndicator: 'grid',
+                acceptedFileTypes: ['image/*'],
+                fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+                    resolve(type);
+                }),
+                files: [{
+                    source: "{{ asset('storage/mobils/foto/' . $mobil->foto) }}",
+                }, ]
+            });
             const detailMobils = {!! json_encode($mobil->detailMobils) !!};
             detailMobils.forEach((value, index) => {
                 if (index == 0) {

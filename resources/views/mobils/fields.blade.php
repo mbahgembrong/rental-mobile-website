@@ -16,14 +16,8 @@
     {!! Form::text('jenis', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Type Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('type', 'Type:') !!}
-    {!! Form::text('type', null, ['class' => 'form-control']) !!}
-</div>
-
 <!-- Merk Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-6">
     {!! Form::label('merk', 'Merk:') !!}
     {!! Form::text('merk', null, ['class' => 'form-control']) !!}
 </div>
@@ -45,6 +39,13 @@
     {!! Form::label('denda', 'Denda:') !!}
     {!! Form::number('denda', null, ['class' => 'form-control']) !!}
 </div>
+<!-- Foto Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('foto', 'Foto:') !!}
+    {!! Form::file('foto') !!}
+</div>
+<div class="clearfix"></div>
+
 <div class="form-group col-sm-12" id="layanan">
     <label for="jenis_kelaminModal" class="form-label">Detail Mobil</label>
     <div class="form-group fieldGroup" data-id="1">
@@ -66,6 +67,10 @@
 @push('scripts')
     <script>
         $(function() {
+            FilePond.registerPlugin(
+                FilePondPluginFileValidateType,
+                FilePondPluginImagePreview,
+            );
             $(document).on('click', '.addMore', function() {
                 var data = $(this).parents('.fieldGroup').data('id') + 1;
                 var fieldHTML = '<div class="form-group fieldGroup" data-id="' + data + '">' +
@@ -86,7 +91,7 @@
             $(document).on('click', '.tahun_mobil', function() {
                 $(this).datetimepicker({
                     format: 'YYYY',
-                     useCurrent: true,
+                    useCurrent: true,
                 });
             })
         })

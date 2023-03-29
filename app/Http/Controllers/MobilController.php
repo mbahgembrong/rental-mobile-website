@@ -10,6 +10,7 @@ use App\Models\KategoriMobil;
 use App\Models\Mobil;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Storage;
 use Response;
 
 class MobilController extends AppBaseController
@@ -51,7 +52,11 @@ class MobilController extends AppBaseController
     public function store(CreateMobilRequest $request)
     {
         $input = $request->all();
-
+        if ($request->hasFile('foto')) {
+            $imageName = time() . $request->file('foto')->getClientOriginalName();
+            Storage::disk('public')->put('mobils/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
+            $input['foto'] = $imageName;
+        }
         /** @var Mobil $mobil */
         $mobil = Mobil::create($input);
         $detailMobilLength = count($input['stnk']);
@@ -130,8 +135,14 @@ class MobilController extends AppBaseController
 
             return redirect(route('mobils.index'));
         }
-
-        $mobil->fill($request->all());
+        $input = $request->all();
+        if ($request->hasFile('foto') && $request->file('foto')->getClientOriginalName() != $kategoriMobil->foto) {
+            $imageName = time() . $request->file('foto')->getClientOriginalName();
+            Storage::disk('public')->put('kategoriMobils/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
+            $input['foto'] = $imageName;
+        } else
+            unset($input['foto']);
+        $mobil->fill($input);
         $mobil->save();
 
         $mobil->detailMobils()->each(function ($value) {
