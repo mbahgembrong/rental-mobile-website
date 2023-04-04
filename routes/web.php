@@ -40,6 +40,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('rentals', App\Http\Controllers\RentalController::class);
     Route::prefix('rental')->group(function () {
+        Route::get('bayar/{id}', [App\Http\Controllers\RentalController::class, 'bayar'])->name('rentals.bayar');
+        Route::post('bayar/{id}', [App\Http\Controllers\RentalController::class, 'pembayaran'])->name('rentals.pembayaran');
+        Route::post('status', [App\Http\Controllers\RentalController::class, 'status'])->name('rentals.status');
         Route::get('cekKetersedianMobil', [App\Http\Controllers\RentalController::class, 'cekKetersediaanMobil'])->name('rentals.cekKetersediaanMobil');
         Route::get('cekKetersedianSopir', [App\Http\Controllers\RentalController::class, 'cekKetersediaanSopir'])->name('rentals.cekKetersediaanSopir');
     });

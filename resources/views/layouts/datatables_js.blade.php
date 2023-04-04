@@ -10,3 +10,15 @@
 <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
 {{-- <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script> --}}
+<script>
+    $(function() {
+        $('table').DataTable({
+            // scrollX: true,
+            // responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    })
+</script>

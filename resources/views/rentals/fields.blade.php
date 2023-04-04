@@ -29,7 +29,8 @@
                 down: "icon-arrow-down-circle icons font-2xl"
             },
             sideBySide: true,
-            minDate: moment()
+            minDate: moment(),
+
         })
     </script>
 @endpush
@@ -53,6 +54,12 @@
             sideBySide: true,
             minDate: moment()
         })
+        $('#waktu_selesai').prop('disabled', true)
+        $('#form_waktu_mulai').on('dp.change', function(e) {
+            $('#waktu_selesai').prop('disabled', false)
+            $('#waktu_selesai').datetimepicker();
+            $('#waktu_selesai').data('DateTimePicker').minDate(e.date);
+        });
     </script>
 @endpush
 <!-- Detail Mobil Id Field -->

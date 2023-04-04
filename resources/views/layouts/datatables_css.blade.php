@@ -9,4 +9,21 @@
         margin: 0 auto;
         width: -webkit-fill-available;
     }
+
+    table.dataTable {
+        width: -webkit-fill-available;
+
+    }
+
+    table.dataTable thead .sorting:after {
+        opacity: 0;
+    }
+
+    table.dataTable thead .sorting_asc:after {
+        opacity: 0;
+    }
+
+    table.dataTable thead .sorting_desc:after {
+        opacity: 0;
+    }
 </style>

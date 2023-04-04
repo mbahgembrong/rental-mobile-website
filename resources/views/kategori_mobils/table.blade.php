@@ -4,6 +4,7 @@
             <tr>
                 <th>#</th>
                 <th>Nama</th>
+                <th>Foto</th>
                 <th aria-colspan="3">Action</th>
             </tr>
         </thead>
@@ -15,6 +16,8 @@
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $kategoriMobil->nama }}</td>
+                    <td><img class="circular--square--index"
+                            src="{{ asset('storage/kategoriMobils/foto/' . $kategoriMobil->foto) }}" /></td>
                     <td>
                         {!! Form::open(['route' => ['kategoriMobils.destroy', $kategoriMobil->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>

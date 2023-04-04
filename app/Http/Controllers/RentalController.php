@@ -141,6 +141,52 @@ class RentalController extends AppBaseController
         return redirect(route('rentals.index'));
     }
 
+    public function bayar(Request $request, $id)
+    {
+        $rental = Rental::find($id);
+
+        if (empty($rental)) {
+            Flash::error('Rental not found');
+
+            return redirect(route('rentals.index'));
+        }
+        $bayar = true;
+        return view('rentals.show', compact(['bayar']))->with('rental', $rental);
+    }
+    public function pembayaran(Request $request, $id)
+    {
+        $request->validate([
+            'bayar' => 'integer|gte:grand_total'
+        ]);
+        $rental = Rental::find($id);
+
+        if (empty($rental)) {
+            Flash::error('Rental not found');
+
+            return redirect(route('rentals.index'));
+        }
+        $rental->status_pembayaran = 'lunas';
+        $rental->save();
+        Flash::success('Rental bayar successfully.');
+
+        return redirect(route('rentals.index'));
+    }
+    public function status(Request $request)
+    {
+        $rental = Rental::find($request->id);
+        if (empty($rental))
+            return response([
+                'status' => 'error',
+                'message' => 'Rental not found'
+            ], 404);
+        $rental->status = $request->status;
+        $rental->save();
+        return response([
+            'status' => 'success',
+            'message' => 'Rental status updated successfully'
+        ], 200);
+    }
+
     /**
      * Remove the specified Rental from storage.
      *
@@ -161,9 +207,11 @@ class RentalController extends AppBaseController
             return redirect(route('rentals.index'));
         }
 
-        $rental->delete();
+        // $rental->delete();
+        $rental->status = 'batal';
+        $rental->save();
 
-        Flash::success('Rental deleted successfully.');
+        Flash::success('Rental canceled successfully.');
 
         return redirect(route('rentals.index'));
     }

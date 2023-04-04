@@ -33,11 +33,22 @@
         }
     </style>
     {{-- filepond --}}
-    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    {{-- <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-        rel="stylesheet" />
+        rel="stylesheet" /> --}}
     {{-- Datatables --}}
     @include('layouts.datatables_css')
+    <style>
+        .circular--square--index {
+            border-radius: 5%;
+            width: 20vh;
+            height: 15vh;
+            box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.6);
+            -moz-box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.6);
+            -webkit-box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.6);
+            -o-box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.6);
+        }
+    </style>
     @stack('css')
 </head>
 
@@ -111,23 +122,14 @@
 {{-- sweet alert --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{-- filepond --}}
-<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-<script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
+{{-- <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script> --}}
+{{-- <script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
-<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script> --}}
 {{-- Datatables --}}
 @include('layouts.datatables_js')
-<script>
-    $(function() {
-        $('table').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
-    })
-</script>
+
 @stack('scripts')
 
 </html>
