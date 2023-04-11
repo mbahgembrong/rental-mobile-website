@@ -13,9 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('/')->group(function () {
+    Route::get('/', [App\Http\Controllers\Landing\IndexController::class, 'index'])->name('landing.index');
+    Route::get('/about', [App\Http\Controllers\Landing\AboutController::class, 'index'])->name('landing.about');
+    Route::get('/blog', [App\Http\Controllers\Landing\BlogController::class, 'index'])->name('landing.blog');
+    Route::get('/car', [App\Http\Controllers\Landing\CarController::class, 'index'])->name('landing.car');
+    Route::get('/service', [App\Http\Controllers\Landing\ServiceController::class, 'index'])->name('landing.service');
+    Route::get('/contact', [App\Http\Controllers\Landing\ContactController::class, 'index'])->name('landing.contact');
 });
+
 
 Auth::routes();
 Route::middleware('auth')->group(function () {
