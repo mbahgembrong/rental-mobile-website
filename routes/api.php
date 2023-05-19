@@ -19,18 +19,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-// Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
+// Route::resource('users', \UserAPIController::class);
 
-// Route::resource('pelanggans', App\Http\Controllers\API\PelangganAPIController::class);
+// Route::resource('pelanggans', \PelangganAPIController::class);
 
-// Route::resource('roles', App\Http\Controllers\API\RoleAPIController::class);
+Route::resource('roles', \RoleAPIController::class);
 
-// Route::resource('sopirs', App\Http\Controllers\API\SopirAPIController::class);
+// Route::resource('sopirs', \SopirAPIController::class);
 
-// Route::resource('kategori_mobils', App\Http\Controllers\API\KategoriMobilAPIController::class);
+// Route::resource('kategori_mobils', \KategoriMobilAPIController::class);
 
-// Route::resource('mobils', App\Http\Controllers\API\MobilAPIController::class);
+// Route::resource('mobils', \MobilAPIController::class);
 
-// Route::resource('detail_mobils', App\Http\Controllers\API\DetailMobilAPIController::class);
+// Route::resource('detail_mobils', \DetailMobilAPIController::class);
 
-// Route::resource('rentals', App\Http\Controllers\API\RentalAPIController::class);
+// Route::resource('rentals', \RentalAPIController::class);
