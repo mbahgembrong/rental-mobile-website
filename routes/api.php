@@ -19,18 +19,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-// Route::resource('users', \UserAPIController::class);
+Route::resource('users', \UserAPIController::class);
 
-// Route::resource('pelanggans', \PelangganAPIController::class);
+Route::resource('pelanggans', \PelangganAPIController::class);
 
 Route::resource('roles', \RoleAPIController::class);
 
-// Route::resource('sopirs', \SopirAPIController::class);
+Route::resource('sopirs', \SopirAPIController::class);
 
-// Route::resource('kategori_mobils', \KategoriMobilAPIController::class);
+Route::resource('kategori_mobils', \KategoriMobilAPIController::class);
 
-// Route::resource('mobils', \MobilAPIController::class);
+Route::resource('mobils', \MobilAPIController::class);
 
-// Route::resource('detail_mobils', \DetailMobilAPIController::class);
+Route::resource('detail_mobils', \DetailMobilAPIController::class);
 
-// Route::resource('rentals', \RentalAPIController::class);
+Route::resource('rentals', \RentalAPIController::class);
