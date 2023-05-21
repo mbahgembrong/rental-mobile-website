@@ -13,9 +13,10 @@ services:
         environment:
             WWWUSER: '${WWWUSER:-$(id -u)}'
             LARAVEL_SAIL: 1
+        # command:  bash -c "php artisan migrate --seed"
         volumes:
             - '.:/var/www/html'
-        networks:
+        networks:php 
             - sail
         depends_on:
             - mysql
@@ -36,7 +37,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_USER: '${FORWARD_DB_USERNAME}'
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
