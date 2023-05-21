@@ -1,0 +1,5 @@
+- error add user
+- add relation in migration
+- add fitur dp
+- home detail car redirect page detail
+- chaten redirect whatsapp
