@@ -1,6 +1,6 @@
 @extends('landing.layouts.app')
 @section('content')
-    <div class="hero-wrap ftco-degree-bg" style="background-image: url('{{ asset('carbook/images') }}/bg_1.jpg');"
+    <div class="hero-wrap ftco-degree-bg" style="background-image: url('{{ asset('img/banner.png') }}');"
         data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -27,7 +27,9 @@
                                 <h2>Buat Perjalanamu</h2>
                                 <div class="form-group">
                                     <label for="kategori_id" class="label">Kategori</label>
-                                    {!! Form::select('kategori_id', $kategoris, null, ['class' => 'form-control']) !!}
+                                    {!! Form::select('kategori_id', ['' => 'Pilih Kategori'] + $kategoris->toArray(), null, [
+                                        'class' => 'form-control',
+                                    ]) !!}
                                     @push('css')
                                         <style>
                                             select option {
@@ -38,7 +40,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="mobil_id" class="label">Mobil</label>
-                                    {!! Form::select('mobil_id', $kategoris, null, ['class' => 'form-control']) !!}
+                                    {!! Form::select('mobil_id', ['' => 'Pilih Mobil'], null, ['class' => 'form-control']) !!}
                                 </div>
                                 <div class="form-group mr-2">
                                     <label for="waktu_mulai" class="label">Tanggal Mulai</label>
@@ -121,7 +123,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a>
+                                <p><a href="{{ route('landing.car') }}" class="btn btn-primary py-3 px-4">Reserve Your
+                                        Perfect Car</a>
                                 </p>
                             </div>
                         </div>
@@ -142,73 +145,28 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="carousel-car owl-carousel">
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url({{ asset('carbook/images') }}/car-1.jpg);">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">$500 <span>/day</span></p>
+                        @foreach ($mobils as $mobil)
+                            <div class="item">
+                                <div class="car-wrap rounded ftco-animate">
+                                    <div class="img rounded d-flex align-items-end"
+                                        style="background-image: url('{{ asset('storage/mobils/foto/' . $mobil->foto) }}');">
                                     </div>
-                                    <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book
-                                            now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
+                                    <div class="text">
+                                        <h2 class="mb-0"><a href="#">{{ $mobil->nama }}</a></h2>
+                                        <div class="d-flex mb-3">
+                                            <span class="cat">{{ $mobil->merk }}</span>
+                                            <p class="price ml-auto">Rp. {{ $mobil->harga }}
+                                                <span>/{{ $mobil->satuan }}</span>
+                                            </p>
+                                        </div>
+                                        <p class="d-flex mb-0 d-block"><a href="#"
+                                                class="btn btn-primary py-2 mr-1">Rental
+                                                now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url({{ asset('carbook/images') }}/car-2.jpg);">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">$500 <span>/day</span></p>
-                                    </div>
-                                    <p class="d-flex mb-0 d-block"><a href="#"
-                                            class="btn btn-primary py-2 mr-1">Book now</a> <a href="#"
-                                            class="btn btn-secondary py-2 ml-1">Details</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url({{ asset('carbook/images') }}/car-3.jpg);">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">$500 <span>/day</span></p>
-                                    </div>
-                                    <p class="d-flex mb-0 d-block"><a href="#"
-                                            class="btn btn-primary py-2 mr-1">Book now</a> <a href="#"
-                                            class="btn btn-secondary py-2 ml-1">Details</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end"
-                                    style="background-image: url({{ asset('carbook/images') }}/car-4.jpg);">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-                                    <div class="d-flex mb-3">
-                                        <span class="cat">Cheverolet</span>
-                                        <p class="price ml-auto">$500 <span>/day</span></p>
-                                    </div>
-                                    <p class="d-flex mb-0 d-block"><a href="#"
-                                            class="btn btn-primary py-2 mr-1">Book now</a> <a href="#"
-                                            class="btn btn-secondary py-2 ml-1">Details</a></p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -234,7 +192,7 @@
                             safe country. A small river named Duden flows by their place and supplies it with the
                             necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly
                             into your mouth.</p>
-                        <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
+                        <p><a href="{{ route('landing.car') }}" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
                     </div>
                 </div>
             </div>
@@ -392,108 +350,28 @@
             </div>
         </div>
     </section>
-
-    <section class="ftco-section">
-        <div class="container">
-            <div class="row justify-content-center mb-5">
-                <div class="col-md-7 heading-section text-center ftco-animate">
-                    <span class="subheading">Blog</span>
-                    <h2>Recent Blog</h2>
-                </div>
-            </div>
-            <div class="row d-flex">
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry justify-content-end">
-                        <a href="blog-single.html" class="block-20"
-                            style="background-image: url('{{ asset('carbook/images') }}/image_1.jpg');">
-                        </a>
-                        <div class="text pt-4">
-                            <div class="meta mb-3">
-                                <div><a href="#">Oct. 29, 2019</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                            </div>
-                            <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business
-                                    Growth</a></h3>
-                            <p><a href="#" class="btn btn-primary">Read more</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry justify-content-end">
-                        <a href="blog-single.html" class="block-20"
-                            style="background-image: url('{{ asset('carbook/images') }}/image_2.jpg');">
-                        </a>
-                        <div class="text pt-4">
-                            <div class="meta mb-3">
-                                <div><a href="#">Oct. 29, 2019</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                            </div>
-                            <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business
-                                    Growth</a></h3>
-                            <p><a href="#" class="btn btn-primary">Read more</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry">
-                        <a href="blog-single.html" class="block-20"
-                            style="background-image: url('{{ asset('carbook/images') }}/image_3.jpg');">
-                        </a>
-                        <div class="text pt-4">
-                            <div class="meta mb-3">
-                                <div><a href="#">Oct. 29, 2019</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                            </div>
-                            <h3 class="heading mt-2"><a href="#">Why Lead Generation is Key for Business
-                                    Growth</a></h3>
-                            <p><a href="#" class="btn btn-primary">Read more</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="ftco-counter ftco-section img bg-light" id="section-counter">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-                    <div class="block-18">
-                        <div class="text text-border d-flex align-items-center">
-                            <strong class="number" data-number="60">0</strong>
-                            <span>Year <br>Experienced</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-                    <div class="block-18">
-                        <div class="text text-border d-flex align-items-center">
-                            <strong class="number" data-number="1090">0</strong>
-                            <span>Total <br>Cars</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-                    <div class="block-18">
-                        <div class="text text-border d-flex align-items-center">
-                            <strong class="number" data-number="2590">0</strong>
-                            <span>Happy <br>Customers</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-                    <div class="block-18">
-                        <div class="text d-flex align-items-center">
-                            <strong class="number" data-number="67">0</strong>
-                            <span>Total <br>Branches</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 @endsection
+@push('scripts')
+    <script>
+        $(function() {
+            $('select[name="kategori_id"]').on('change', function() {
+                if ($(this).val()) {
+                    $.get(`/mobils/${$(this).val()}`).then((result) => {
+                        console.log(result);
+                        $('select[name="mobil_id"]').empty();
+                        $('select[name="mobil_id"]').append(
+                            `<option value="">Pilih Mobil</option>`);
+                        $.each(result, function(key, value) {
+                            $('select[name="mobil_id"]').append(
+                                `<option value="${key}">${value}</option>`);
+                        });
+
+                    }).catch((err) => {
+
+                    });
+                    // console.log($(this).val());
+                }
+            })
+        });
+    </script>
+@endpush

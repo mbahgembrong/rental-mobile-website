@@ -55,8 +55,6 @@
                     </li>
                     <li class="nav-item {{ Request::is('car*') ? 'active' : '' }}"><a
                             href="{{ route('landing.car', []) }}" class="nav-link">Cars</a></li>
-                    <li class="nav-item {{ Request::is('blog*') ? 'active' : '' }}"><a
-                            href="{{ route('landing.blog', []) }}" class="nav-link">Blog</a></li>
                     <li class="nav-item {{ Request::is('contact*') ? 'active' : '' }}"><a
                             href="{{ route('landing.contact', []) }}" class="nav-link">Contact</a></li>
                 </ul>
