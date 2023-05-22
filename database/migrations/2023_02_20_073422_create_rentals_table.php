@@ -34,6 +34,11 @@ class CreateRentalsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        Schema::table('rentals', function (Blueprint $table) {
+            $table->foreign('pelanggan_id')->references('id')->on('pelanggans')->onDelete('cascade');
+            $table->foreign('detail_mobil_id')->references('id')->on('detail_mobils')->onDelete('cascade');
+            $table->foreign('sopir_id')->references('id')->on('sopirs')->onDelete('cascade');
+        });
     }
 
     /**

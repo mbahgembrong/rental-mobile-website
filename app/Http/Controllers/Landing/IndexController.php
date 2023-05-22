@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Landing;
 
 use App\Http\Controllers\Controller;
 use App\Models\KategoriMobil;
+use App\Models\Mobil;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -16,9 +17,16 @@ class IndexController extends Controller
     public function index()
     {
         $kategoris = KategoriMobil::pluck('nama', 'id');
-        return view('landing.index', compact(['kategoris']));
+        $mobils = Mobil::take(5)->get();
+        return view('landing.index', compact(['kategoris', 'mobils']));
     }
 
+
+    public function getMobil($idKategori)
+    {
+        $mobils = Mobil::where('kategori_id', $idKategori)->pluck('nama', 'id');
+        return response()->json($mobils);
+    }
     /**
      * Show the form for creating a new resource.
      *

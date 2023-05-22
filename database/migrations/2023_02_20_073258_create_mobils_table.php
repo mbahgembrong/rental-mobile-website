@@ -27,6 +27,9 @@ class CreateMobilsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        Schema::table('mobils', function (Blueprint $table) {
+            $table->foreign('kategori_id')->references('id')->on('kategori_mobils')->onDelete('cascade');
+        });
     }
 
     /**

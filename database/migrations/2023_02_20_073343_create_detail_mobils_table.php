@@ -24,6 +24,9 @@ class CreateDetailMobilsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        Schema::table('detail_mobils', function (Blueprint $table) {
+            $table->foreign('mobil_id')->references('id')->on('mobils')->onDelete('cascade');
+        });
     }
 
     /**
