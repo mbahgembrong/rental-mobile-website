@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function () {
     Route::get('/', [App\Http\Controllers\Landing\IndexController::class, 'index'])->name('landing.index');
-    Route::get('/mobils/{idKategori}', [App\Http\Controllers\Landing\IndexController::class, 'getMobil'])->name('landing.index.getMobil');
+    Route::get('/mobil/{idKategori}', [App\Http\Controllers\Landing\IndexController::class, 'getMobil'])->name('landing.index.getMobil');
     Route::get('/about', [App\Http\Controllers\Landing\AboutController::class, 'index'])->name('landing.about');
    
     Route::get('/car', [App\Http\Controllers\Landing\CarController::class, 'index'])->name('landing.car');

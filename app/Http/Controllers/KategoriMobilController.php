@@ -123,7 +123,7 @@ class KategoriMobilController extends AppBaseController
             return redirect(route('kategoriMobils.index'));
         }
         $input = $request->all();
-        if ($request->hasFile('foto') && $request->file('foto')->getClientOriginalName() != $kategoriMobil->foto) {
+        if ($request->hasFile('foto') &&( $request->file('foto')->getClientOriginalName() != $kategoriMobil->foto)) {
             $imageName = time() . $request->file('foto')->getClientOriginalName();
             Storage::disk('public')->put('kategoriMobils/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
             $input['foto'] = $imageName;

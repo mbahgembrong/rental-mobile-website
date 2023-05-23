@@ -136,9 +136,9 @@ class MobilController extends AppBaseController
             return redirect(route('mobils.index'));
         }
         $input = $request->all();
-        if ($request->hasFile('foto') && $request->file('foto')->getClientOriginalName() != $kategoriMobil->foto) {
+        if ($request->hasFile('foto') && $request->file('foto')->getClientOriginalName() != $mobil->foto) {
             $imageName = time() . $request->file('foto')->getClientOriginalName();
-            Storage::disk('public')->put('kategoriMobils/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
+            Storage::disk('public')->put('mobils/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
             $input['foto'] = $imageName;
         } else
             unset($input['foto']);
