@@ -3,3 +3,20 @@
 - add fitur dp
 - home detail car redirect page detail
 - chaten redirect whatsapp
+- middleware admin
+- pelanggan panel
+- laporan penyewaan
+- notify email
+- kpu cekked nik
+- error add user
+- add relation in migration
+- add fitur dp
+- home detail car redirect page detail
+- chaten redirect whatsapp
+- penghitungan denda dan luar daerah = denda +harga
+- fake order mulai januari sampai juni tanggal 12
+- change url get mobil byKategori in landing
+- kecilkan font awal in index landing
+- carrousel car in index by category not mobil
+- klik detail item keluar daftar mobil
+- pelanggan dapat menambah ulasan
