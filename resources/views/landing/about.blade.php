@@ -19,122 +19,37 @@
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center"
-                    style="background-image: url({{ asset('carbook') }}/images/about.jpg);">
+                    style="background-image: url({{ asset('img/banner-right.jpg') }}); ">
                 </div>
                 <div class="col-md-6 wrap-about ftco-animate">
                     <div class="heading-section heading-section-white pl-md-5">
-                        <span class="subheading">About us</span>
-                        <h2 class="mb-4">Welcome to Carbook</h2>
+                        <span class="subheading">Tentang Kami</span>
+                        <h2 class="mb-4">Selamat datang di Wijaya Rental Car</h2>
 
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It
-                            is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                        <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it
-                            would have been rewritten a thousand times and everything that was left from its origin would be
-                            the word "and" and the Little Blind Text should turn around and return to its own, safe country.
-                            A small river named Duden flows by their place and supplies it with the necessary regelialia. It
-                            is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                        <p><a href="{{ route('landing.car', []) }}" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
+                        <p>Penyedia jasa rental mobil terbaik untuk kebutuhan transportasi Anda di daerah Kediri. Kami telah
+                            beroperasi selama kurang lebih 6 tahun, memberikan layanan terbaik dan berkualitas kepada
+                            pelanggan kami di seluruh Indonesia khususnya Kota Kediri.</p>
+                        <p>Kami memiliki armada mobil yang terawat dengan baik dan selalu siap digunakan untuk berbagai
+                            keperluan, seperti perjalanan bisnis, liburan keluarga, atau sekadar mengantar tamu dari dan ke
+                            bandara. Selain itu, kami juga menawarkan berbagai jenis mobil dari berbagai merek terkenal,
+                            mulai dari mobil sedan, SUV, hingga minibus.</p>
+                        <p>Kami memahami bahwa kenyamanan dan keamanan adalah hal yang utama dalam perjalanan Anda, oleh
+                            karena itu kami selalu mengutamakan pelayanan terbaik dengan sopir yang berpengalaman dan ramah
+                            serta dilengkapi dengan fasilitas keselamatan yang lengkap.</p>
+                        <p>Kami juga menawarkan harga rental mobil yang terjangkau dan fleksibel, dengan berbagai pilihan
+                            paket sesuai dengan kebutuhan Anda. Selain itu, kami juga memberikan layanan 24 jam untuk
+                            memastikan Anda selalu terlayani dengan baik.</p>
+                        <p>Kami berkomitmen untuk memberikan pengalaman rental mobil yang terbaik untuk setiap pelanggan
+                            kami, dan kami selalu siap memberikan solusi terbaik untuk kebutuhan transportasi Anda. Terima
+                            kasih telah memilih Wijaya Rental Car sebagai mitra perjalanan Anda.</p>
+                        <p><a href="{{ route('landing.car', []) }}" class="btn btn-primary py-3 px-4">Cari Mobil</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="ftco-section ftco-intro" style="background-image: url({{ asset('carbook') }}/images/bg_3.jpg);">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row justify-content-end">
-                <div class="col-md-6 heading-section heading-section-white ftco-animate">
-                    <h2 class="mb-3">Do You Want To Earn With Us? So Don't Be Late.</h2>
-                    <a href="#" class="btn btn-primary btn-lg">Become A Driver</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="ftco-section testimony-section bg-light">
-        <div class="container">
-            <div class="row justify-content-center mb-5">
-                <div class="col-md-7 text-center heading-section ftco-animate">
-                    <span class="subheading">Testimonial</span>
-                    <h2 class="mb-3">Happy Clients</h2>
-                </div>
-            </div>
-            <div class="row ftco-animate">
-                <div class="col-md-12">
-                    <div class="carousel-testimony owl-carousel ftco-owl">
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2"
-                                    style="background-image: url({{ asset('carbook') }}/images/person_1.jpg)">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">Marketing Manager</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2"
-                                    style="background-image: url({{ asset('carbook') }}/images/person_2.jpg)">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">Interface Designer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2"
-                                    style="background-image: url({{ asset('carbook') }}/images/person_3.jpg)">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">UI Designer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2"
-                                    style="background-image: url({{ asset('carbook') }}/images/person_1.jpg)">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">Web Developer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap rounded text-center py-4 pb-5">
-                                <div class="user-img mb-2"
-                                    style="background-image: url({{ asset('carbook') }}/images/person_1.jpg)">
-                                </div>
-                                <div class="text pt-4">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
-                                        Vokalia and Consonantia, there live the blind texts.</p>
-                                    <p class="name">Roger Scott</p>
-                                    <span class="position">System Analyst</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    {{--
     <section class="ftco-counter ftco-section img" id="section-counter">
         <div class="overlay"></div>
         <div class="container">
@@ -173,5 +88,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 @endsection

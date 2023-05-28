@@ -50,13 +50,30 @@
                     <li class="nav-item {{ Request::is('about*') ? 'active' : '' }}"><a
                             href="{{ route('landing.about', []) }}" class="nav-link">About</a>
                     </li>
-                    <li class="nav-item {{ Request::is('service*') ? 'active' : '' }}"><a
-                            href="{{ route('landing.service', []) }}" class="nav-link">Services</a>
+                    {{-- <li class="nav-item {{ Request::is('service*') ? 'active' : '' }}"><a
+                            href="{{ route('landing.service', []) }}" class="nav-link">Services</a> --}}
                     </li>
                     <li class="nav-item {{ Request::is('car*') ? 'active' : '' }}"><a
                             href="{{ route('landing.car', []) }}" class="nav-link">Cars</a></li>
                     <li class="nav-item {{ Request::is('contact*') ? 'active' : '' }}"><a
                             href="{{ route('landing.contact', []) }}" class="nav-link">Contact</a></li>
+
+
+                    @if (auth()->guard('pelanggan')->check())
+                        <li class="nav-item {{ Request::is('pelanggan*') ? 'active' : '' }}"><a href="/pelanggan/home"
+                                class="nav-link">Dashboard
+                                Pelanggan</a></li>
+                    @elseif(auth()->guard('web')->check())
+                        <li class="nav-item {{ Request::is('home*') ? 'active' : '' }}"><a
+                                href="{{ route('home', []) }}" class="nav-link">Dashboard Admin</a></li>
+                    @else
+                        <li class="nav-item {{ Request::is('pelanggan*') ? 'active' : '' }}"><a
+                                href="{{ route('landing.pelanggan.showLogin', []) }}" class="nav-link">Login
+                                Pelanggan</a>
+                        </li>
+                        <li class="nav-item {{ Request::is('pelanggan*') ? 'active' : '' }}"><a
+                                href="{{ route('login', []) }}" class="nav-link">Login Admin</a></li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -70,9 +87,10 @@
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2"><a href="#" class="logo">Car<span>book</span></a></h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts.</p>
+                        <h2 class="ftco-heading-2"><a href="/" class="logo"><img
+                                    src="{{ asset('img/logo.svg') }}" width="100" height="100"
+                                    style="width: 8em; margin: -2em 0px;"></a></h2>
+                        <p>Rental mobil Kediri. harga sewa murah mengutamakan kenyamanan pelanggan.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -109,10 +127,10 @@
                         <h2 class="ftco-heading-2">Have a Questions?</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St.
-                                        Mountain View, San Francisco, California, USA</span></li>
-                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2
-                                            392 3929 210</span></a></li>
+                                <li><span class="icon icon-map-marker"></span><span class="text">Jl. Kh. Hasyim
+                                        Asy'ari RT/RW 001/009 Desa Banjarmlati Kec. Mojoroto, Kediri 64119.</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+62
+                                            81908237682</span></a></li>
                                 <li><a href="#"><span class="icon icon-envelope"></span><span
                                             class="text">info@yourdomain.com</span></a></li>
                             </ul>

@@ -5,6 +5,8 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class Pelanggan
@@ -21,14 +23,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $password
  * @property string $foto
  */
-class Pelanggan extends Model
+class Pelanggan extends Authenticatable
 {
     use SoftDeletes;
 
     use HasFactory;
+    use Notifiable;
 
     use \App\Traits\TraitUuid;
-
+    protected $guard = 'pelanggan';
     public $table = 'pelanggans';
 
 

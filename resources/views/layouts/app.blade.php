@@ -57,7 +57,7 @@
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img class="navbar-brand-full" src="{{ asset('img/logo.svg') }}" alt="InfyOm Logo">
             <img class="navbar-brand-minimized" src="{{ asset('img/logo.svg') }}" alt="InfyOm Logo">
         </a>
@@ -69,18 +69,21 @@
             <li class="nav-item dropdown">
                 <a class="nav-link" style="margin-right: 10px" data-toggle="dropdown" href="#" role="button"
                     aria-haspopup="true" aria-expanded="false">
-                    {{ Auth::user()->nama }}
+                    {{ Auth::guard('pelanggan')->check() ? Auth::guard('pelanggan')->user()->nama : Auth::user()->nama }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-header text-center">
                         <strong>Account</strong>
                     </div>
-                    <a href="{{ url('/logout') }}" class="dropdown-item btn btn-default btn-flat"
+                    <a href="{{ Auth::guard('pelanggan')->check() ? url('/pelanggan/logout') : url('/logout') }}"
+                        class="dropdown-item btn btn-default btn-flat"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fa fa-lock"></i>Logout
                     </a>
 
-                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form"
+                        action="{{ Auth::guard('pelanggan')->check() ? url('/pelanggan/logout') : url('/logout') }}"
+                        method="POST" style="display: none;">
                         @csrf
                     </form>
                 </div>

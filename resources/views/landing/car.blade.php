@@ -9,7 +9,7 @@
                     <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('landing.index') }}">Home <i
                                     class="ion-ios-arrow-forward"></i></a></span> <span>Cars <i
                                 class="ion-ios-arrow-forward"></i></span></p>
-                    <h1 class="mb-3 bread">Choose Your Car</h1>
+                    <h1 class="mb-3 bread">Pilih Mobil mu</h1>
                 </div>
             </div>
         </div>

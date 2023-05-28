@@ -22,9 +22,11 @@ class CreatePelanggansTable extends Migration
             $table->text('alamat');
             $table->string('hp', 15);
             $table->string('ktp');
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('foto');
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });
