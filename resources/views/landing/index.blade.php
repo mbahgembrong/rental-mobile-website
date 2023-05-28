@@ -7,10 +7,7 @@
             <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
                 <div class="col-lg-8 ftco-animate">
                     <div class="text w-100 text-center mb-md-5 pb-md-5">
-                        <h1 class="mb-4">Cepat &amp; Mudah Sewa Mobil</h1>
-                        <p style="font-size: 18px;">Penyedia jasa rental mobil terbaik untuk kebutuhan transportasi Anda di
-                            daerah Kediri. Kami telah beroperasi selama kurang lebih 6 tahun, memberikan layanan terbaik dan
-                            berkualitas kepada pelanggan kami di seluruh Indonesia khususnya Kota Kediri.</p>
+                        <h1 class="mb-4">Pastikan Perjalanan anda cepat, aman dan nyaman bersama Wijaya Rental Car</h1>
 
                     </div>
                 </div>
