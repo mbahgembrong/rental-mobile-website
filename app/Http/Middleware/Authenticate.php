@@ -14,8 +14,11 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+        if (!$request->expectsJson()) {
+            if (explode('/', $request->getRequestUri())[1] == 'pelanggan') {
+                return route('landing.pelanggan.showLogin');
+            } else
+                return route('login');
         }
     }
 }

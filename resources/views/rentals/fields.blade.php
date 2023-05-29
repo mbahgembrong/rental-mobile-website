@@ -1,12 +1,27 @@
 <!-- Pelanggan Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('pelanggan_id', 'Pelanggan :') !!}
-    {!! Form::select('pelanggan_id', $pelanggans, null, ['class' => 'form-control']) !!}
+    @if (Auth::guard('pelanggan')->check())
+        {!! Form::select('pelanggan_id', $pelanggans, Auth::guard('pelanggan')->user()->id, [
+            'class' => 'form-control',
+            'disabled',
+        ]) !!}
+        <input type="hidden" name="pelanggan_id" value="{{ Auth::guard('pelanggan')->user()->id }}">
+    @else
+        {!! Form::select('pelanggan_id', $pelanggans, null, ['class' => 'form-control']) !!}
+    @endif
 </div>
 <!-- Kategori Mobil Id Field -->
 <div class="form-group col-sm-6" id="form_kategori_id">
     {!! Form::label('kategori_id', 'Kategori Mobil:') !!}
-    {!! Form::select('kategori_id', $kategoris, null, ['class' => 'form-control']) !!}
+    {!! Form::select(
+        'kategori_id',
+        ['' => 'Pilih Kategori'] + $kategoris->toArray(),
+        $request->kategori_id ?? null,
+        [
+            'class' => 'form-control',
+        ],
+    ) !!}
 </div>
 <!--  Mobil Id Field -->
 <div class="form-group col-sm-12" id="form_mobil_id">
@@ -94,7 +109,9 @@
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary', 'disabled']) !!}
-    <a href="{{ route('rentals.index') }}" class="btn btn-secondary">Cancel</a>
+    @if (!Auth::guard('pelanggan')->check())
+        <a href="{{ route('rentals.index') }}" class="btn btn-secondary">Cancel</a>
+    @endif
 </div>
 @push('scripts')
     <script>
@@ -106,6 +123,15 @@
             $('#form_waktu_mulai').hide();
             $('#form_waktu_selesai').hide();
             $('#form_grand_total').hide();
+            // if ({{ json_encode($errors->any() || 0) }}) {
+            //     $('#form_mobil_id').show();
+            //     $('#form_detail_mobil_id').show();
+            //     $('#form_sopir_id').show();
+            //     $('select[name="sopir_id"]').show();
+            //     $('#form_waktu_mulai').show();
+            //     $('#form_waktu_selesai').show();
+            //     $('#form_grand_total').show();
+            // }
             let grandTotal = 0;
             let totalCar = 0;
             let totalSopir = 0;
@@ -119,11 +145,8 @@
             $('#form_kategori_id').on('change', function() {
                 var kategori_id = $(this).find('select').val();
                 $.ajax({
-                    url: "{{ route('mobils.getmobil') }}",
+                    url: `/mobil/${kategori_id}`,
                     type: "GET",
-                    data: {
-                        kategori_id: kategori_id
-                    },
                     success: function(data) {
                         if (data.status == 'success') {
                             $('#form_mobil_id').show();
@@ -278,6 +301,8 @@
                             } else {
                                 $('select[name="sopir_id"]').hide();
                                 $('select[name="sopir_id"]').val('');
+                                $('#radioSopir').attr('checked', false)
+                                $('#radioNonSopir').attr('checked', true)
                                 priceSopir = 0;
                                 Swal.fire({
                                     icon: 'error',

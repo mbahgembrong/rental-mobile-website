@@ -21,7 +21,8 @@
                 <div class="col-md-12	featured-top">
                     <div class="row no-gutters">
                         <div class="col-md-4 d-flex align-items-center">
-                            <form action="#" class="request-form ftco-animate bg-primary" style="width: inherit;">
+                            <form action="{{ route('pelanggan.rentals.create') }}"
+                                class="request-form ftco-animate bg-primary" style="width: inherit;" method="get">
                                 <h2>Buat Perjalanamu</h2>
                                 <div class="form-group">
                                     <label for="kategori_id" class="label">Kategori</label>
@@ -121,7 +122,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p><a href="{{ route('landing.car') }}" class="btn btn-primary py-3 px-4">Pesan Mobil
+                                <p><a href="{{ route('pelanggan.rentals.create') }}" class="btn btn-primary py-3 px-4">Pesan Mobil
                                         Sekarang Juga!</a>
                                 </p>
                             </div>
@@ -136,8 +137,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-                    <span class="subheading">Apa yang Kamu Butuhkan</span>
-                    <h2 class="mb-2">Feeatured Vehicles</h2>
+                    <h2 class="mb-2">Kategori Mobil</h2>
                 </div>
             </div>
             <div class="row">
@@ -208,8 +208,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-                    <span class="subheading">Apa yang Kamu Butuhkan</span>
-                    <h2 class="mb-2">Feeatured Vehicles</h2>
+                    <h2 class="mb-2">Mobil yang Banyak di Pinjam</h2>
                 </div>
             </div>
             <div class="row">
@@ -248,14 +247,14 @@
         $(function() {
             $('select[name="kategori_id"]').on('change', function() {
                 if ($(this).val()) {
-                    $.get(`/mobils/${$(this).val()}`).then((result) => {
+                    $.get(`/mobil/${$(this).val()}`).then((result) => {
                         console.log(result);
                         $('select[name="mobil_id"]').empty();
                         $('select[name="mobil_id"]').append(
                             `<option value="">Pilih Mobil</option>`);
-                        $.each(result, function(key, value) {
+                        $.each(result.data, function(key, value) {
                             $('select[name="mobil_id"]').append(
-                                `<option value="${key}">${value}</option>`);
+                                `<option value="${value.id}">${value.nama}</option>`);
                         });
 
                     }).catch((err) => {

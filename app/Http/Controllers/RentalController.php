@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Response;
 
@@ -28,9 +29,14 @@ class RentalController extends AppBaseController
      */
     public function index(Request $request)
     {
-        /** @var Rental $rentals */
-        $rentals = Rental::all();
 
+
+        /** @var Rental $rentals */
+        if (Auth::guard('pelanggan')->check()) {
+            $rentals = Rental::where('pelanggan_id', Auth::guard('pelanggan')->user()->id)->get();
+        } else {
+            $rentals = Rental::all();
+        }
         return view('rentals.index')
             ->with('rentals', $rentals);
     }
@@ -40,12 +46,12 @@ class RentalController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $pelanggans = Pelanggan::pluck('nama', 'id');
         $kategoris = KategoriMobil::pluck('nama', 'id');
 
-        return view('rentals.create', compact(['pelanggans', 'kategoris']));
+        return view('rentals.create', compact(['pelanggans', 'kategoris', 'request']));
     }
 
     /**
@@ -57,6 +63,7 @@ class RentalController extends AppBaseController
      */
     public function store(CreateRentalRequest $request)
     {
+        // dd($request->all());
         $input = $request->all();
         $input["waktu_peminjaman"] = Carbon::now()->timestamp;
         $input["waktu_mulai"] = Carbon::createFromFormat('Y-m-d H:i:s', $input['waktu_mulai'])->timestamp;
@@ -68,8 +75,10 @@ class RentalController extends AppBaseController
         $rental = Rental::create($input);
 
         Flash::success('Rental saved successfully.');
-
-        return redirect(route('rentals.index'));
+        if (Auth::guard('pelanggan')->check())
+            return redirect(route('pelangan.rentals.index'));
+        else
+            return redirect(route('rentals.index'));
     }
 
     /**

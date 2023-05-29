@@ -35,13 +35,18 @@
                     <td>Rp. {{ $rental->grand_total }}</td>
 
                     <td>
-                        {!! Form::open(['route' => ['rentals.destroy', $rental->id], 'method' => 'delete']) !!}
+                        {!! Form::open([
+                            'route' => [Auth::guard('pelanggan')->check() ? 'pelanggan.rentals.destroy' : 'rentals.destroy', $rental->id],
+                            'method' => 'delete',
+                        ]) !!}
                         <div class='btn-group'>
-                            <a href="{{ route('rentals.show', [$rental->id]) }}" class='btn btn-ghost-secondary'><i
-                                    class="fa fa-eye"></i></a>
-                            <a href="#" data-id="{{ $rental->id }}" data-status="{{ $rental->status }}"
-                                class='btn btn-ghost-warning status {{ $rental->waktu_mulai <= time() || $rental->status_pembayaran != 'lunas' || in_array($rental->status, ['batal', 'selesai']) ? 'disabled' : '' }}'><i
-                                    class="fa fa-paper-plane-o"></i></a>
+                            <a href="{{ route(Auth::guard('pelanggan')->check() ? 'pelanggan.rentals.show' : 'rentals.show', [$rental->id]) }}"
+                                class='btn btn-ghost-secondary'><i class="fa fa-eye"></i></a>
+                            @if (!Auth::guard('pelanggan')->check())
+                                <a href="#" data-id="{{ $rental->id }}" data-status="{{ $rental->status }}"
+                                    class='btn btn-ghost-warning status {{ $rental->waktu_mulai <= time() || $rental->status_pembayaran != 'lunas' || in_array($rental->status, ['batal', 'selesai']) ? 'disabled' : '' }}'><i
+                                        class="fa fa-paper-plane-o"></i></a>
+                            @endif
                             <a href="{{ route('rentals.bayar', [$rental->id]) }}"
                                 class='btn btn-ghost-success  {{ $rental->waktu_mulai <= time() || $rental->status_pembayaran == 'lunas' || in_array($rental->status, ['batal', 'selesai', 'berjalan']) ? 'disabled' : '' }}'><i
                                     class="fa fa-money"></i></a>

@@ -31,9 +31,13 @@
         .navbar-brand img {
             width: -webkit-fill-available;
         }
+
+        .dataTables_wrapper {
+            width: -moz-available;
+        }
     </style>
     {{-- filepond --}}
-     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
         rel="stylesheet" />
     {{-- Datatables --}}
@@ -58,7 +62,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="/">
-            <img class="navbar-brand-full" src="{{ asset('img/logo.svg') }}" alt="InfyOm Logo">
+            <img class="navbar-brand-full" src="{{ asset('img/logo.svg') }}"style="width: inherit;" alt="InfyOm Logo">
             <img class="navbar-brand-minimized" src="{{ asset('img/logo.svg') }}" alt="InfyOm Logo">
         </a>
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
@@ -125,8 +129,8 @@
 {{-- sweet alert --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{-- filepond --}}
- <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script> 
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
 <script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>

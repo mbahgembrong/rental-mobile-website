@@ -1,7 +1,7 @@
 <!-- Kategori Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('kategori_id', 'Kategori Id:') !!}
-    {!! Form::select('kategori_id', $kategori_mobils, null, ['class' => 'form-control']) !!}
+    {!! Form::label('kategori_id', 'Kategori :') !!}
+    {!! Form::select('kategori_id', ['' => 'Pilih Kategori'] + $kategori_mobils->toArray(), null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Nama Field -->

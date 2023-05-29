@@ -195,10 +195,11 @@ class MobilController extends AppBaseController
         return redirect(route('mobils.index'));
     }
 
-    public function getMobil(Request $request)
+    public function getMobil(Request $request, $idKategori)
     {
         try {
-            $mobil = Mobil::where('kategori_id', $request->kategori_id)->get();
+
+            $mobil = Mobil::where('kategori_id', $idKategori)->get();
             return response()->json([
                 'status' => 'success',
                 'data' => $mobil,

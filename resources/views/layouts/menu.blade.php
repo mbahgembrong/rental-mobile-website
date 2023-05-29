@@ -5,14 +5,14 @@
             <span>Home</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('#') }}">
+    <li class="nav-item {{ Request::is('pelanggan/rentals/create') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pelanggan.rentals.create') }}">
             <i class="nav-icon fa fa-plus" aria-hidden="true"></i>
             <span>Pesan Rental</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('#') }}">
+    <li class="nav-item {{ Request::is('pelanggan/rentals') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pelangan.rentals.index') }}">
             <i class="nav-icon fa fa-taxi" aria-hidden="true"></i>
             <span>Rental</span>
         </a>
