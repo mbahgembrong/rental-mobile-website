@@ -1,22 +1,16 @@
 - error add user
-- add relation in migration
+- add relation in migration (fix)
 - add fitur dp
 - home detail car redirect page detail
 - chaten redirect whatsapp
-- middleware admin
-- pelanggan panel
+- middleware admin 
+- pelanggan panel (fix)
 - laporan penyewaan
 - notify email
 - kpu cekked nik
-- error add user
-- add relation in migration
-- add fitur dp
-- home detail car redirect page detail
-- chaten redirect whatsapp
 - penghitungan denda dan luar daerah = denda +harga
 - fake order mulai januari sampai juni tanggal 12
-- change url get mobil byKategori in landing
+- change url get mobil byKategori in landing (fix)
 - kecilkan font awal in index landing
-- carrousel car in index by category not mobil
-- klik detail item keluar daftar mobil
+- carrousel car in index by category not mobil (fix)
 - pelanggan dapat menambah ulasan
