@@ -3,7 +3,7 @@
 - add fitur dp
 - home detail car redirect page detail
 - chaten redirect whatsapp
-- middleware admin 
+- middleware admin
 - pelanggan panel (fix)
 - laporan penyewaan
 - notify email
@@ -14,3 +14,8 @@
 - kecilkan font awal in index landing
 - carrousel car in index by category not mobil (fix)
 - pelanggan dapat menambah ulasan
+- active and hover change color to blue
+- change primary color to blue or dark
+- midleware pelanggan remove pelanggan input in pesan rental
+- add image in menu profil
+- validasi create mobil in detail mobil
