@@ -39,6 +39,7 @@
 @push('scripts')
     <script>
         $(function() {
+
             if ("{{ $request->kategori_id }}") {
                 $.ajax({
                     url: `/mobil/${"{{ $request->kategori_id }}"}`,
@@ -61,12 +62,16 @@
                                     mobil.harga + ' / ' + mobil.satuan + '</option>'
                                 );
                             });
-                             $('#form_mobil_id select').val("{{ $request->mobil_id }}").change()
+                            $('#form_mobil_id select').val("{{ $request->mobil_id }}").change()
                             $('#form_waktu_mulai').show();
                             $('#form_waktu_selesai').show();
                         }
                     }
                 });
+                $('#waktu_mulai').data('DateTimePicker').minDate(moment('{{ $request->waktu_mulai }}'));
+                $('#waktu_selesai').data('DateTimePicker').minDate(moment('{{ $request->waktu_selesai }}'));
+                cekKetersediaanMobil("{{ $request->mobil_id }}", moment('{{ $request->waktu_mulai }}').unix(),
+                    moment('{{ $request->waktu_selesai }}').unix());
             }
         })
     </script>
