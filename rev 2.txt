@@ -19,3 +19,5 @@
 - midleware pelanggan remove pelanggan input in pesan rental
 - add image in menu profil
 - validasi create mobil in detail mobil
+- remove print csv
+- print struk in rentals
