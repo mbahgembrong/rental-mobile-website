@@ -43,7 +43,8 @@
                                 </div>
                                 <div class="form-group mr-2">
                                     <label for="waktu_mulai" class="label">Tanggal Mulai</label>
-                                    <input type="text" class="form-control" id="waktu_mulai" placeholder="Date">
+                                    <input type="text" name="waktu_mulai" class="form-control" id="waktu_mulai"
+                                        placeholder="Date">
                                 </div>
                                 @push('scripts')
                                     <script type="text/javascript">
@@ -63,7 +64,8 @@
 
                                 <div class="form-group ml-2">
                                     <label for="waktu_selesai" class="label">Tanggal Selesai</label>
-                                    <input type="text" class="form-control" id="waktu_selesai" placeholder="Date">
+                                    <input type="text" class="form-control" name="waktu_selesai" id="waktu_selesai"
+                                        placeholder="Date">
                                 </div>
                                 @push('scripts')
                                     <script type="text/javascript">
@@ -122,7 +124,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p><a href="{{ route('pelanggan.rentals.create') }}" class="btn btn-primary py-3 px-4">Pesan Mobil
+                                <p><a href="{{ route('pelanggan.rentals.create') }}" class="btn btn-primary py-3 px-4">Pesan
+                                        Mobil
                                         Sekarang Juga!</a>
                                 </p>
                             </div>
@@ -159,7 +162,8 @@
                                         </div>
                                         <p class="d-flex mb-0 d-block"><a href="#"
                                                 class="btn btn-primary py-2 mr-1">Rental
-                                                now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a>
+                                                now</a> <a href="#" class="btn btn-secondary py-2 ml-1"
+                                                data-car="{!! json_encode($mobil) !!}">Details</a>
                                         </p>
                                     </div>
                                 </div>
@@ -230,7 +234,8 @@
                                         </div>
                                         <p class="d-flex mb-0 d-block"><a href="#"
                                                 class="btn btn-primary py-2 mr-1">Rental
-                                                now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a>
+                                                now</a> <a href="#" class="btn btn-secondary py-2 ml-1 car-detail"
+                                                data-car='{!! json_encode($mobil) !!}'>Details</a>
                                         </p>
                                     </div>
                                 </div>
@@ -242,9 +247,18 @@
         </div>
     </section>
 @endsection
+@include('landing.layouts.modal_car_detail')
 @push('scripts')
     <script>
         $(function() {
+
+            $('.item').on('click', '.car-detail', function(e) {
+                $('#modal-car-detail').modal();
+                const detailCar = $(this).data('car');
+                console.log(detailCar);
+                $('#modal-car-detail #modalCarDetailTitle').text(`Detail ${detailCar.nama}`);
+
+            })
             $('select[name="kategori_id"]').on('change', function() {
                 if ($(this).val()) {
                     $.get(`/mobil/${$(this).val()}`).then((result) => {
