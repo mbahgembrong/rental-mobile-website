@@ -1,23 +1,23 @@
 - error add user (fix)
 - add relation in migration (fix)
-- add fitur dp
 - home detail car redirect page detail (fix)
+- pelanggan panel (fix)
+- change url get mobil byKategori in landing (fix)
+- kecilkan font awal in index landing (fix)
+- carrousel car in index by category not mobil (fix)
+- active and hover change color to blue (fix)
+- change primary color to blue or dark (fix)
+- remove print csv (fix)
+- add fitur dp
 - chaten redirect whatsapp
 - middleware admin
-- pelanggan panel (fix)
 - laporan penyewaan
 - notify email
 - kpu cekked nik
 - penghitungan denda dan luar daerah = denda +harga
 - fake order mulai januari sampai juni tanggal 12
-- change url get mobil byKategori in landing (fix)
-- kecilkan font awal in index landing (fix)
-- carrousel car in index by category not mobil (fix)
 - pelanggan dapat menambah ulasan
-- active and hover change color to blue (fix)
-- change primary color to blue or dark (fix)
 - midleware pelanggan remove pelanggan input in pesan rental
 - add image in menu profil
 - validasi create mobil in detail mobil
-- remove print csv (fix)
 - print struk in rentals
