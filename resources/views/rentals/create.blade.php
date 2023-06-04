@@ -10,6 +10,8 @@
             </li>
         @endif
     </ol>
+    @php
+    @endphp
     <div class="container-fluid">
         <div class="animated fadeIn">
             @include('coreui-templates::common.errors')
@@ -53,7 +55,7 @@
                             $('#form_mobil_id select').append(
                                 '<option value="" disabled selected>Pilih Mobil</option>'
                             );
-
+                            
                             data.data.forEach(mobil => {
                                 $('#form_mobil_id select').append('<option value="' +
                                     mobil.id + '" data-price="' + mobil.harga +

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Carbook - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Wijaya Rental</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -55,8 +55,8 @@
                     </li>
                     <li class="nav-item {{ Request::is('car*') ? 'active' : '' }}"><a
                             href="{{ route('landing.car', []) }}" class="nav-link">Cars</a></li>
-                    <li class="nav-item {{ Request::is('contact*') ? 'active' : '' }}"><a
-                            href="{{ route('landing.contact', []) }}" class="nav-link">Contact</a></li>
+                    {{-- <li class="nav-item {{ Request::is('contact*') ? 'active' : '' }}"><a
+                            href="{{ route('landing.contact', []) }}" class="nav-link">Contact</a></li> --}}
 
 
                     @if (auth()->guard('pelanggan')->check())

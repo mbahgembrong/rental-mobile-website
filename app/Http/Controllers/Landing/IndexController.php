@@ -16,8 +16,8 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $kategoris = KategoriMobil::pluck('nama', 'id');
-        $mobils = Mobil::take(5)->get();
+        $kategoris = KategoriMobil::all();
+        $mobils = Mobil::with(['kategoriMobil','detailMobils'])->take(5)->get();
         return view('landing.index', compact(['kategoris', 'mobils']));
     }
 

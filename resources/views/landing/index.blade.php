@@ -26,7 +26,7 @@
                                 <h2>Buat Perjalanamu</h2>
                                 <div class="form-group">
                                     <label for="kategori_id" class="label">Kategori</label>
-                                    {!! Form::select('kategori_id', ['' => 'Pilih Kategori'] + $kategoris->toArray(), null, [
+                                    {!! Form::select('kategori_id', ['' => 'Pilih Kategori'] + $kategoris->pluck('nama', 'id')->toArray(), null, [
                                         'class' => 'form-control',
                                     ]) !!}
                                     @push('css')
@@ -146,25 +146,19 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="carousel-car owl-carousel">
-                        @foreach ($mobils as $mobil)
+                        @foreach ($kategoris as $kategori)
                             <div class="item">
                                 <div class="car-wrap rounded ftco-animate">
                                     <div class="img rounded d-flex align-items-end"
-                                        style="background-image: url('{{ asset('storage/mobils/foto/' . $mobil->foto) }}');">
+                                        style="background-image: url('{{ asset('storage/kategoriMobils/foto/' . $kategori->foto) }}');">
                                     </div>
                                     <div class="text">
-                                        <h2 class="mb-0"><a href="#">{{ $mobil->nama }}</a></h2>
-                                        <div class="d-flex mb-3">
-                                            <span class="cat">{{ $mobil->merk }}</span>
-                                            <p class="price ml-auto">Rp. {{ $mobil->harga }}
-                                                <span>/{{ $mobil->satuan }}</span>
-                                            </p>
-                                        </div>
-                                        <p class="d-flex mb-0 d-block"><a href="#"
-                                                class="btn btn-primary py-2 mr-1">Rental
-                                                now</a> <a href="#" class="btn btn-secondary py-2 ml-1"
-                                                data-car="{!! json_encode($mobil) !!}">Details</a>
-                                        </p>
+                                        <span class="d-flex mb-0 d-block justify-content-around">
+                                            <h2 class="mb-0 mr-1" style="display: inline-block;">{{ $kategori->nama }}
+                                            </h2>
+                                            <a href="{{ route('landing.car', ['kategori_id' => $kategori->id]) }}"
+                                                class="btn btn-primary py-2 ml-auto">Cari Mobil</a>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -232,9 +226,10 @@
                                                 <span>/{{ $mobil->satuan }}</span>
                                             </p>
                                         </div>
-                                        <p class="d-flex mb-0 d-block"><a href="#"
+                                        <p class="d-flex mb-0 d-block"><a
+                                                href=" {{ route('pelanggan.rentals.create', ['mobil_id' => $mobil->id]) }}"
                                                 class="btn btn-primary py-2 mr-1">Rental
-                                                now</a> <a href="#" class="btn btn-secondary py-2 ml-1 car-detail"
+                                                now</a> <a class="btn btn-secondary py-2 ml-1 car-detail"
                                                 data-car='{!! json_encode($mobil) !!}'>Details</a>
                                         </p>
                                     </div>
@@ -255,9 +250,27 @@
             $('.item').on('click', '.car-detail', function(e) {
                 $('#modal-car-detail').modal();
                 const detailCar = $(this).data('car');
-                console.log(detailCar);
-                $('#modal-car-detail #modalCarDetailTitle').text(`Detail ${detailCar.nama}`);
+                $('#modal-car-detail #modalBodyCarDetailFoto').attr('src',
+                    `{{ asset('storage/mobils/foto') }}/${detailCar.foto}`);
+                $('#modal-car-detail #modalBodyCarDetailKategori').text(detailCar.kategori_mobil.nama);
+                $('#modal-car-detail #modalBodyCarDetailNama').text(detailCar.nama);
+                $('#modal-car-detail #modalBodyCarDetailJenis').text(detailCar.jenis);
+                $('#modal-car-detail #modalBodyCarDetailMerk').text(detailCar.merk);
+                $('#modal-car-detail #modalBodyCarDetailHarga').text(
+                    `Rp. ${detailCar.harga} / ${detailCar.satuan}`);
+                $('#modal-car-detail #modalBodyCarDetailDenda').text(`Rp. ${detailCar.denda}`);
 
+                let carsDetail = [];
+                $.each(detailCar.detail_mobils, function(key, value) {
+                    carsDetail.push(`<tr>
+                        <td>${key+1}</td>
+                        <td>${value.plat}</td>
+                        <td>${value.stnk}</td>
+                        <td>${value.tahun_mobil}</td>
+                        <td>${value.status}</td>
+                    </tr>`);
+                });
+                $('#modal-car-detail #modalBodyCarDetailMobil tbody').html(carsDetail);
             })
             $('select[name="kategori_id"]').on('change', function() {
                 if ($(this).val()) {

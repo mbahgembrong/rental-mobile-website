@@ -20,7 +20,7 @@
     <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('#') }}">
             <i class="nav-icon fa fa-user" aria-hidden="true"></i>
-            <span>User</span>
+            <span>Profil</span>
         </a>
     </li>
 @else

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateRentalRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\DetailMobil;
 use App\Models\KategoriMobil;
+use App\Models\Mobil;
 use App\Models\Pelanggan;
 use App\Models\Rental;
 use App\Models\Sopir;
@@ -48,6 +49,10 @@ class RentalController extends AppBaseController
      */
     public function create(Request $request)
     {
+        if ($request->get('mobil_id') ?? false) {
+            $mobil = Mobil::find($request->get('mobil_id'));
+            $request->request->add(['kategori_id' => $mobil->kategori_id]);
+        }
         $pelanggans = Pelanggan::pluck('nama', 'id');
         $kategoris = KategoriMobil::pluck('nama', 'id');
 
