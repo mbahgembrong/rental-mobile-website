@@ -66,10 +66,10 @@
             <span>Rental</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('#') }}">
             <i class="nav-icon fa fa-user" aria-hidden="true"></i>
             <span>Ulasan</span>
         </a>
-    </li>
+    </li> --}}
 @endif
