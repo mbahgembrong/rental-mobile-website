@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -119,5 +121,25 @@ class Rental extends Model
     public function sopir(): BelongsTo
     {
         return $this->belongsTo(Sopir::class, 'sopir_id');
+    }
+
+    /**
+     * Get all of the detailPembayaran for the Rental
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function detailPembayaran()
+    {
+        return $this->hasMany(DetailPembayaranRental::class, 'rental_id');
+    }
+
+    /**
+     * Get the ulasan associated with the Rental
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function ulasan()
+    {
+        return $this->hasOne(Ulasan::class, 'rental_id');
     }
 }

@@ -9,13 +9,13 @@
 - change primary color to blue or dark (fix)
 - remove print csv (fix)
 - validasi create mobil in detail mobil (fix)
+- add image in menu profil (fix)
 - chaten redirect whatsapp
 - middleware admin
 - laporan penyewaan
 - penghitungan denda dan luar daerah = denda +harga
 - pelanggan dapat menambah ulasan
 - midleware pelanggan remove pelanggan input in pesan rental
-- add image in menu profil
 - add fitur dp
 - notify email
 - kpu cekked nik
