@@ -17,7 +17,7 @@
             // responsive: true,
             dom: 'Bfrtip',
             buttons: [
-                'excel', 'pdf', 'print'
+                'copy','excel', 'pdf', 'print'
             ]
         });
     })
