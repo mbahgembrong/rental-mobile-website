@@ -12,6 +12,7 @@ use App\Models\Mobil;
 use App\Models\Pelanggan;
 use App\Models\Rental;
 use App\Models\Sopir;
+use App\Models\Ulasan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
@@ -242,11 +243,11 @@ class RentalController extends AppBaseController
     public function status(Request $request)
     {
         $rental = Rental::find($request->id);
-        if (empty($rental))
-            return response([
-                'status' => 'error',
-                'message' => 'Rental not found'
-            ], 404);
+        if (empty($rental)) {
+            Flash::error('Rental not found');
+
+            return redirect(route('pelanggan.rentals.index'));
+        }
         if ($request->status == 'selesai' && $rental->status_pembayaran != 'lunas') {
             return response([
                 'status' => 'error',
@@ -259,6 +260,27 @@ class RentalController extends AppBaseController
             'status' => 'success',
             'message' => 'Rental status updated successfully'
         ], 200);
+    }
+
+    public function ulasan(Request $request)
+    {
+        $request->validate([
+            'star' => 'required|integer|min:1|max:5',
+            'ulasan' => 'required|string'
+        ]);
+        $rental = Rental::find($request->id);
+        if (empty($rental))
+            return response([
+                'status' => 'error',
+                'message' => 'Rental not found'
+            ], 404);
+        $ulasan = new Ulasan;
+        $ulasan->rental_id = $rental->id;
+        $ulasan->star = $request->star;
+        $ulasan->ulasan = $request->ulasan;
+        $ulasan->save();
+        Flash::success('Rental ulasan successfully.');
+        return redirect(route('pelangan.rentals.index'));
     }
 
     /**

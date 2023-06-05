@@ -10,13 +10,13 @@
 - remove print csv (fix)
 - validasi create mobil in detail mobil (fix)
 - add image in menu profil (fix)
+- add fitur dp (fix)
+- pelanggan dapat menambah ulasan (fix)
 - chaten redirect whatsapp
 - middleware admin
 - laporan penyewaan
 - penghitungan denda dan luar daerah = denda +harga
-- pelanggan dapat menambah ulasan
 - midleware pelanggan remove pelanggan input in pesan rental
-- add fitur dp
 - notify email
 - kpu cekked nik
 - fake order mulai januari sampai juni tanggal 12
