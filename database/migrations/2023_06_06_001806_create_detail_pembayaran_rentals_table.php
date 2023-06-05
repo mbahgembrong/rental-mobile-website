@@ -19,11 +19,13 @@ class CreateDetailPembayaranRentalsTable extends Migration
             $table->integer('jumlah');
             $table->integer('kurang')->default(0);
             $table->string('bukti')->nullable();
+            $table->uuid('user_validasi_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
         Schema::table('detail_pembayaran_rentals', function (Blueprint $table) {
             $table->foreign('rental_id')->references('id')->on('rentals')->onDelete('cascade');
+            $table->foreign('user_validasi_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

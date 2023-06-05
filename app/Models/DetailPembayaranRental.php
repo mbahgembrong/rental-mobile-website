@@ -23,6 +23,7 @@ class DetailPembayaranRental extends Model
 
     public $fillable = [
         'rental_id',
+        'user_validasi_id',
         'jumlah',
         'kurang',
         'bukti',
