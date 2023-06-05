@@ -17,8 +17,8 @@
             <span>Rental</span>
         </a>
     </li>
-    <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('#') }}">
+    <li class="nav-item {{ Request::is('profile*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pelanggan.profile') }}">
             <i class="nav-icon fa fa-user" aria-hidden="true"></i>
             <span>Profil</span>
         </a>

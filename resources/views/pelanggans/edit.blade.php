@@ -3,7 +3,7 @@
 @section('content')
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="{!! route('pelanggans.index') !!}">Pelanggan</a>
+            <a href="{!! Auth::guard('pelanggan')->check() ? route('pelanggan.profile') : route('pelanggans.index') !!}">{{ Auth::guard('pelanggan')->check() ? 'Profile' : 'Pelanggan' }}</a>
         </li>
         <li class="breadcrumb-item active">Edit</li>
     </ol>
@@ -15,11 +15,11 @@
                     <div class="card">
                         <div class="card-header">
                             <i class="fa fa-edit fa-lg"></i>
-                            <strong>Edit Pelanggan</strong>
+                            <strong>Edit {{ Auth::guard('pelanggan')->check() ? 'Profile' : 'Pelanggan' }}</strong>
                         </div>
                         <div class="card-body">
                             {!! Form::model($pelanggan, [
-                                'route' => ['pelanggans.update', $pelanggan->id],
+                                'route' => [Auth::guard('pelanggan')->check() ? 'pelanggan.profile.update' : 'pelanggans.update', $pelanggan->id],
                                 'method' => 'patch',
                                 'files' => true,
                                 'class' => 'row',

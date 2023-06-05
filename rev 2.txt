@@ -8,6 +8,7 @@
 - active and hover change color to blue (fix)
 - change primary color to blue or dark (fix)
 - remove print csv (fix)
+- validasi create mobil in detail mobil (fix)
 - chaten redirect whatsapp
 - middleware admin
 - laporan penyewaan
@@ -19,5 +20,4 @@
 - notify email
 - kpu cekked nik
 - fake order mulai januari sampai juni tanggal 12
-- validasi create mobil in detail mobil
 - print struk in rentals

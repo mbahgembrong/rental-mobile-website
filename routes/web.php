@@ -39,6 +39,10 @@ Route::prefix('/pelanggan')->group(function () {
                 'destroy' => 'pelanggan.rentals.destroy',
             ]
         ]);
+        Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('pelanggan.profile');
+        Route::post('/profile/update_foto', [App\Http\Controllers\ProfileController::class, 'updateFoto'])->name('pelanggan.profile.update_foto');
+        Route::get('/profile/edit/{id}', [App\Http\Controllers\ProfileController::class, 'edit'])->name('pelanggan.profile.edit');
+        Route::patch('/profile/update/{id}', [App\Http\Controllers\ProfileController::class, 'update'])->name('pelanggan.profile.update');
     });
 });
 
@@ -52,6 +56,8 @@ Route::prefix('rental')->group(function () {
 Route::prefix('mobil')->group(function () {
     Route::get('/{idKategori}', [App\Http\Controllers\MobilController::class, 'getMobil'])->name('mobils.getmobil');
 });
+
+
 Auth::routes();
 
 Route::prefix('/admin')->group(function () {
