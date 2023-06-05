@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\AppBaseController;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdatePelangganRequest;
 use Carbon\Carbon;
 
-class ProfileController extends Controller
+class ProfileController extends AppBaseController
 {
     public function index(Request $request)
     {

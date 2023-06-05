@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Pelanggan;
+use Illuminate\Support\Facades\Auth;
 
 class UpdatePelangganRequest extends FormRequest
 {
@@ -26,9 +27,10 @@ class UpdatePelangganRequest extends FormRequest
     public function rules()
     {
         $rules = Pelanggan::$rules;
-        $rules['nik'] = 'required|digits:16|unique:pelanggans,nik,' . $this->pelanggan;
-        $rules['hp'] = 'required|digits_between:10,15|numeric|unique:pelanggans,hp,' . $this->pelanggan;
-        $rules['email'] = 'required|email|unique:pelanggans,email,' . $this->pelanggan;
+        $pelanggan = $this->pelanggan ?? Auth::guard('pelanggan')->user()->id;
+        $rules['nik'] = 'required|digits:16|unique:pelanggans,nik,' . $pelanggan;
+        $rules['hp'] = 'required|digits_between:10,15|numeric|unique:pelanggans,hp,' . $pelanggan;
+        $rules['email'] = 'required|email|unique:pelanggans,email,' . $pelanggan;
         $rules['password'] = 'nullable|min:8';
         $rules['foto'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
         $rules['ktp'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
