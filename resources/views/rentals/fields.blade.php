@@ -167,6 +167,12 @@
                             });
                             $('#form_waktu_mulai').show();
                             $('#form_waktu_selesai').show();
+                            $('#form_detail_mobil_id select').find('option')
+                                    .remove()
+                                    .end()
+                                $('#form_detail_mobil_id select').append(
+                                    '<option value="" disabled selected>Pilih Detail Mobil</option>'
+                                );
                         }
                     }
                 });
