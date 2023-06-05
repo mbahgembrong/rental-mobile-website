@@ -293,7 +293,7 @@ class RentalController extends AppBaseController
 
             return redirect(route('pelanggan.rentals.index'));
         }
-        return view('rentals.struk', compact('rental'));
+        return view('rentals.struk');
     }
 
     /**
@@ -329,15 +329,16 @@ class RentalController extends AppBaseController
     {
         try {
             $mobilId = $request->mobil_id;
-            $waktuMulai = $request->waktu_mulai || Carbon::now()->timestamp;
-            $waktuSelesai = $request->waktu_selesai || Carbon::now()->timestamp;
-
-            $mobil = DetailMobil::where('mobil_id', $mobilId)->whereNotExists(function ($query) use ($waktuMulai, $waktuSelesai) {
-                $query->select(DB::raw(1))
-                    ->from('rentals')
-                    ->whereRaw('rentals.detail_mobil_id = detail_mobils.id')
-                    ->where('waktu_mulai', '>=', $waktuMulai)->where('waktu_selesai', '<=', $waktuSelesai);
-            })->get();
+            $waktuMulai = $request->waktu_mulai ?? Carbon::now()->timestamp;
+            $waktuSelesai = $request->waktu_selesai ?? Carbon::now()->timestamp;
+            // dd(Rental::whereBetween('waktu_mulai', [$waktuMulai, $waktuSelesai])->orwhereBetween('waktu_selesai', [$waktuMulai, $waktuSelesai])->whereIn('status', ['pemesanan', 'berjalan'])->select('detail_mobil_id'));
+            $mobil = DB::table('detail_mobils')->where('mobil_id', $mobilId)
+                ->whereNotIn('id', function ($query) use ($waktuMulai, $waktuSelesai) {
+                    $query->select('*')
+                        ->from('rentals as rent')
+                        ->whereBetween('waktu_mulai', [$waktuMulai, $waktuSelesai])->orwhereBetween('waktu_selesai', [$waktuMulai, $waktuSelesai])->whereIn('status', ['pemesanan', 'berjalan'])->select('detail_mobil_id');
+                })
+                ->get();
 
             return response()->json([
                 'status' => 'success',
@@ -356,11 +357,10 @@ class RentalController extends AppBaseController
             $waktuMulai = $request->waktu_mulai || Carbon::now()->timestamp;
             $waktuSelesai = $request->waktu_selesai || Carbon::now()->timestamp;
 
-            $sopir = Sopir::whereNotExists(function ($query) use ($waktuMulai, $waktuSelesai) {
-                $query->select(DB::raw(1))
+            $sopir = Sopir::whereNotIn('id', function ($query) use ($waktuMulai, $waktuSelesai) {
+                $query->select('*')
                     ->from('rentals')
-                    ->whereRaw('rentals.sopir_id = sopirs.id')
-                    ->where('waktu_mulai', '>=', $waktuMulai)->where('waktu_selesai', '<=', $waktuSelesai);
+                    ->whereBetween('waktu_mulai', [$waktuMulai, $waktuSelesai])->orwhereBetween('waktu_selesai', [$waktuMulai, $waktuSelesai])->whereIn('status', ['pemesanan', 'berjalan'])->select('sopir_id');
             })->get();
 
             return response()->json([

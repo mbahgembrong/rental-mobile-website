@@ -168,11 +168,11 @@
                             $('#form_waktu_mulai').show();
                             $('#form_waktu_selesai').show();
                             $('#form_detail_mobil_id select').find('option')
-                                    .remove()
-                                    .end()
-                                $('#form_detail_mobil_id select').append(
-                                    '<option value="" disabled selected>Pilih Detail Mobil</option>'
-                                );
+                                .remove()
+                                .end()
+                            $('#form_detail_mobil_id select').append(
+                                '<option value="" disabled selected>Pilih Detail Mobil</option>'
+                            );
                         }
                     }
                 });
@@ -233,6 +233,7 @@
                         waktu_selesai: waktuSelesai
                     },
                     success: function(data) {
+                        console.log(data);
                         if (data.status == 'success') {
                             if (data.data.length > 0) {
                                 $('#form_detail_mobil_id').show();
