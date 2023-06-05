@@ -145,21 +145,17 @@ class MobilController extends AppBaseController
         $mobil->fill($input);
         $mobil->save();
 
-        $mobil->detailMobils()->each(function ($value) {
-            if ($value->status == 'tersedia') {
-                $value->delete();
-            }
-        });
         if (isset($request->plat)) {
             $detailMobilLength = count($request->plat);
             for ($i = 0; $i < $detailMobilLength; $i++) {
-                $detailMobil = DetailMobil::create([
-                    'mobil_id' => $mobil->id,
-                    'plat' => $request->plat[$i],
-                    'stnk' => $request->stnk[$i],
-                    'tahun_mobil' => $request->tahun_mobil[$i],
-                    'status' => 'tersedia',
-                ]);
+                if ($mobil->detailMobils()->where('plat', $request->plat[$i])->first() == null)
+                    $detailMobil = DetailMobil::create([
+                        'mobil_id' => $mobil->id,
+                        'plat' => $request->plat[$i],
+                        'stnk' => $request->stnk[$i],
+                        'tahun_mobil' => $request->tahun_mobil[$i],
+                        'status' => 'tersedia',
+                    ]);
             }
         }
 
