@@ -146,7 +146,7 @@ class MobilController extends AppBaseController
         $mobil->save();
 
         $mobil->detailMobils()->each(function ($value) {
-            if ($value == 'tersedia') {
+            if ($value->status == 'tersedia') {
                 $value->delete();
             }
         });
