@@ -13,11 +13,12 @@
 <script>
     $(function() {
         $('table').DataTable({
-            // scrollX: true,
-            // responsive: true,
+            "sScrollX": "100%",
+            "sScrollXInner": "110%",
+            "bScrollCollapse": true,
             dom: 'Bfrtip',
             buttons: [
-                'copy','excel', 'pdf', 'print'
+                'copy', 'excel', 'pdf', 'print'
             ]
         });
     })
