@@ -142,7 +142,7 @@
     @push('scripts')
         <script>
             $(function() {
-                if ({!! $rental->ulasan()->first() != null || !Auth::guard('pelanggan')->check() !!}) {
+                if ({!! json_encode($rental->ulasan()->first() != null || !Auth::guard('pelanggan')->check()) !!}) {
                     for (let index = 1; index <= {{ $rental->ulasan()->first()->star ?? 0 }}; index++) {
                         $(`input.star-${index}`).prop('checked', true);
                     }

@@ -244,9 +244,10 @@ class RentalController extends AppBaseController
     {
         $rental = Rental::find($request->id);
         if (empty($rental)) {
-            Flash::error('Rental not found');
-
-            return redirect(route('pelanggan.rentals.index'));
+            return response([
+                'status' => 'error',
+                'message' => 'Rental not found'
+            ], 404);
         }
         if ($request->status == 'selesai' && $rental->status_pembayaran != 'lunas') {
             return response([
@@ -269,11 +270,12 @@ class RentalController extends AppBaseController
             'ulasan' => 'required|string'
         ]);
         $rental = Rental::find($request->id);
-        if (empty($rental))
-            return response([
-                'status' => 'error',
-                'message' => 'Rental not found'
-            ], 404);
+        if (empty($rental)) {
+            Flash::error('Rental not found');
+
+            return redirect(route('pelanggan.rentals.index'));
+        }
+
         $ulasan = new Ulasan;
         $ulasan->rental_id = $rental->id;
         $ulasan->star = $request->star;
@@ -281,6 +283,17 @@ class RentalController extends AppBaseController
         $ulasan->save();
         Flash::success('Rental ulasan successfully.');
         return redirect(route('pelangan.rentals.index'));
+    }
+
+    public function struk($id, Request $request)
+    {
+        $rental = Rental::find($request->id);
+        if (empty($rental)) {
+            Flash::error('Rental not found');
+
+            return redirect(route('pelanggan.rentals.index'));
+        }
+        return view('rentals.struk', compact('rental'));
     }
 
     /**

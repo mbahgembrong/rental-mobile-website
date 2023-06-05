@@ -12,6 +12,7 @@
 - add image in menu profil (fix)
 - add fitur dp (fix)
 - pelanggan dapat menambah ulasan (fix)
+- print struk in rentals (fix)
 - chaten redirect whatsapp
 - middleware admin
 - laporan penyewaan
@@ -20,4 +21,3 @@
 - notify email
 - kpu cekked nik
 - fake order mulai januari sampai juni tanggal 12
-- print struk in rentals

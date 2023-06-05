@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{{ config('app.name') }}</title>
+    <title>Wijaya Car Rental </title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Favicons -->
     {{-- <link href="{{ asset('img/logo.ico') }}" rel="icon">
@@ -108,12 +108,12 @@
     </div>
     <footer class="app-footer">
         <div>
-            <a href="https://infyom.com">{{ env('APP_NAME') }} </a>
+            <a href="{{ url('/') }}">Wijaya Car Rental </a>
             <span>&copy; {{ date('Y', time()) }}</span>
         </div>
         <div class="ml-auto">
             <span>Powered by</span>
-            <a href="https://coreui.io">CoreUI</a>
+            <a href="{{ url('/') }}">Levin</a>
         </div>
     </footer>
 </body>

@@ -58,6 +58,9 @@
                             {{-- <a href="{{ route('rentals.edit', [$rental->id]) }}"
                                 class='btn btn-ghost-info  {{ $rental->waktu_mulai <= time() ? 'disabled' : '' }}'><i
                                     class="fa fa-edit"></i></a> --}}
+                            <a href="{{ route('rentals.struk', [$rental->id]) }}"
+                                class='btn btn-ghost-info  {{ $rental->status != 'selesai' ? 'disabled' : '' }}'
+                                target="_blank"><i class="fa fa-file-text-o"></i></a>
                             {!! Form::button('<i class="fa fa-times-circle-o"></i>', [
                                 'type' => 'submit',
                                 'class' => 'btn btn-ghost-danger',

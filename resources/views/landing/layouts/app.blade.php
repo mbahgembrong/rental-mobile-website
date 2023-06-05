@@ -91,15 +91,15 @@
                                     src="{{ asset('img/logo.svg') }}" width="100" height="100"
                                     style="width: 8em; margin: -2em 0px;"></a></h2>
                         <p>Rental mobil Kediri. harga sewa murah mengutamakan kenyamanan pelanggan.</p>
-                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                        {{-- <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul>
+                        </ul> --}}
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                    {{-- <div class="ftco-footer-widget mb-4 ml-md-5">
                         <h2 class="ftco-heading-2">Information</h2>
                         <ul class="list-unstyled">
                             <li><a href="#" class="py-2 d-block">About</a></li>
@@ -108,10 +108,10 @@
                             <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
                             <li><a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
+                    {{-- <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Customer Support</h2>
                         <ul class="list-unstyled">
                             <li><a href="#" class="py-2 d-block">FAQ</a></li>
@@ -120,19 +120,20 @@
                             <li><a href="#" class="py-2 d-block">How it works</a></li>
                             <li><a href="#" class="py-2 d-block">Contact Us</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <h2 class="ftco-heading-2">Ada Pertanyaan?</h2>
                         <div class="block-23 mb-3">
                             <ul>
                                 <li><span class="icon icon-map-marker"></span><span class="text">Jl. Kh. Hasyim
                                         Asy'ari RT/RW 001/009 Desa Banjarmlati Kec. Mojoroto, Kediri 64119.</span></li>
-                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+62
+                                <li><a href="//wa.me/6281908237682" target="_blank"><span
+                                            class="icon icon-phone"></span><span class="text">+62
                                             81908237682</span></a></li>
-                                <li><a href="#"><span class="icon icon-envelope"></span><span
-                                            class="text">info@yourdomain.com</span></a></li>
+                                {{-- <li><a href="#"><span class="icon icon-envelope"></span><span
+                                            class="text">info@yourdomain.com</span></a></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -141,15 +142,14 @@
             <div class="row">
                 <div class="col-md-12 text-center">
 
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i
-                            class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                            target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+                    Copyright &copy;
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script> Wijaya Car Rental | This App is made with <i
+                        class="icon-heart color-danger" aria-hidden="true"></i> by <a href="{{ url('/') }}"
+                        target="_blank">Levin</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
             </div>
