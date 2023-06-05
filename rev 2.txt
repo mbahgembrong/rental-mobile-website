@@ -8,16 +8,16 @@
 - active and hover change color to blue (fix)
 - change primary color to blue or dark (fix)
 - remove print csv (fix)
-- add fitur dp
 - chaten redirect whatsapp
 - middleware admin
 - laporan penyewaan
-- notify email
-- kpu cekked nik
 - penghitungan denda dan luar daerah = denda +harga
-- fake order mulai januari sampai juni tanggal 12
 - pelanggan dapat menambah ulasan
 - midleware pelanggan remove pelanggan input in pesan rental
 - add image in menu profil
+- add fitur dp
+- notify email
+- kpu cekked nik
+- fake order mulai januari sampai juni tanggal 12
 - validasi create mobil in detail mobil
 - print struk in rentals

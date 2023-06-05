@@ -71,13 +71,16 @@
 
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item dropdown">
+
                 <a class="nav-link" style="margin-right: 10px" data-toggle="dropdown" href="#" role="button"
                     aria-haspopup="true" aria-expanded="false">
-                    {{ Auth::guard('pelanggan')->check() ? Auth::guard('pelanggan')->user()->nama : Auth::user()->nama }}
+                    <div class="avatar avatar-md"><img class="avatar-img"
+                            src="{{ Auth::guard('pelanggan')->check() ? asset('storage/pelanggans/foto/' . Auth::guard('pelanggan')->user()->foto) : asset('storage/pelanggans/foto/' . Auth::user()->foto ) }}">
+                    </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-header text-center">
-                        <strong>Account</strong>
+                        <strong>{{ Auth::guard('pelanggan')->check() ? Auth::guard('pelanggan')->user()->nama : Auth::user()->nama }}</strong>
                     </div>
                     <a href="{{ Auth::guard('pelanggan')->check() ? url('/pelanggan/logout') : url('/logout') }}"
                         class="dropdown-item btn btn-default btn-flat"
