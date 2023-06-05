@@ -53,45 +53,112 @@
     </div>
 @endif
 <!-- Grand Total Field -->
-<div class="form-group col-sm-12 ">
+<div class="form-group col-sm-6 ">
     {!! Form::label('grand_total', 'Grand Total :  ') !!}
-    <p style="display: contents;">{{ $rental->grand_total }}</p>
+    <p style="display: contents;">Rp. {{ $rental->grand_total }}</p>
 </div>
+
 @isset($bayar)
-    <form action="{{ route('rentals.pembayaran', $rental->id) }}" method="post" class="col-sm-12 row">
-        @csrf
-        <input type="hidden" name="grand_total" value="{{ $rental->grand_total }}">
-        <!-- Grand Total Field -->
-        <div class="form-group col-sm-12" id="form_bayar">
-            {!! Form::label('bayar', 'Bayar:') !!}
-            {!! Form::number('bayar', null, ['class' => 'form-control']) !!}
-        </div>
-        <div class="form-group col-sm-12" id="form_kembalian">
-            {!! Form::label('kembalian', 'Kembalian:') !!}
-            {!! Form::text('kembalian', null, ['class' => 'form-control', 'readonly']) !!}
-        </div>
-        <!-- Submit Field -->
-        <div class="form-group col-sm-12">
-            {!! Form::submit('Save', ['class' => 'btn btn-primary', 'disabled']) !!}
-            <a href="{{ route('rentals.index') }}" class="btn btn-secondary">Cancel</a>
-        </div>
-    </form>
-    @push('scripts')
-        <script>
-            $(function() {
-                const grand_total = {{ $rental->grand_total }};
-                $('#form_bayar').on('keyup', 'input', function(e) {
-                    const bayar = $(this).val();
-                    const kembalian = $('#form_kembalian input');
-                    if (bayar >= grand_total) {
-                        kembalian.val(`Rp. ${bayar - grand_total}`);
-                        $('input[type="submit"]').prop('disabled', false);
-                    } else {
-                        kembalian.val('');
-                        $('input[type="submit"]').prop('disabled', true);
-                    }
+    <div class="form-group col-sm-6 ">
+        {!! Form::label('kurang_bayar', 'Kurang Bayar :  ') !!}
+        <p style="display: contents;" id="kurangBayar">Rp. -
+            {{ $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->kurang ?? $rental->grand_total }}
+        </p>
+    </div>
+
+    @if (
+        $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first() != null &&
+            $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->user_validasi_id == null)
+        <form action="{{ route('rentals.validasi', $rental->id) }}" method="post" class="col-sm-12 row">
+            @csrf
+            <input type="hidden" name="valid" value="true">
+            <!-- Grand Total Field -->
+            <div class="form-group col-sm-12" id="form_bayar">
+                {!! Form::label('bayar', 'Total Bayar:') !!}
+                {!! Form::number(
+                    'bayar',
+                    $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->jumlah,
+                    ['class' => 'form-control', 'disabled'],
+                ) !!}
+            </div>
+            <div class="form-group col-sm-12" id="form_bayar">
+                {!! Form::label('bukti', 'Bukti Bayar:') !!}
+                <p> <img class="circular--square--index" style="width: 50vh;
+    height: 30vh;"
+                        src="{{ asset('storage/rentals/bukti/' .$rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->bukti) }}" />
+                </p>
+            </div>
+            <!-- Submit Field -->
+            <div class="form-group col-sm-12">
+                @if (!Auth::guard('pelanggan')->check())
+                    {!! Form::submit('Validasi Pembayaran', ['class' => 'btn btn-primary']) !!}
+                @endif
+                <a href="{{ Auth::guard('pelanggan')->check() ? route('pelangan.rentals.index') : route('rentals.index') }}"
+                    class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    @else
+        <form action="{{ route('rentals.pembayaran', $rental->id) }}" method="post" class="col-sm-12 row"
+            enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="grand_total" value="{{ $rental->grand_total }}">
+            <!-- Grand Total Field -->
+            <div class="form-group col-sm-12" id="form_bayar">
+                {!! Form::label('bayar', 'Bayar:') !!}
+                {!! Form::number('bayar', null, ['class' => 'form-control']) !!}
+            </div>
+            @if (Auth::guard('pelanggan')->check())
+                <div class="form-group col-sm-12" id="form_bukti">
+                    {!! Form::label('bukti', 'Bukti Pembayaran:') !!}
+                    {!! Form::file('bukti') !!}
+                    <div class="clearfix"></div>
+                </div>
+            @endif
+            <div class="form-group col-sm-12" id="form_kembalian">
+                {!! Form::label('kembalian', 'Kembalian:') !!}
+                {!! Form::text('kembalian', null, ['class' => 'form-control', 'readonly']) !!}
+            </div>
+            <!-- Submit Field -->
+            <div class="form-group col-sm-12">
+                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ Auth::guard('pelanggan')->check() ? route('pelangan.rentals.index') : route('rentals.index') }}"
+                    class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+        @push('scripts')
+            <script>
+                $(function() {
+                    const grand_total =
+                        {{ $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->kurang ?? $rental->grand_total }};
+                    $('#form_bayar').on('keyup', 'input', function(e) {
+                        const bayar = $(this).val();
+                        const kembalian = $('#form_kembalian input');
+                        if (bayar >= grand_total) {
+                            $('label[for="kembalian"]').text('Kembalian : ')
+                            kembalian.val(`Rp. ${bayar - grand_total}`);
+                            // $('input[type="submit"]').prop('disabled', false);
+                        } else {
+                            $('label[for="kembalian"]').text('Kurang Bayar : ')
+                            kembalian.val(`Rp. - ${grand_total - bayar}`);
+                            // $('input[type="submit"]').prop('disabled', true);
+                        }
+                    })
+                    FilePond.registerPlugin(
+                        FilePondPluginFileValidateType,
+                        FilePondPluginImagePreview,
+                    );
+                    $('input[name="bukti"]').filepond({
+                        labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
+                        storeAsFile: true,
+                        imagePreviewMaxHeight: 150,
+                        imagePreviewTransparencyIndicator: 'grid',
+                        acceptedFileTypes: ['image/*'],
+                        fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+                            resolve(type);
+                        }),
+                    });
                 })
-            })
-        </script>
-    @endpush
+            </script>
+        @endpush
+    @endif
 @endisset

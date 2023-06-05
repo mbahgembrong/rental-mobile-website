@@ -99,7 +99,7 @@
                                     {{ Auth::guard('pelanggan')->user()->nama }} <br><br>
                                     {{ Auth::guard('pelanggan')->user()->nik }} <br><br>
                                     {{ Auth::guard('pelanggan')->user()->email }} <br><br>
-                                    {{ Auth::guard('pelanggan')->user()->tanggal_lahir }} <br><br>
+                                    {{ Auth::guard('pelanggan')->user()->tanggal_lahir->format('d/m/Y') }} <br><br>
                                     {{ Auth::guard('pelanggan')->user()->hp }} <br><br>
                                     {!! Auth::guard('pelanggan')->user()->alamat !!}
                                 </div>

@@ -6,6 +6,7 @@ use App\Http\Requests\CreateRentalRequest;
 use App\Http\Requests\UpdateRentalRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\DetailMobil;
+use App\Models\DetailPembayaranRental;
 use App\Models\KategoriMobil;
 use App\Models\Mobil;
 use App\Models\Pelanggan;
@@ -17,6 +18,7 @@ use Flash;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Response;
 
 class RentalController extends AppBaseController
@@ -169,9 +171,22 @@ class RentalController extends AppBaseController
     }
     public function pembayaran(Request $request, $id)
     {
-        $request->validate([
-            'bayar' => 'integer|gte:grand_total'
-        ]);
+        if (Auth::guard('pelanggan')->check()) {
+            $request->validate([
+                'bayar' => 'integer|min:1',
+                'bukti' => 'required|image'
+            ]);
+            if ($request->hasFile('bukti')) {
+                $imageName = time() . $request->file('bukti')->getClientOriginalName();
+                Storage::disk('public')->put('rentals/bukti/' . $imageName, file_get_contents($request->file('bukti')->getRealPath()));
+                $buktiPembayaran = $imageName;
+            }
+        } else
+            $request->validate([
+                'bayar' => 'integer|min:1'
+            ]);
+
+        // dd($request->all());
         $rental = Rental::find($id);
 
         if (empty($rental)) {
@@ -179,10 +194,49 @@ class RentalController extends AppBaseController
 
             return redirect(route('rentals.index'));
         }
-        $rental->status_pembayaran = 'lunas';
-        $rental->save();
+        $detailPembayaran = new DetailPembayaranRental;
+        $detailPembayaran->rental_id = $rental->id;
+        $detailPembayaran->jumlah = $request->bayar;
+        $detailPembayaran->kurang = $rental->grand_total - ($request->bayar + ($rental->detailPembayaran()->sum('jumlah') ?? 0));
+        if (Auth::guard('pelanggan')->check())
+            $detailPembayaran->bukti = $buktiPembayaran;
+        else {
+            $detailPembayaran->user_validasi_id = Auth::user()->id;
+            if ($detailPembayaran->kurang <= 0) {
+                $detailPembayaran->kurang = 0;
+                $rental->status_pembayaran = 'lunas';
+                $rental->save();
+            }
+        }
+        $detailPembayaran->save();
+
         Flash::success('Rental bayar successfully.');
 
+        if (Auth::guard('pelanggan')->check()) {
+            return redirect(route('pelangan.rentals.index'));
+        } else
+            return redirect(route('rentals.index'));
+    }
+
+    public function validasi($id)
+    {
+        $rental = Rental::find($id);
+
+        if (empty($rental)) {
+            Flash::error('Rental not found');
+
+            return redirect(route('rentals.index'));
+        }
+        $bayar = true;
+        $detailPembayaran = $rental->detailPembayaran()->whereNull('user_validasi_id')->first();
+        $detailPembayaran->user_validasi_id = Auth::user()->id;
+        $detailPembayaran->save();
+        $totalBayar = $rental->detailPembayaran()->sum('jumlah');
+        if ($totalBayar >= $rental->grand_total) {
+            $rental->status_pembayaran = 'lunas';
+            $rental->save();
+        }
+        Flash::success('Rental validasi successfully.');
         return redirect(route('rentals.index'));
     }
     public function status(Request $request)
@@ -193,6 +247,12 @@ class RentalController extends AppBaseController
                 'status' => 'error',
                 'message' => 'Rental not found'
             ], 404);
+        if ($request->status == 'selesai' && $rental->status_pembayaran != 'lunas') {
+            return response([
+                'status' => 'error',
+                'message' => 'Rental Pembayaran belum lunas'
+            ], 200);
+        }
         $rental->status = $request->status;
         $rental->save();
         return response([

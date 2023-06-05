@@ -11,6 +11,7 @@
                 <th>Jenis Transaksi</th>
                 <th>Status</th>
                 <th>Grand Total</th>
+                <th>Kurang Bayar</th>
                 <th aria-colspan="3">Action</th>
             </tr>
         </thead>
@@ -33,6 +34,10 @@
                             class="badge bg-{{ $rental->status == 'pemesanan' ? 'primary' : ($rental->status == 'berjalan' ? 'secondary' : ($rental->status == 'selesai' ? 'success' : ($rental->status == 'terlambat' ? 'warning' : 'danger'))) }}">{{ $rental->status }}</span>
                     </td>
                     <td>Rp. {{ $rental->grand_total }}</td>
+                    <td>Rp.
+                        -
+                        {{ $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->kurang ?? $rental->grand_total }}
+                    </td>
 
                     <td>
                         {!! Form::open([
@@ -44,11 +49,11 @@
                                 class='btn btn-ghost-secondary'><i class="fa fa-eye"></i></a>
                             @if (!Auth::guard('pelanggan')->check())
                                 <a href="#" data-id="{{ $rental->id }}" data-status="{{ $rental->status }}"
-                                    class='btn btn-ghost-warning status {{ $rental->waktu_mulai <= time() || $rental->status_pembayaran != 'lunas' || in_array($rental->status, ['batal', 'selesai']) ? 'disabled' : '' }}'><i
+                                    class='btn btn-ghost-warning status {{ $rental->waktu_mulai <= time() ||$rental->detailPembayaran()->orderBy('created_at', 'DESC')->first() == null ||in_array($rental->status, ['batal', 'selesai'])? 'disabled': '' }}'><i
                                         class="fa fa-paper-plane-o"></i></a>
                             @endif
                             <a href="{{ route('rentals.bayar', [$rental->id]) }}"
-                                class='btn btn-ghost-success  {{ $rental->waktu_mulai <= time() || $rental->status_pembayaran == 'lunas' || in_array($rental->status, ['batal', 'selesai', 'berjalan']) ? 'disabled' : '' }}'><i
+                                class='btn btn-ghost-success  {{ $rental->waktu_mulai <= time() || $rental->status_pembayaran == 'lunas' || in_array($rental->status, ['batal', 'selesai']) ? 'disabled' : '' }}'><i
                                     class="fa fa-money"></i></a>
                             {{-- <a href="{{ route('rentals.edit', [$rental->id]) }}"
                                 class='btn btn-ghost-info  {{ $rental->waktu_mulai <= time() ? 'disabled' : '' }}'><i
@@ -57,7 +62,9 @@
                                 'type' => 'submit',
                                 'class' => 'btn btn-ghost-danger',
                                 'disabled' =>
-                                    $rental->waktu_mulai <= time() || $rental->status != 'pemesanan' || $rental->status_pembayaran == 'lunas'
+                                    $rental->waktu_mulai <= time() ||
+                                    $rental->status != 'pemesanan' ||
+                                    $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first() != null
                                         ? true
                                         : false,
                             ]) !!}
@@ -108,18 +115,34 @@
                                 status: status == 'pemesanan' ? 'berjalan' : 'selesai'
                             },
                             success: function(data) {
-                                Swal.fire({
-                                    title: "Berhasil!",
-                                    text: `Mobil telah ${status == 'pemesanan' ? 'berjalan' : 'selesai'} !`,
-                                    icon: 'success',
-                                    confirmButtonText: "Ok!",
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        location.reload();
-                                    }
-                                }).catch((err) => {
-                                    console.log(err);
-                                });
+                                // console.log(data);
+                                if (data.status == 'success') {
+                                    Swal.fire({
+                                        title: "Berhasil!",
+                                        text: `Mobil telah ${status == 'pemesanan' ? 'berjalan' : 'selesai'} !`,
+                                        icon: 'success',
+                                        confirmButtonText: "Ok!",
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    }).catch((err) => {
+                                        console.log(err);
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: "Gagal !",
+                                        text: `${data.message} !`,
+                                        icon: 'warning',
+                                        confirmButtonText: "Ok!",
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload();
+                                        }
+                                    }).catch((err) => {
+                                        console.log(err);
+                                    });
+                                }
                             },
                             error: function(err) {
                                 console.log(err);
