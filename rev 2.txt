@@ -21,3 +21,10 @@
 - notify email
 - kpu cekked nik
 - fake order mulai januari sampai juni tanggal 12
+- banner sesuai heinght layar in landing
+- bug login pelanggan
+- bug book now in car landing
+- bug detail mobil in update mobil admin panel
+- bayar lunas baru bisa merubah status menjadi berjalan, dan status selesai bisa dirubah setelah bayar denda
+- cetak struk bisa dicetak status pembayaran lunas
+- bug cetak struk
