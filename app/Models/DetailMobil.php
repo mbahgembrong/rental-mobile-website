@@ -71,7 +71,7 @@ class DetailMobil extends Model
      */
     public function mobil()
     {
-        return $this->belongsTo(Mobil::class, 'mobil_id');
+        return $this->belongsTo(Mobil::class, 'mobil_id')->withTrashed();
     }
 
 }

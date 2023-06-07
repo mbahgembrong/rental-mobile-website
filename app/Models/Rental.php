@@ -102,7 +102,7 @@ class Rental extends Model
      */
     public function pelanggan()
     {
-        return $this->belongsTo(Pelanggan::class, 'pelanggan_id');
+        return $this->belongsTo(Pelanggan::class, 'pelanggan_id')->withTrashed();
     }
     /**
      * Get the detailMobil that owns the Rental
@@ -111,7 +111,7 @@ class Rental extends Model
      */
     public function detailMobil()
     {
-        return $this->belongsTo(DetailMobil::class, 'detail_mobil_id');
+        return $this->belongsTo(DetailMobil::class, 'detail_mobil_id')->withTrashed();
     }
     /**
      * Get the sopir that owns the Rental
@@ -120,7 +120,7 @@ class Rental extends Model
      */
     public function sopir(): BelongsTo
     {
-        return $this->belongsTo(Sopir::class, 'sopir_id');
+        return $this->belongsTo(Sopir::class, 'sopir_id')->withTrashed();
     }
 
     /**
@@ -130,7 +130,7 @@ class Rental extends Model
      */
     public function detailPembayaran()
     {
-        return $this->hasMany(DetailPembayaranRental::class, 'rental_id');
+        return $this->hasMany(DetailPembayaranRental::class, 'rental_id')->withTrashed();
     }
 
     /**
@@ -140,6 +140,6 @@ class Rental extends Model
      */
     public function ulasan()
     {
-        return $this->hasOne(Ulasan::class, 'rental_id');
+        return $this->hasOne(Ulasan::class, 'rental_id')->withTrashed();
     }
 }

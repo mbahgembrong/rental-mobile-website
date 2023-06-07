@@ -88,7 +88,7 @@ class Mobil extends Model
      */
     public function kategoriMobil()
     {
-        return $this->belongsTo(KategoriMobil::class, 'kategori_id');
+        return $this->belongsTo(KategoriMobil::class, 'kategori_id')->withTrashed();
     }
     /**
      * Get all of the detailMobils for the Mobil
@@ -97,7 +97,7 @@ class Mobil extends Model
      */
     public function detailMobils()
     {
-        return $this->hasMany(DetailMobil::class, 'mobil_id', 'id');
+        return $this->hasMany(DetailMobil::class, 'mobil_id', 'id')->withTrashed();
     }
 
 }

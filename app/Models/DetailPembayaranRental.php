@@ -57,6 +57,6 @@ class DetailPembayaranRental extends Model
      */
     public function rental()
     {
-        return $this->belongsTo(Rental::class, 'rental_id');
+        return $this->belongsTo(Rental::class, 'rental_id')->withTrashed();
     }
 }
