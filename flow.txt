@@ -1,0 +1,12 @@
+Rental
+- show -> lunas, belum lunass, selesai, semua status
+- ulasan -> belum mengisi ulasan, status selesai
+- struk -> status selesai
+- batal -> statsus pemesanan, belum ada pembayaran
+- bayar -> status pemesanan, status berajalan dan belum lunas
+- proses -> berjalan disemua proses, tapi ketika pembayaran belum lunas  maka status tidak bisa diubah ke selesai, sedangkan perpindahan ke proses pemesanan tidak bisa dilakukan jika belum ada sama sekali pembayaran
+- terlambat -> 
+
+scedule
+- status bisa menjadi batal jika status pemesanan belum di dp
+- denda itu dihitung jika status belum berupah menjadi selesai dan waktu selesai sudah melebihi dari waktu selesai yang tentukan, maka waktu selesai akan dirubah otomatis oleh sistem, tapi waktu selesai ini bisa berhenti jika status proses sudah dirubah ke status selesai
