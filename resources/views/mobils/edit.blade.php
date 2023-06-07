@@ -51,7 +51,7 @@
                     source: "{{ asset('storage/mobils/foto/' . $mobil->foto) }}",
                 }, ]
             });
-            const detailMobils = {!! json_encode($mobil->detailMobils) !!};
+            const detailMobils = {!! json_encode($mobil->detailMobils()->whereNull('deleted_at')->get()) !!};
             detailMobils.forEach((value, index) => {
                 if (index == 0) {
                     $('.detailMobil').val(value.id);

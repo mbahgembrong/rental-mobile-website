@@ -28,8 +28,8 @@
                     <td>Rp. {{ $mobil->denda . ' / ' . $mobil->satuan }}</td>
                     <td>
                         <span
-                            class="badge bg-{{ count($mobil->detailMobils->where('status', 'tersedia')) > 0 ? 'success' : 'danger' }}">
-                            {{ count($mobil->detailMobils->where('status', 'tersedia')) }} Buah</span>
+                            class="badge bg-{{ count($mobil->detailMobils->where('status', 'tersedia')->whereNull('deleted_at')) > 0 ? 'success' : 'danger' }}">
+                            {{ count($mobil->detailMobils->where('status', 'tersedia')->whereNull('deleted_at')) }} Buah</span>
                     </td>
                     <td>
                         {!! Form::open(['route' => ['mobils.destroy', $mobil->id], 'method' => 'delete']) !!}
