@@ -332,11 +332,11 @@ class RentalController extends AppBaseController
             $waktuMulai = $request->waktu_mulai ?? Carbon::now()->timestamp;
             $waktuSelesai = $request->waktu_selesai ?? Carbon::now()->timestamp;
             // dd(Rental::whereBetween('waktu_mulai', [$waktuMulai, $waktuSelesai])->orwhereBetween('waktu_selesai', [$waktuMulai, $waktuSelesai])->whereIn('status', ['pemesanan', 'berjalan'])->select('detail_mobil_id'));
-            $mobil = DB::table('detail_mobils')->where('mobil_id', $mobilId)
+            $mobil = DB::table('detail_mobils')->where('mobil_id', $mobilId)->whereNull('deleted_at')
                 ->whereNotIn('id', function ($query) use ($waktuMulai, $waktuSelesai) {
                     $query->select('*')
                         ->from('rentals as rent')
-                        ->whereBetween('waktu_mulai', [$waktuMulai, $waktuSelesai])->orwhereBetween('waktu_selesai', [$waktuMulai, $waktuSelesai])->whereIn('status', ['pemesanan', 'berjalan'])->select('detail_mobil_id');
+                        ->whereBetween('waktu_mulai', [$waktuMulai, $waktuSelesai])->orwhereBetween('waktu_selesai', [$waktuMulai, $waktuSelesai])->whereIn('status', ['pemesanan', 'berjalan', 'terlambat'])->select('detail_mobil_id');
                 })
                 ->get();
 
@@ -357,10 +357,10 @@ class RentalController extends AppBaseController
             $waktuMulai = $request->waktu_mulai || Carbon::now()->timestamp;
             $waktuSelesai = $request->waktu_selesai || Carbon::now()->timestamp;
 
-            $sopir = Sopir::whereNotIn('id', function ($query) use ($waktuMulai, $waktuSelesai) {
+            $sopir = Sopir::whereNull('deleted_at')->whereNotIn('id', function ($query) use ($waktuMulai, $waktuSelesai) {
                 $query->select('*')
                     ->from('rentals')
-                    ->whereBetween('waktu_mulai', [$waktuMulai, $waktuSelesai])->orwhereBetween('waktu_selesai', [$waktuMulai, $waktuSelesai])->whereIn('status', ['pemesanan', 'berjalan'])->select('sopir_id');
+                    ->whereBetween('waktu_mulai', [$waktuMulai, $waktuSelesai])->orwhereBetween('waktu_selesai', [$waktuMulai, $waktuSelesai])->whereIn('status', ['pemesanan', 'berjalan', 'terlambat'])->select('sopir_id');
             })->get();
 
             return response()->json([
