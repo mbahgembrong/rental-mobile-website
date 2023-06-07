@@ -29,3 +29,5 @@
 - cetak struk bisa dicetak status pembayaran lunas
 - bug cetak struk(fix)
 - rental sort by order desc(fix)
+- ubah posisi button proses in rental
+- struk belum ada waktu mulai dan waktu selesai
