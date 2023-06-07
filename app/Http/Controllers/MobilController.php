@@ -145,19 +145,36 @@ class MobilController extends AppBaseController
         $mobil->fill($input);
         $mobil->save();
 
-        if (isset($request->plat)) {
-            $detailMobilLength = count($request->plat);
-            for ($i = 0; $i < $detailMobilLength; $i++) {
-                if ($mobil->detailMobils()->where('plat', $request->plat[$i])->first() == null)
-                    $detailMobil = DetailMobil::create([
-                        'mobil_id' => $mobil->id,
-                        'plat' => $request->plat[$i],
-                        'stnk' => $request->stnk[$i],
-                        'tahun_mobil' => $request->tahun_mobil[$i],
-                        'status' => 'tersedia',
-                    ]);
+        $detailMobilLength = count($request->plat);
+        foreach ($mobil->detailMobils()->pluck('id')->toArray() as $value) {
+            if (!in_array($value, $request->detail_mobil_id)) {
+                DetailMobil::find($value)->delete();
             }
         }
+        for ($i = 0; $i < $detailMobilLength; $i++) {
+            if ($request->detail_mobil_id[$i] == null) {
+                $detailMobil = DetailMobil::create([
+                    'mobil_id' => $mobil->id,
+                    'plat' => $request->plat[$i],
+                    'stnk' => $request->stnk[$i],
+                    'tahun_mobil' => $request->tahun_mobil[$i],
+                    'status' => 'tersedia',
+                ]);
+            } else {
+                $detailMobil = DetailMobil::find($request->detail_mobil_id[$i]);
+                $detailMobil->fill([
+                    'mobil_id' => $mobil->id,
+                    'plat' => $request->plat[$i],
+                    'stnk' => $request->stnk[$i],
+                    'tahun_mobil' => $request->tahun_mobil[$i],
+                    'status' => 'tersedia',
+                ]);
+                $detailMobil->save();
+            }
+            // if ($mobil->detailMobils()->where('plat', $request->plat[$i])->first() == null)
+
+        }
+
 
         Flash::success('Mobil updated successfully.');
 

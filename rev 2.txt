@@ -22,10 +22,10 @@
 - kpu cekked nik
 - fake order mulai januari sampai juni tanggal 12
 - banner sesuai height layar in landing
-- bug login pelanggan
-- bug book now in car landing
-- bug detail mobil in update mobil admin panel
+- bug login pelanggan(fix)
+- bug book now in car landing(fix)
+- bug detail mobil in update mobil admin panel(fix)
 - bayar lunas baru bisa merubah status menjadi berjalan, dan status selesai bisa dirubah setelah bayar denda
 - cetak struk bisa dicetak status pembayaran lunas
-- bug cetak struk
-- rental sort by order desc
+- bug cetak struk(fix)
+- rental sort by order desc(fix)

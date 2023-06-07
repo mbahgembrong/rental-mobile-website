@@ -37,9 +37,9 @@ class RentalController extends AppBaseController
 
         /** @var Rental $rentals */
         if (Auth::guard('pelanggan')->check()) {
-            $rentals = Rental::where('pelanggan_id', Auth::guard('pelanggan')->user()->id)->get();
+            $rentals = Rental::where('pelanggan_id', Auth::guard('pelanggan')->user()->id)->orderBy('created_at', 'desc')->get();
         } else {
-            $rentals = Rental::all();
+            $rentals = Rental::orderBy('created_at', 'desc')->get();
         }
         return view('rentals.index')
             ->with('rentals', $rentals);
@@ -293,7 +293,7 @@ class RentalController extends AppBaseController
 
             return redirect(route('pelanggan.rentals.index'));
         }
-        return view('rentals.struk');
+        return view('rentals.struk', compact('rental'));
     }
 
     /**

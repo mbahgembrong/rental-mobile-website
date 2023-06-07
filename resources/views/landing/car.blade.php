@@ -53,7 +53,7 @@
                                     <p class="price ml-auto">Rp. {{ $mobil->harga }} <span>/{{ $mobil->satuan }}</span></p>
                                 </div>
                                 <p class="d-flex mb-0 d-block">
-                                    <a href=" {{ route('pelanggan.rentals.create', ['mobil_id' => $mobil->id]) }}"
+                                    <a href=" {{ Auth::guard('web')->check() ? route('rentals.create', ['mobil_id' => $mobil->id]) : route('pelanggan.rentals.create', ['mobil_id' => $mobil->id]) }}"
                                         class="btn btn-primary py-2 mr-1">Book now</a>
                                     <a class="btn btn-secondary py-2 ml-1 car-detail"
                                         data-car='{!! json_encode($mobil) !!}'>Details</a>

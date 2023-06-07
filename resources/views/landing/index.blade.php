@@ -21,7 +21,8 @@
                 <div class="col-md-12	featured-top">
                     <div class="row no-gutters">
                         <div class="col-md-4 d-flex align-items-center">
-                            <form action="{{ route('pelanggan.rentals.create') }}"
+                            <form
+                                action="{{ Auth::guard('web')->check() ? route('rentals.create') : route('pelanggan.rentals.create') }}"
                                 class="request-form ftco-animate bg-primary" style="width: inherit;" method="get">
                                 <h2>Buat Perjalanamu</h2>
                                 <div class="form-group">
@@ -124,7 +125,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p><a href="{{ route('pelanggan.rentals.create') }}" class="btn btn-primary py-3 px-4">Pesan
+                                <p><a href="{{ Auth::guard('web')->check() ? route('rentals.create') : route('pelanggan.rentals.create') }}"
+                                        class="btn btn-primary py-3 px-4">Pesan
                                         Mobil
                                         Sekarang Juga!</a>
                                 </p>
@@ -227,7 +229,7 @@
                                             </p>
                                         </div>
                                         <p class="d-flex mb-0 d-block"><a
-                                                href=" {{ route('pelanggan.rentals.create', ['mobil_id' => $mobil->id]) }}"
+                                                href=" {{ Auth::guard('web')->check() ? route('rentals.create', ['mobil_id' => $mobil->id]) : route('pelanggan.rentals.create', ['mobil_id' => $mobil->id]) }}"
                                                 class="btn btn-primary py-2 mr-1">Rental
                                                 now</a> <a class="btn btn-secondary py-2 ml-1 car-detail"
                                                 data-car='{!! json_encode($mobil) !!}'>Details</a>

@@ -54,11 +54,13 @@
             const detailMobils = {!! json_encode($mobil->detailMobils) !!};
             detailMobils.forEach((value, index) => {
                 if (index == 0) {
+                    $('.detailMobil').val(value.id);
                     $('.plat').val(value.plat);
                     $('.stnk').val(value.stnk);
                     $('.tahun_mobil').val(value.tahun_mobil);
                     if (value.status != 'tersedia') {
                         $('.addMore').attr('disabled', true);
+                        $('.detailMobil').attr('disabled', true);
                         $('.plat').attr('disabled', true);
                         $('.stnk').attr('disabled', true);
                         $('.tahun_mobil').attr('disabled', true);
@@ -66,6 +68,9 @@
                 } else {
                     var fieldHTML = '<div class="form-group fieldGroup" data-id="' + value.id + '">' +
                         '<div class="input-group">' +
+                        ' <input type="hidden" name="detail_mobil_id[]" class="form-control detailMobil" placeholder="Detail Mobil Id" value="' +
+                        value.id + '" ' + (value.status != 'tersedia' ? 'disabled="disabled"' : '') +
+                        ' />' +
                         '<input type="text" name="plat[]" class="form-control plat" placeholder="Plat" value="' +
                         value.plat + '" ' + (value.status != 'tersedia' ? 'disabled="disabled"' : '') +
                         ' />' +

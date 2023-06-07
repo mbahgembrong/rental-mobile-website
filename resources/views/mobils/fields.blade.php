@@ -1,7 +1,9 @@
 <!-- Kategori Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('kategori_id', 'Kategori :') !!}
-    {!! Form::select('kategori_id', ['' => 'Pilih Kategori'] + $kategori_mobils->toArray(), null, ['class' => 'form-control']) !!}
+    {!! Form::select('kategori_id', ['' => 'Pilih Kategori'] + $kategori_mobils->toArray(), null, [
+        'class' => 'form-control',
+    ]) !!}
 </div>
 
 <!-- Nama Field -->
@@ -50,6 +52,7 @@
     <label for="jenis_kelaminModal" class="form-label">Detail Mobil</label>
     <div class="form-group fieldGroup" data-id="1">
         <div class="input-group">
+            <input type="hidden" name="detail_mobil_id[]" class="form-control detailMobil" placeholder="Detail Mobil Id" />
             <input type="text" name="plat[]" class="form-control plat" placeholder="Plat" />
             <input type="text" name="stnk[]" class="form-control stnk" placeholder="Masukkan stnk" />
             <input type="text" name="tahun_mobil[]" class="form-control tahun_mobil" placeholder="Tahun Mobil" />
@@ -74,7 +77,7 @@
             $(document).on('click', '.addMore', function() {
                 var data = $(this).parents('.fieldGroup').data('id') + 1;
                 var fieldHTML = '<div class="form-group fieldGroup" data-id="' + data + '">' +
-                    '<div class="input-group">' +
+                    '<div class="input-group"><input type="hidden" name="detail_mobil_id[]" class="form-control detailMobil" placeholder="Detail Mobil Id" />' +
                     '<input type="text" name="plat[]" class="form-control plat" placeholder="Plat" />' +
                     '<input type="text" name="stnk[]" class="form-control stnk" placeholder="Masukkan stnk" />' +
                     '<input type="text" name="tahun_mobil[]" class="form-control tahun_mobil" placeholder="Tahun Mobil" />' +
