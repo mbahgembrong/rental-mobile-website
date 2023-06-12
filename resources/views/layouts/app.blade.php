@@ -128,6 +128,11 @@
 {{-- coreui --}}
 <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@2.1.16/dist/js/coreui.min.js"" type=" text/javascript">
 </script>
+{{-- chartjs --}}
+<script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js
+"></script>
+
 {{-- <script src="vendors/simplebar/js/simplebar.min.js" type="text/javascript"></script> --}}
 {{-- tinymsce --}}
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>

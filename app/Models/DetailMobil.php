@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Eloquent as Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -72,6 +73,16 @@ class DetailMobil extends Model
     public function mobil()
     {
         return $this->belongsTo(Mobil::class, 'mobil_id')->withTrashed();
+    }
+
+    /**
+     * Get all of the rental for the DetailMobil
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rental()
+    {
+        return $this->hasMany(Rental::class, 'detail_mobil_id');
     }
 
 }

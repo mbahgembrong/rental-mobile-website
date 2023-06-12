@@ -28,7 +28,7 @@ Route::prefix('/pelanggan')->group(function () {
     Route::post('/register', [App\Http\Controllers\Auth\PelangganRegisterController::class, 'register']);
     Route::post('/logout', [App\Http\Controllers\Auth\PelangganLoginController::class, 'logout']);
     Route::middleware('auth:pelanggan')->group(function () {
-        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('pelanggan.home');
         Route::resource('rentals', App\Http\Controllers\RentalController::class, [
             // 'only' => ['index', 'create', 'store', 'show', 'destroy'],
             'names' => [

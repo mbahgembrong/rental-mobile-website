@@ -12,7 +12,7 @@
 {{-- <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script> --}}
 <script>
     $(function() {
-        $('table').DataTable({
+        $('.table').DataTable({
             "sScrollX": "100%",
             "sScrollXInner": "110%",
             "bScrollCollapse": true,

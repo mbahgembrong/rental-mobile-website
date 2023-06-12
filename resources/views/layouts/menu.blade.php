@@ -1,6 +1,6 @@
 @if (Auth::guard('pelanggan')->check())
-    <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('#') }}">
+    <li class="nav-item {{ Request::is('pelanggan/home') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pelanggan.home') }}">
             <i class="nav-icon fa fa-user" aria-hidden="true"></i>
             <span>Home</span>
         </a>
@@ -14,7 +14,7 @@
     <li class="nav-item {{ Request::is('pelanggan/rentals') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('pelangan.rentals.index') }}">
             <i class="nav-icon fa fa-taxi" aria-hidden="true"></i>
-            <span>Rental</span>
+            <span>Histori Penyewaan</span>
         </a>
     </li>
     <li class="nav-item {{ Request::is('profile*') ? 'active' : '' }}">
@@ -25,7 +25,7 @@
     </li>
 @else
     <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('#') }}">
+        <a class="nav-link" href="{{ route('home') }}">
             <i class="nav-icon fa fa-user" aria-hidden="true"></i>
             <span>Home</span>
         </a>
@@ -33,7 +33,7 @@
     <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('users.index') }}">
             <i class="nav-icon fa fa-user" aria-hidden="true"></i>
-            <span>Pegawai</span>
+            <span>Data Admin</span>
         </a>
     </li>
     <li class="nav-item {{ Request::is('pelanggans*') ? 'active' : '' }}">
@@ -45,7 +45,7 @@
     <li class="nav-item {{ Request::is('sopirs*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('sopirs.index') }}">
             <i class="nav-icon fa fa-id-card"></i>
-            <span>Sopir</span>
+            <span>Data Sopir</span>
         </a>
     </li>
     <li class="nav-item {{ Request::is('kategoriMobils*') ? 'active' : '' }}">

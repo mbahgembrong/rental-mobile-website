@@ -2,10 +2,7 @@
 <div class="form-group col-sm-6">
     {!! Form::label('pelanggan_id', 'Pelanggan :') !!}
     @if (Auth::guard('pelanggan')->check())
-        {!! Form::select('pelanggan_id', $pelanggans, Auth::guard('pelanggan')->user()->id, [
-            'class' => 'form-control',
-            'disabled',
-        ]) !!}
+        <p class="form-control">{{ Auth::guard('pelanggan')->user()->nama }}</p>
         <input type="hidden" name="pelanggan_id" value="{{ Auth::guard('pelanggan')->user()->id }}">
     @else
         {!! Form::select('pelanggan_id', $pelanggans, null, ['class' => 'form-control']) !!}
