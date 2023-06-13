@@ -66,6 +66,12 @@
             <span>Rental</span>
         </a>
     </li>
+    <li class="nav-item {{ Request::is('laporan*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('laporan') }}">
+            <i class="nav-icon fa fa-file-o"></i>
+            <span>Laporan</span>
+        </a>
+    </li>
     {{-- <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('#') }}">
             <i class="nav-icon fa fa-user" aria-hidden="true"></i>

@@ -76,5 +76,7 @@ Route::prefix('/admin')->group(function () {
         Route::resource('detailMobils', App\Http\Controllers\DetailMobilController::class);
         Route::resource('rentals', App\Http\Controllers\RentalController::class);
 
+        Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index'])->name('laporan');
+
     });
 });
