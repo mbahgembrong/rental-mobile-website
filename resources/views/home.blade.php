@@ -3,7 +3,7 @@
     function diffPercent($array)
     {
         try {
-            return (($array[array_key_last($array)] - ($array[array_key_last($array) - 1] ?: $array[0])) / ($array[array_key_last($array)] ?: $array[array_key_last($array) - 1])) * 100;
+            return round((($array[array_key_last($array)] - ($array[array_key_last($array) - 1] ?: $array[0])) / ($array[array_key_last($array)] ?: $array[array_key_last($array) - 1])) * 100, 0);
         } catch (\Throwable $th) {
             return 0;
         }
@@ -67,7 +67,7 @@
                             <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                                 <div>
                                     <div class="fs-4 fw-semibold">
-                                        {{ $card['penyewaan'][array_key_last($card['penyewaan'])] }}
+                                        {{ $card['penyewaan'][array_key_last($card['penyewaan'])] }} Mobil
                                         <span class="fs-6 fw-normal">({{ diffPercent($card['penyewaan']) }}% <i
                                                 class="fa fa-arrow-{{ hasMinusSign(diffPercent($card['penyewaan'])) ? 'down' : 'up' }}"
                                                 aria-hidden="true"></i>)</span>
