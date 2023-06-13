@@ -43,10 +43,10 @@ class DendaScedule extends Command
         $rental = Rental::whereIn('status', ['berjalan', 'terlambat'])->where('waktu_selesai', '<', (Carbon::now()->timestamp + 30))->get();
         foreach ($rental as $rental) {
             $rental->status = 'terlambat';
+            $rental->status_pembayaran = 'belum';
             $rental->waktu_denda = Carbon::now()->timestamp;
-            $rental->denda = round(($rental->waktu_denda - $rental->waktu_selesai) / ($rental->detailMobil->mobil->satuan == 'hari' ? 86_400 : 3_600)) * $rental->detailMobil->mobil->denda;
+            $rental->denda = round(($rental->waktu_denda - $rental->waktu_selesai) / ($rental->detailMobil->mobil->satuan == 'hari' ? 86400 : 3600)) * $rental->detailMobil->mobil->denda;
             $rental->grand_total = $rental->total + $rental->denda;
-
             $rental->save();
             Log::info($rental->id . ' - change status pemesanan (terlambat)');
             $this->info($rental->id . ' - change status pemesanan (terlambat)');

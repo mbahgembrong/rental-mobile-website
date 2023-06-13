@@ -10,8 +10,8 @@
                 <th>Waktu Selesai</th>
                 <th>Jenis Transaksi</th>
                 <th>Status</th>
+                <th>Status Pembayaran</th>
                 <th>Grand Total</th>
-                <th>Kurang Bayar</th>
                 <th aria-colspan="3">Action</th>
             </tr>
         </thead>
@@ -31,14 +31,12 @@
                             class="badge bg-{{ $rental->jenis_transaksi == 'offline' ? 'success' : 'primary' }}">{{ $rental->jenis_transaksi }}</span>
                     </td>
                     <td> <span
-                            class="badge bg-{{ $rental->status == 'pemesanan' ? 'primary' : ($rental->status == 'berjalan' ? 'secondary' : ($rental->status == 'selesai' ? 'success' : ($rental->status == 'terlambat' ? 'warning' : 'danger'))) }}">{{ $rental->status }}</span>
+                            class="badge bg-{{ $rental->status == 'pemesanan' ? 'primary' : ($rental->status == 'berjalan' ? 'secondary' : ($rental->status == 'selesai' ? 'success' : ($rental->status == 'terlambat' ? 'warning' : 'danger'))) }}">{{ $rental->status }}{{ $rental->status == 'telambat' ? ' : ' . $rental->denda : '' }}</span>
+                    </td>
+                    <td> <span
+                            class="badge bg-{{ $rental->status_pembayaran == 'lunas' ? 'success' : 'danger' }}">{{ $rental->status_pembayaran != 'lunas'? 'Kurang : -' .($rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->kurang ??$rental->grand_total): 'Lunas' }}</span>
                     </td>
                     <td>Rp. {{ $rental->grand_total }}</td>
-                    <td>Rp.
-                        -
-                        {{ $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->kurang ?? $rental->grand_total }}
-                    </td>
-
                     <td>
                         {!! Form::open([
                             'route' => [Auth::guard('pelanggan')->check() ? 'pelanggan.rentals.destroy' : 'rentals.destroy', $rental->id],
@@ -55,11 +53,8 @@
                                     class='btn btn-ghost-warning status {{ $rental->waktu_mulai <= time() ||$rental->detailPembayaran()->orderBy('created_at', 'DESC')->first() == null ||in_array($rental->status, ['batal', 'selesai'])? 'disabled': '' }}'><i
                                         class="fa fa-paper-plane-o"></i></a>
                             @endif
-                            {{-- <a href="{{ route('rentals.edit', [$rental->id]) }}"
-                                class='btn btn-ghost-info  {{ $rental->waktu_mulai <= time() ? 'disabled' : '' }}'><i
-                                    class="fa fa-edit"></i></a> --}}
                             <a href="{{ route('rentals.struk', [$rental->id]) }}"
-                                class='btn btn-ghost-info  {{ $rental->status != 'selesai' ? 'disabled' : '' }}'
+                                class='btn btn-ghost-info  {{ $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first() == null || $rental->status == 'terlambat'? 'disabled': '' }}'
                                 target="_blank"><i class="fa fa-file-text-o"></i></a>
                             {!! Form::button('<i class="fa fa-times-circle-o"></i>', [
                                 'type' => 'submit',
