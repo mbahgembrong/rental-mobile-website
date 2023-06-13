@@ -188,7 +188,11 @@
                     maintainAspectRatio: false,
                     scales: {
                         y: {
-                            min: 0
+                            min: 0,
+                            ticks: {
+                                // precision: 0,
+                                beginAtZero: true,
+                            }
                         }
                     },
                     elements: {

@@ -1,7 +1,7 @@
 @if (Auth::guard('pelanggan')->check())
     <li class="nav-item {{ Request::is('pelanggan/home') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('pelanggan.home') }}">
-            <i class="nav-icon fa fa-user" aria-hidden="true"></i>
+            <i class="nav-icon fa fa-home" aria-hidden="true"></i>
             <span>Home</span>
         </a>
     </li>
@@ -26,7 +26,7 @@
 @else
     <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('home') }}">
-            <i class="nav-icon fa fa-user" aria-hidden="true"></i>
+            <i class="nav-icon fa fa-home" aria-hidden="true"></i>
             <span>Home</span>
         </a>
     </li>
