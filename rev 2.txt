@@ -34,7 +34,7 @@
 - Pelanggan menu rental diganti history penyewaan (fix)
 - login admin dikasih background atau dihias (fix)
 - in dashboard admin menu pegawai diganti data admin dan menu sopir diganti data sopir (fix)
-- prev and next button datepicker tahun change color
+- prev and next button datepicker tahun change color(fix)
 - select in pesan rental pelanggan change to text (fix)
 
 

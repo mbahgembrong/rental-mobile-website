@@ -49,7 +49,9 @@
             useCurrent: true,
             icons: {
                 up: "icon-arrow-up-circle icons font-2xl",
-                down: "icon-arrow-down-circle icons font-2xl"
+                down: "icon-arrow-down-circle icons font-2xl",
+                previous: "fa fa-chevron-left",
+                next: "fa fa-chevron-right",
             },
             // sideBySide: true
         })

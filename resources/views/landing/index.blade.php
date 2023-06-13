@@ -54,7 +54,9 @@
                                             useCurrent: true,
                                             icons: {
                                                 up: "icon-arrow-up-circle icons font-2xl",
-                                                down: "icon-arrow-down-circle icons font-2xl"
+                                                down: "icon-arrow-down-circle icons font-2xl",
+                                                previous: "fa fa-chevron-left",
+                                                next: "fa fa-chevron-right",
                                             },
                                             sideBySide: true,
                                             minDate: moment(),
@@ -74,8 +76,10 @@
                                             format: 'YYYY-MM-DD HH:mm:ss',
                                             useCurrent: true,
                                             icons: {
-                                                up: "icon-arrow-up-circle icons font-2xl",
-                                                down: "icon-arrow-down-circle icons font-2xl"
+                                                 up: "icon-arrow-up-circle icons font-2xl",
+                                                down: "icon-arrow-down-circle icons font-2xl",
+                                                previous: "fa fa-chevron-left",
+                                                next: "fa fa-chevron-right",
                                             },
                                             sideBySide: true,
                                             minDate: moment()
