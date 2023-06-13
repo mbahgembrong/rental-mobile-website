@@ -30,7 +30,7 @@
 - rental sort by order desc(fix)
 - ubah posisi button proses in rental(fix)
 - struk belum ada waktu mulai dan waktu selesai
-- rekap 1 bulan penyewaan,  mobil yang disewa, penyewa,  keuntungan, denda
+- rekap 1 bulan penyewaan,  mobil yang disewa, penyewa,  keuntungan, denda (fix)
 - Pelanggan menu rental diganti history penyewaan (fix)
 - login admin dikasih background atau dihias
 - in dashboard admin menu pegawai diganti data admin dan menu sopir diganti data sopir (fix)

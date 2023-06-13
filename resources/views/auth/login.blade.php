@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Login | CoreUI | {{ config('app.name') }}</title>
+    <title>Login {{ config('app.name') }}</title>
     <meta name="description" content="CoreUI Template - InfyOm Laravel Generator">
     <meta name="keyword" content="CoreUI,Bootstrap,Admin,Template,InfyOm,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
     <!-- Bootstrap-->
@@ -27,7 +27,13 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card-group">
-                    <div class="card p-4">
+                    @if (Request::is('login'))
+                        <div class="card  py-5 d-md-down-none" style="width:44%;">
+                            <img src="{{ asset('img/banner.png') }}" tyle="width: 100%;">
+                        </div>
+                    @endif
+                    <div class="card
+                            p-4">
                         <div class="card-body">
                             <form method="post"
                                 action="{{ Request::is('pelanggan/login') ? url('/pelanggan/login') : url('/login') }}">
@@ -68,11 +74,6 @@
                                     <div class="col-6">
                                         <button class="btn btn-primary px-4" type="submit">Login</button>
                                     </div>
-                                    {{-- <div class="col-6 text-right">
-                                    <a class="btn btn-link px-0" href="{{ url('/password/reset') }}">
-                                        Forgot password?
-                                    </a>
-                                </div> --}}
                                 </div>
                             </form>
                         </div>
