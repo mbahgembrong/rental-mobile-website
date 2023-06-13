@@ -32,7 +32,7 @@
                                         Transaksi <span class="fs-6 fw-normal">({{ diffPercent($card['transaksi']) }}% <i
                                                 class="fa fa-arrow-{{ hasMinusSign(diffPercent($card['transaksi'])) ? 'down' : 'up' }}"
                                                 aria-hidden="true"></i>)</span></div>
-                                    <div>Transaksi</div>
+                                    <div>Total Transaksi Selesai</div>
                                 </div>
                             </div>
                             <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">
@@ -89,7 +89,7 @@
                                             class="fs-6 fw-normal">({{ diffPercent($card['batal']) }}% <i
                                                 class="fa fa-arrow-{{ hasMinusSign(diffPercent($card['batal'])) ? 'down' : 'up' }}"
                                                 aria-hidden="true"></i>)</span></div>
-                                    <div>Batal</div>
+                                    <div>Total Pembatalan Transaksi</div>
                                 </div>
                             </div>
                             <div class="c-chart-wrapper mt-3 mx-3" style="height:70px;">

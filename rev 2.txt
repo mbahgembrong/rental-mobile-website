@@ -29,7 +29,7 @@
 - bug cetak struk(fix)
 - rental sort by order desc(fix)
 - ubah posisi button proses in rental(fix)
-- struk belum ada waktu mulai dan waktu selesai
+- struk belum ada waktu mulai dan waktu selesai(fix)
 - rekap 1 bulan penyewaan,  mobil yang disewa, penyewa,  keuntungan, denda (fix)
 - Pelanggan menu rental diganti history penyewaan (fix)
 - login admin dikasih background atau dihias (fix)
