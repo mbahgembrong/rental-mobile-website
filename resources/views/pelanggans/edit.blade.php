@@ -64,6 +64,21 @@
                     source: "{{ asset('storage/pelanggans/foto/' . $pelanggan->foto) }}",
                 }, ]
             });
+            $('input[name="sim"]').filepond({
+                labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
+                storeAsFile: true,
+                imagePreviewMaxHeight: 150,
+                imagePreviewTransparencyIndicator: 'grid',
+                acceptedFileTypes: ['image/*'],
+                fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+                    resolve(type);
+                }),
+                @if ($pelanggan->sim != null)
+                    files: [{
+                        source: "{{ asset('storage/pelanggans/sim/' . $pelanggan->sim) }}",
+                    }, ]
+                @endif
+            });
             $('input#tanggal_lahir').val("{{ $pelanggan->tanggal_lahir->format('d/m/Y') }}")
         })
     </script>

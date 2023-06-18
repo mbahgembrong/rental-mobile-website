@@ -9,7 +9,7 @@
                 <th>Waktu Mulai</th>
                 <th>Waktu Selesai</th>
                 <th>Denda</th>
-                <th>Total</th>
+                {{-- <th>Total</th> --}}
                 <th>Grand Total</th>
             </tr>
         </thead>
@@ -25,16 +25,16 @@
                     <td>
                         Rp. {{ $rental->denda }}
                     </td>
-                    <td>
+                    {{-- <td>
                         Rp. {{ $rental->total }}
-                    </td>
+                    </td> --}}
                     <td>Rp. {{ $rental->grand_total }}</td>
                 </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="7"></td>
+                <td colspan="6"></td>
                 <td>Total : </td>
                 <td>Rp. {{ $rentals->sum('grand_total') }}</td>
             </tr>

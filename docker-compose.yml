@@ -16,10 +16,6 @@ services:
         # command:  bash -c "php artisan migrate --seed"
         volumes:
             - '.:/var/www/html'
-        networks:php 
-            - sail
-        depends_on:
-            - mysql
             - redis
             # - selenium
     # selenium:

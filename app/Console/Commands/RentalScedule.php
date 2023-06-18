@@ -41,9 +41,14 @@ class RentalScedule extends Command
      */
     public function handle()
     {
-        $rental = Rental::where('status', 'pemesanan')->where('waktu_mulai', '<=', (Carbon::now()->timestamp - 30))->get();
+        $rental = Rental::where('status', 'pemesanan')->where('waktu_peminjaman', '<=', (Carbon::now()->timestamp - 1800))->get();
         foreach ($rental as $key => $value) {
             if ($value->detailPembayaran()->orderBy('created_at', 'DESC')->first() == null) {
+                $value->status = 'batal';
+                $value->save();
+                Log::info($value->id . ' - change status pemesanan (batal)');
+                $this->info($value->id . ' - change status pemesanan (batal)');
+            } elseif ($value->status == 'pemesanan' && $value->where('waktu_selesai', '<=', (Carbon::now()->timestamp))) {
                 $value->status = 'batal';
                 $value->save();
                 Log::info($value->id . ' - change status pemesanan (batal)');

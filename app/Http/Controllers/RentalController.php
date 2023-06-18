@@ -316,11 +316,16 @@ class RentalController extends AppBaseController
             return redirect(route('rentals.index'));
         }
 
-        // $rental->delete();
-        $rental->status = 'batal';
-        $rental->save();
 
-        Flash::success('Rental canceled successfully.');
+        if ($rental->status != 'batal') {
+            $rental->status = 'batal';
+            $rental->save();
+
+            Flash::success('Rental canceled successfully.');
+        } else {
+            $rental->delete();
+            Flash::success('Rental deleted successfully.');
+        }
 
         return redirect(route('rentals.index'));
     }

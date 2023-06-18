@@ -50,21 +50,16 @@
                                     class="fa fa-money"></i></a>
                             @if (!Auth::guard('pelanggan')->check())
                                 <a href="#" data-id="{{ $rental->id }}" data-status="{{ $rental->status }}"
-                                    class='btn btn-ghost-warning status {{ $rental->waktu_mulai <= time() ||$rental->detailPembayaran()->orderBy('created_at', 'DESC')->first() == null ||in_array($rental->status, ['batal', 'selesai'])? 'disabled': '' }}'><i
+                                    class='btn btn-ghost-warning status {{ $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first() == null || in_array($rental->status, ['batal', 'selesai'])? 'disabled': '' }}'><i
                                         class="fa fa-paper-plane-o"></i></a>
                             @endif
                             <a href="{{ route('rentals.struk', [$rental->id]) }}"
                                 class='btn btn-ghost-info  {{ $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first() == null || $rental->status == 'terlambat'? 'disabled': '' }}'
                                 target="_blank"><i class="fa fa-file-text-o"></i></a>
-                            {!! Form::button('<i class="fa fa-times-circle-o"></i>', [
+                            {!! Form::button('<i class="fa fa-' . ($rental->status == 'batal' ? 'trash' : 'times-circle-o') . '"></i>', [
                                 'type' => 'submit',
                                 'class' => 'btn btn-ghost-danger',
-                                'disabled' =>
-                                    $rental->waktu_mulai <= time() ||
-                                    $rental->status != 'pemesanan' ||
-                                    $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first() != null
-                                        ? true
-                                        : false,
+                                'disabled' => !in_array($rental->status, ['pemesanan', 'batal']),
                             ]) !!}
                         </div>
                         {!! Form::close() !!}

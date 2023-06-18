@@ -36,5 +36,11 @@
 - in dashboard admin menu pegawai diganti data admin dan menu sopir diganti data sopir (fix)
 - prev and next button datepicker tahun change color(fix)
 - select in pesan rental pelanggan change to text (fix)
+- remove column total in laporan(fix)
+- change color legend chart home admin(fix)
+- status  change batal after 30 menit pemesanan jika belum dp(fix)
+- button hapus in rental if status batal (fix)
+- bug pay in rental status pemesanan(fix)
+- pelanggan upload sim(fix)
 
 

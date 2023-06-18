@@ -51,7 +51,8 @@ class Pelanggan extends Authenticatable
         'ktp',
         'email',
         'password',
-        'foto'
+        'foto',
+        'sim'
     ];
 
     /**
@@ -68,7 +69,8 @@ class Pelanggan extends Authenticatable
         'ktp' => 'string',
         'email' => 'string',
         'password' => 'string',
-        'foto' => 'string'
+        'foto' => 'string',
+        'sim' => 'string',
     ];
 
     /**

@@ -55,6 +55,8 @@ class HomeController extends Controller
                     $chart[$key]['data'][] = $sumCarRental;
                 }
                 $chart[$key]['label'] = $mobil->nama;
+                $chart[$key]['borderColor'] = $this->random_rgb();
+                $chart[$key]['backgroundColor'] = $chart[$key]['borderColor'];
             }
 
             return view('home', compact(['card', 'labels', 'chart']));
@@ -85,6 +87,13 @@ class HomeController extends Controller
             }
             return view('home', compact(['labels', 'card']));
         }
+    }
+
+    function random_rgb()
+    {
+        // $r = rand(0, 100) / 100;
+        $s = 255;
+        return 'rgb(' . round(rand(0, 100) / 100 * $s) . ',' . round(rand(0, 100) / 100 * $s) . ',' . round(rand(0, 100) / 100 * $s) . ')';
     }
 
 }

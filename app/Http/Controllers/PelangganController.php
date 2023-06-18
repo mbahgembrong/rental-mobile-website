@@ -60,6 +60,11 @@ class PelangganController extends AppBaseController
             Storage::disk('public')->put('pelanggans/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
             $input['foto'] = $imageName;
         }
+        if ($request->hasFile('sim')) {
+            $imageName = time() . $request->file('sim')->getClientOriginalName();
+            Storage::disk('public')->put('pelanggans/sim/' . $imageName, file_get_contents($request->file('sim')->getRealPath()));
+            $input['sim'] = $imageName;
+        }
         $input['password'] = bcrypt($input['password']);
         $input['tanggal_lahir'] = Carbon::createFromFormat('d/m/Y', $input['tanggal_lahir'])->format('Y-m-d');
 
@@ -144,6 +149,13 @@ class PelangganController extends AppBaseController
             $input['foto'] = $imageName;
         } else
             unset($input['foto']);
+
+        if ($request->hasFile('sim') && $request->file('sim')->getClientOriginalName() != $pelanggan->sim) {
+            $imageName = time() . $request->file('sim')->getClientOriginalName();
+            Storage::disk('public')->put('pelanggans/sim/' . $imageName, file_get_contents($request->file('sim')->getRealPath()));
+            $input['sim'] = $imageName;
+        } else
+            unset($input['sim']);
 
         $input['tanggal_lahir'] = Carbon::createFromFormat('d/m/Y', $input['tanggal_lahir'])->format('Y-m-d');
         if ($input['password'] == null)

@@ -52,7 +52,8 @@
     <label for="jenis_kelaminModal" class="form-label">Detail Mobil</label>
     <div class="form-group fieldGroup" data-id="1">
         <div class="input-group">
-            <input type="hidden" name="detail_mobil_id[]" class="form-control detailMobil" placeholder="Detail Mobil Id" />
+            <input type="hidden" name="detail_mobil_id[]" class="form-control detailMobil"
+                placeholder="Detail Mobil Id" />
             <input type="text" name="plat[]" class="form-control plat" placeholder="Plat" />
             <input type="text" name="stnk[]" class="form-control stnk" placeholder="Masukkan stnk" />
             <input type="text" name="tahun_mobil[]" class="form-control tahun_mobil" placeholder="Tahun Mobil" />
@@ -82,7 +83,7 @@
                     '<input type="text" name="stnk[]" class="form-control stnk" placeholder="Masukkan stnk" />' +
                     '<input type="text" name="tahun_mobil[]" class="form-control tahun_mobil" placeholder="Tahun Mobil" />' +
                     '<div class="input-group-addon ml-3">' +
-                    '<a href="javascript:void(0)" class="btn btn-danger remove"><i class="fa fa-minus"></i></a>' +
+                    '<a href="javascript:void(0)" class="btn btn-danger remove"><i class="fa  btn-danger remove"></i></a>' +
                     '</div>' +
                     '</div>' +
                     '</div>';
@@ -95,6 +96,16 @@
                 $(this).datetimepicker({
                     format: 'YYYY',
                     useCurrent: true,
+                    icons: {
+                        time: "fa fa-clock-o",
+                        date: "fa fa-calendar",
+                        up: "fa fa-arrow-up",
+                        down: "fa fa-arrow-down",
+                        previous: "fa fa-chevron-left",
+                        next: "fa fa-chevron-right",
+                        today: "fa fa-clock-o",
+                        clear: "fa fa-trash-o"
+                    }
                 });
             })
         })

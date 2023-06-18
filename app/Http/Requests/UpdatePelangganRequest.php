@@ -34,6 +34,7 @@ class UpdatePelangganRequest extends FormRequest
         $rules['password'] = 'nullable|min:8';
         $rules['foto'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
         $rules['ktp'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        $rules['ktp'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
         return $rules;
     }
 }
