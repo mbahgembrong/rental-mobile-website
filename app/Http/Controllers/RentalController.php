@@ -327,7 +327,10 @@ class RentalController extends AppBaseController
             Flash::success('Rental deleted successfully.');
         }
 
-        return redirect(route('rentals.index'));
+        if (Auth::guard('pelanggan')->check())
+            return redirect(route('pelangan.rentals.index'));
+        else
+            return redirect(route('rentals.index'));
     }
 
     public function cekKetersediaanMobil(Request $request)

@@ -3,7 +3,8 @@
 @section('content')
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="{{ route('rentals.index') }}">Rental</a>
+            <a
+                href="{{ Auth::guard('pelanggan')->check() ? route('pelangan.rentals.index') : route('rentals.index') }}">Rental</a>
         </li>
         <li class="breadcrumb-item active">Detail</li>
     </ol>
