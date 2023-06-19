@@ -77,7 +77,8 @@
                     <div class="avatar avatar-md">
                         <img class="avatar-img"
                             src="{{ Auth::guard('pelanggan')->check() ? asset('storage/pelanggans/foto/' . Auth::guard('pelanggan')->user()->foto) : asset('storage/pelanggans/foto/' . Auth::user()->foto) }}"
-                            onerror="this.onerror=null; this.src='{{ asset('img/default-user.jpg') }}'">
+                            onerror="this.onerror=null; this.src='{{ asset('img/default-user.jpg') }}'"
+                            style="max-height: 36px;">
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
