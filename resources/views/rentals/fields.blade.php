@@ -287,7 +287,7 @@
                 updateGrandTotal()
             });
             $('select[name="sopir_id"]').on('change', function() {
-                priceSopir = 5000;
+                priceSopir = {{ env('PRICE_SOPIR', 100000) }};
                 updateGrandTotal()
             })
             // cek ketersedian sopir
