@@ -132,6 +132,11 @@
                                 )
                                 $('#pelanggan_id').val(result.id)
                                 $('#pelanggan_id').trigger('change');
+                                Swal.fire({
+                                    title: `Success Tambah Pelanggan ${result.nama}`,
+                                    icon: 'success',
+                                    confirmButtonText: "Yes!",
+                                })
 
                             }
                         },
