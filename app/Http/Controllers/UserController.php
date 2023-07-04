@@ -23,7 +23,7 @@ class UserController extends AppBaseController
     public function index(Request $request)
     {
         /** @var User $users */
-        $users = User::all();
+        $users = User::orderBy('created_at', 'DESC')->get();
 
         return view('users.index')
             ->with('users', $users);
