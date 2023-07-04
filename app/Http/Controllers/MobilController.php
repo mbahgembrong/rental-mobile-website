@@ -25,7 +25,7 @@ class MobilController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Mobil $mobils */
-        $mobils = Mobil::all();
+        $mobils = Mobil::orderBy('created_at', 'DESC')->get();
 
         return view('mobils.index')
             ->with('mobils', $mobils);

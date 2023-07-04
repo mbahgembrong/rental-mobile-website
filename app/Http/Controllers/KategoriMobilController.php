@@ -23,7 +23,7 @@ class KategoriMobilController extends AppBaseController
     public function index(Request $request)
     {
         /** @var KategoriMobil $kategoriMobils */
-        $kategoriMobils = KategoriMobil::all();
+        $kategoriMobils = KategoriMobil::orderBy('created_at', 'DESC')->get();
 
         return view('kategori_mobils.index')
             ->with('kategoriMobils', $kategoriMobils);

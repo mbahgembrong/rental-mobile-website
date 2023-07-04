@@ -22,7 +22,7 @@ class DetailMobilController extends AppBaseController
     public function index(Request $request)
     {
         /** @var DetailMobil $detailMobils */
-        $detailMobils = DetailMobil::all();
+        $detailMobils = DetailMobil::orderBy('created_at', 'DESC')->get();
 
         return view('detail_mobils.index')
             ->with('detailMobils', $detailMobils);

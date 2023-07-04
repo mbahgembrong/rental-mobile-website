@@ -24,7 +24,7 @@ class SopirController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Sopir $sopirs */
-        $sopirs = Sopir::all();
+        $sopirs = Sopir::orderBy('created_at', 'DESC')->get();
 
         return view('sopirs.index')
             ->with('sopirs', $sopirs);

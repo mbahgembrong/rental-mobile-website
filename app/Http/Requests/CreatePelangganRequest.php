@@ -30,9 +30,9 @@ class CreatePelangganRequest extends FormRequest
         $rules['hp'] = 'required|digits_between:10,15|numeric|unique:pelanggans,hp';
         $rules['email'] = 'required|email|unique:pelanggans,email';
         $rules['password'] = 'required|min:8';
-        $rules['foto'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
-        $rules['ktp'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
-        $rules['sim'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        $rules['foto'] = 'required|image|mimes:jpeg,png,jpg,gif,svg';
+        $rules['ktp'] = 'required|image|mimes:jpeg,png,jpg,gif,svg';
+        $rules['sim'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg';
         return $rules;
     }
 }

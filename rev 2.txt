@@ -13,19 +13,6 @@
 - add fitur dp (fix)
 - pelanggan dapat menambah ulasan (fix)
 - print struk in rentals (fix)
-- chaten redirect whatsapp
-- middleware admin
-- laporan penyewaan
-- penghitungan denda dan luar daerah = denda +harga
-- notify email
-- kpu cekked nik
-- fake order mulai januari sampai juni tanggal 12
-- banner sesuai height layar in landing
-- bug login pelanggan(fix)
-- bug book now in car landing(fix)
-- bug detail mobil in update mobil admin panel(fix)
-- bayar lunas baru bisa merubah status menjadi berjalan, dan status selesai bisa dirubah setelah bayar denda
-- cetak struk bisa dicetak status pembayaran lunas
 - bug cetak struk(fix)
 - rental sort by order desc(fix)
 - ubah posisi button proses in rental(fix)
@@ -42,5 +29,21 @@
 - button hapus in rental if status batal (fix)
 - bug pay in rental status pemesanan(fix)
 - pelanggan upload sim(fix)
+- bug login pelanggan(fix)
+- bug book now in car landing(fix)
+- bug detail mobil in update mobil admin panel(fix)
+- bayar lunas baru bisa merubah status menjadi berjalan, dan status selesai bisa dirubah setelah bayar denda(fix)
+- cetak struk bisa dicetak status pembayaran lunas(fix)
+- chaten redirect whatsapp
+- middleware admin
+- laporan penyewaan
+- penghitungan denda dan luar daerah = denda +harga
+- notify email
+- kpu cekked nik
+- fake order mulai januari sampai juni tanggal 12
+- banner sesuai height layar in landing
 
+- diagram activity
+- tambah pelanggan di create rental menggunakan modal dashboard admin(fix)
+- Order by desc all table(fix)
 

@@ -22,7 +22,7 @@ class RoleController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Role $roles */
-        $roles = Role::all();
+        $roles = Role::orderBy('created_at', 'DESC')->get();
 
         return view('roles.index')
             ->with('roles', $roles);
