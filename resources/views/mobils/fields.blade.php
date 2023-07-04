@@ -49,7 +49,7 @@
 <div class="clearfix"></div>
 
 <div class="form-group col-sm-12" id="layanan">
-    <label for="jenis_kelaminModal" class="form-label">Detail Mobil</label>
+    <label for="jenis_kelamin" class="form-label">Detail Mobil</label>
     <div class="form-group fieldGroup" data-id="1">
         <div class="input-group">
             <input type="hidden" name="detail_mobil_id[]" class="form-control detailMobil"

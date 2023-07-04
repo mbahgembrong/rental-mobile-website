@@ -67,6 +67,9 @@ Route::prefix('/admin')->group(function () {
     Route::middleware('auth:web')->group(function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
         Route::resource('users', App\Http\Controllers\UserController::class);
+        Route::prefix('pelanggans')->group(function () {
+            Route::post('/store_api', [App\Http\Controllers\PelangganController::class, 'store_api'])->name('pelanggans.store_api');
+        });
         Route::resource('pelanggans', App\Http\Controllers\PelangganController::class);
         Route::resource('roles', App\Http\Controllers\RoleController::class);
         Route::resource('sopirs', App\Http\Controllers\SopirController::class);

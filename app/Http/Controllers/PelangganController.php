@@ -24,7 +24,7 @@ class PelangganController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Pelanggan $pelanggans */
-        $pelanggans = Pelanggan::all();
+        $pelanggans = Pelanggan::orderBy('created_at', 'DESC')->get();
 
         return view('pelanggans.index')
             ->with('pelanggans', $pelanggans);
@@ -74,6 +74,43 @@ class PelangganController extends AppBaseController
         Flash::success('Pelanggan saved successfully.');
 
         return redirect(route('pelanggans.index'));
+    }
+    public function store_api(CreatePelangganRequest $request)
+    {
+        try {
+            $input = $request->all();
+            if ($request->hasFile('ktp')) {
+                $imageName = time() . $request->file('ktp')->getClientOriginalName();
+                Storage::disk('public')->put('pelanggans/ktp/' . $imageName, file_get_contents($request->file('ktp')->getRealPath()));
+                $input['ktp'] = $imageName;
+            }
+            if ($request->hasFile('foto')) {
+                $imageName = time() . $request->file('foto')->getClientOriginalName();
+                Storage::disk('public')->put('pelanggans/foto/' . $imageName, file_get_contents($request->file('foto')->getRealPath()));
+                $input['foto'] = $imageName;
+            }
+            if ($request->hasFile('sim')) {
+                $imageName = time() . $request->file('sim')->getClientOriginalName();
+                Storage::disk('public')->put('pelanggans/sim/' . $imageName, file_get_contents($request->file('sim')->getRealPath()));
+                $input['sim'] = $imageName;
+            }
+            $input['password'] = bcrypt($input['password']);
+            $input['tanggal_lahir'] = Carbon::createFromFormat('d/m/Y', $input['tanggal_lahir'])->format('Y-m-d');
+
+            /** @var Pelanggan $pelanggan */
+            $pelanggan = Pelanggan::create($input);
+            return response([
+                'status' => 'success',
+                'message' => 'Pelanggan saved successfully.',
+                'data' => $pelanggan
+            ], 200);
+        } catch (\Throwable $th) {
+            return response([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+                'data' => null
+            ], 500);
+        }
     }
 
     /**
