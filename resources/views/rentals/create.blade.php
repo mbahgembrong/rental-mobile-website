@@ -24,11 +24,13 @@
                                     <strong>Tambah Rental</strong>
                                 </div>
                                 <div class="col-sm-6 d-flex  justify-content-end">
-                                    {!! Form::submit('Tambah Pelanggan', [
-                                        'class' => 'btn btn-success',
-                                        'data-toggle' => 'modal',
-                                        'data-target' => '#addPelangganeModal',
-                                    ]) !!}
+                                    @if (!Auth::guard('pelanggan')->check())
+                                        {!! Form::submit('Tambah Pelanggan', [
+                                            'class' => 'btn btn-success',
+                                            'data-toggle' => 'modal',
+                                            'data-target' => '#addPelangganeModal',
+                                        ]) !!}
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -48,142 +50,114 @@
         </div>
     </div>
 @endsection
-// modall add pelanggan
-<div class="modal" id="addPelangganeModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Tambah Pelanggan</h4>
+@if (!Auth::guard('pelanggan')->check())
+    {{-- // modall add pelanggan --}}
+    <div class="modal" id="addPelangganeModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Tambah Pelanggan</h4>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form role="form" action="{{ route('pelanggans.store_api') }}" method="POST"
+                        enctype="multipart/form-data">
+                        <div id="errorModal"></div>
+                        @csrf
+                        <div class="container row">
+                            @include('pelanggans.fields')
+                        </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-sm shadow-sm"><i
+                            class="fa fa-check fa-sm text-white-50"></i> Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm shadow-sm" data-dismiss="modal"><i
+                            class="fa fa-times fa-sm text-white-50"></i> Close</button>
+                </div>
+                </form>
             </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form role="form" action="{{ route('pelanggans.store_api') }}" method="POST"
-                    enctype="multipart/form-data">
-                    <div id="errorModal"></div>
-                    @csrf
-                    <div class="container row">
-                        @include('pelanggans.fields')
-                    </div>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success btn-sm shadow-sm"><i
-                        class="fa fa-check fa-sm text-white-50"></i> Submit</button>
-                <button type="button" class="btn btn-danger btn-sm shadow-sm" data-dismiss="modal"><i
-                        class="fa fa-times fa-sm text-white-50"></i> Close</button>
-            </div>
-            </form>
         </div>
     </div>
-</div>
-<div id="spinner-div" class="pt-5">
-    <div class="spinner-border text-primary" role="status">
+    <div id="spinner-div" class="pt-5">
+        <div class="spinner-border text-primary" role="status">
+        </div>
     </div>
-</div>
-@push('css')
-    <style>
-        #spinner-div {
-            display: block;
-            position: fixed;
-            z-index: 100000;
-            /* High z-index so it is on top of the page */
-            top: 50%;
-            right: 50%;
-            /* or: left: 50%; */
-            margin-top: -..px;
-            /* half of the elements height */
-            margin-right: -..px;
+    @push('css')
+        <style>
+            #spinner-div {
+                display: block;
+                position: fixed;
+                z-index: 100000;
+                /* High z-index so it is on top of the page */
+                top: 50%;
+                right: 50%;
+                /* or: left: 50%; */
+                margin-top: -..px;
+                /* half of the elements height */
+                margin-right: -..px;
 
-        }
-    </style>
-@endpush
-@push('scripts')
-    <script>
-        $(function() {
-            $('#spinner-div').hide();
-            $('#addPelangganeModal input.btn').hide();
-            $('#addPelangganeModal a.btn').hide();
-            $('#addPelangganeModal .modal-footer button[type="submit"]').click(function(e) {
-                e.preventDefault();
-                const form = $('#addPelangganeModal form');
-                const data = new FormData(form[0])
-                const url = form.attr('action');
-                $('#spinner-div').show();
-                $.ajax({
-                    type: "POST",
-                    url,
-                    data,
-                    dataType: "json",
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        console.log(response);
-                        $('#spinner-div').hide()
-                        const result = response.data;
-                        if (result) {
-                            $('#addPelangganeModal form').trigger('reset');
-                            $('#addPelangganeModal').modal('hide');
-                            $('#pelanggan_id').append(
-                                `<option value="${result.id}" selected>${result.nama}</option>`
-                            )
-                            $('#pelanggan_id').val(result.id)
-                            $('#pelanggan_id').trigger('change');
+            }
+        </style>
+    @endpush
+    @push('scripts')
+        <script>
+            $(function() {
+                $('#spinner-div').hide();
+                $('#addPelangganeModal input.btn').hide();
+                $('#addPelangganeModal a.btn').hide();
+                $('#addPelangganeModal .modal-footer button[type="submit"]').click(function(e) {
+                    e.preventDefault();
+                    const form = $('#addPelangganeModal form');
+                    const data = new FormData(form[0])
+                    const url = form.attr('action');
+                    $('#spinner-div').show();
+                    $.ajax({
+                        type: "POST",
+                        url,
+                        data,
+                        dataType: "json",
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            console.log(response);
+                            $('#spinner-div').hide()
+                            const result = response.data;
+                            if (result) {
+                                $('#addPelangganeModal form').trigger('reset');
+                                $('#addPelangganeModal').modal('hide');
+                                $('#pelanggan_id').append(
+                                    `<option value="${result.id}" selected>${result.nama}</option>`
+                                )
+                                $('#pelanggan_id').val(result.id)
+                                $('#pelanggan_id').trigger('change');
 
+                            }
+                        },
+                        error: function(response) {
+                            $('#spinner-div').hide()
+                            console.log(response.responseJSON);
+                            const err = response.responseJSON.errors
+                            const errModal = $('#addPelangganeModal #errorModal')
+                            if (err) {
+                                errModal.html('')
+                                $.each(err, function(key, value) {
+                                    value.forEach((mess) => {
+                                        errModal.append(
+                                            `<div class="alert alert-danger" role="alert">${mess}</div>`
+                                        )
+                                    })
+                                });
+
+                            }
                         }
-                    },
-                    error: function(response) {
-                        $('#spinner-div').hide()
-                        console.log(response.responseJSON);
-                        const err = response.responseJSON.errors
-                        const errModal = $('#addPelangganeModal #errorModal')
-                        if (err) {
-                            errModal.html('')
-                            $.each(err, function(key, value) {
-                                value.forEach((mess) => {
-                                    errModal.append(
-                                        `<div class="alert alert-danger" role="alert">${mess}</div>`
-                                    )
-                                })
-                            });
-
-                        }
-                    }
+                    });
                 });
-            });
-            // $('input[name="ktp"]').filepond({
-            //     labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
-            //     storeAsFile: true,
-            //     imagePreviewMaxHeight: 150,
-            //     imagePreviewTransparencyIndicator: 'grid',
-            //     acceptedFileTypes: ['image/*'],
-            //     fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-            //         resolve(type);
-            //     }),
-            // });
-            // $('input[name="foto"]').filepond({
-            //     labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
-            //     storeAsFile: true,
-            //     imagePreviewMaxHeight: 150,
-            //     imagePreviewTransparencyIndicator: 'grid',
-            //     acceptedFileTypes: ['image/*'],
-            //     fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-            //         resolve(type);
-            //     }),
-            // });
-            // $('input[name="sim"]').filepond({
-            //     labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
-            //     storeAsFile: true,
-            //     imagePreviewMaxHeight: 150,
-            //     imagePreviewTransparencyIndicator: 'grid',
-            //     acceptedFileTypes: ['image/*'],
-            //     fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-            //         resolve(type);
-            //     }),
-            // });
-        })
-    </script>
-@endpush
+            })
+        </script>
+    @endpush
+@endif
 @push('scripts')
     <script>
         $(function() {
