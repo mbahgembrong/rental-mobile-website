@@ -32,7 +32,7 @@ class CreatePelangganRequest extends FormRequest
         $rules['password'] = 'required|min:8';
         $rules['foto'] = 'required|image|mimes:jpeg,png,jpg,gif,svg';
         $rules['ktp'] = 'required|image|mimes:jpeg,png,jpg,gif,svg';
-        $rules['sim'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg';
+        // $rules['sim'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg';
         return $rules;
     }
 }

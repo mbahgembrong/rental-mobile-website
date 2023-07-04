@@ -26,8 +26,14 @@
             format: 'DD/MM/YYYY ',
             useCurrent: true,
             icons: {
-                up: "icon-arrow-up-circle icons font-2xl",
-                down: "icon-arrow-down-circle icons font-2xl"
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down",
+                previous: "fa fa-chevron-left",
+                next: "fa fa-chevron-right",
+                today: "fa fa-clock-o",
+                clear: "fa fa-trash-o"
             },
         })
     </script>

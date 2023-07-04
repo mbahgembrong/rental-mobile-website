@@ -33,7 +33,8 @@
 
                 <div class="card mx-4 ">
                     <div class="card-body p-4">
-                        <form method="post"class="row" action="{{ url('/pelanggan/register') }}"  enctype="multipart/form-data">
+                        <form method="post"class="row" action="{{ url('/pelanggan/register') }}"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="col-sm-12">
                                 <h1>Register</h1>
@@ -142,10 +143,14 @@
             format: 'DD/MM/YYYY ',
             useCurrent: true,
             icons: {
-                  up: "icon-arrow-up-circle icons font-2xl",
-                                                down: "icon-arrow-down-circle icons font-2xl",
-                                                previous: "fa fa-chevron-left",
-                                                next: "fa fa-chevron-right",
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down",
+                previous: "fa fa-chevron-left",
+                next: "fa fa-chevron-right",
+                today: "fa fa-clock-o",
+                clear: "fa fa-trash-o"
             },
         })
     </script>
