@@ -7,4 +7,5 @@
 - add separator titik in harga
 - add fitur notifikasi
 - add tabel addons_rental (kerusakan, bensin)
-- add collumn keterangan in tabel mobils
+- add collumn keterangan in tabel mobil kaki
+- add catatan kaki minimal dp 50% in pembayaran pelanggan
