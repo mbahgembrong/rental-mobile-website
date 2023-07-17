@@ -17,7 +17,22 @@ class IndexController extends Controller
     public function index()
     {
         $kategoris = KategoriMobil::all();
-        $mobils = Mobil::with(['kategoriMobil','detailMobils'])->take(5)->get();
+        $mobils = Mobil::with([
+            'kategoriMobil',
+            'detailMobils',
+        ])->chunkMap(
+                function ($mobil) {
+                    $mobil->countRentalMobil = $mobil->detailMobils->sum(
+                        function ($detailMobil) {
+                            return $detailMobil->rental->count();
+                        }
+                    );
+                    return $mobil;
+                }
+            )->sortByDesc(
+                'countRentalMobil'
+            )
+            ->take(5);
         return view('landing.index', compact(['kategoris', 'mobils']));
     }
 

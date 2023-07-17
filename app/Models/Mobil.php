@@ -99,9 +99,6 @@ class Mobil extends Model
     {
         return $this->hasMany(DetailMobil::class, 'mobil_id', 'id')->withTrashed();
     }
-    /**
-     * Get all of the rental for the Mobil
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+
+  
 }

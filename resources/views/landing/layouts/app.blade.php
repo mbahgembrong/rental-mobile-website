@@ -98,8 +98,8 @@
                         </ul> --}}
                     </div>
                 </div>
-                <div class="col-md">
-                    {{-- <div class="ftco-footer-widget mb-4 ml-md-5">
+                {{-- <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
                         <h2 class="ftco-heading-2">Information</h2>
                         <ul class="list-unstyled">
                             <li><a href="#" class="py-2 d-block">About</a></li>
@@ -108,11 +108,15 @@
                             <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
                             <li><a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
                         </ul>
-                    </div> --}}
-                </div>
+                    </div>
+                </div> --}}
                 <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Pembayaran Bank BRI</h2>
+                        <h6 class="ftco-heading-6">627001003192500 an Wijaya Rental Car</h6>
+
+                    </div>
                     {{-- <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Customer Support</h2>
                         <ul class="list-unstyled">
                             <li><a href="#" class="py-2 d-block">FAQ</a></li>
                             <li><a href="#" class="py-2 d-block">Payment Option</a></li>
