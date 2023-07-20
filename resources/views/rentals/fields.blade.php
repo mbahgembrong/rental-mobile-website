@@ -291,7 +291,12 @@
                 updateGrandTotal()
             });
             $('select[name="sopir_id"]').on('change', function() {
-                priceSopir = {{ env('PRICE_SOPIR', 100000) }};
+                if (typeCar == 'hari') {
+                    priceSopir = {{ env('PRICE_SOPIR_DAY', 100000) }};
+                } else {
+                    priceSopir = {{ env('PRICE_SOPIR_HOUR', 1000) }};
+                }
+                priceSopir = {{ env('PRICE_SOPIR_DAY', 100000) }};
                 updateGrandTotal()
             })
 
