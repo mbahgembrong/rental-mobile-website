@@ -339,14 +339,10 @@ class RentalController extends AppBaseController
             $mobilId = $request->mobil_id;
             $waktuMulai = $request->waktu_mulai ?? Carbon::now()->timestamp;
             $waktuSelesai = $request->waktu_selesai ?? Carbon::now()->timestamp;
-            // dd(Rental::whereBetween('waktu_mulai', [$waktuMulai, $waktuSelesai])->orwhereBetween('waktu_selesai', [$waktuMulai, $waktuSelesai])->whereIn('status', ['pemesanan', 'berjalan'])->select('detail_mobil_id'));
+            $rental = Rental::whereRaw("((`waktu_mulai` <= $waktuMulai and `waktu_selesai` >=  $waktuSelesai ) or (`waktu_mulai` >= $waktuMulai and `waktu_selesai` <= $waktuSelesai) or (`waktu_mulai` BETWEEN $waktuMulai and $waktuSelesai ) or ( `waktu_selesai` BETWEEN $waktuMulai and $waktuSelesai ))")->whereIn('status', ['pemesanan', 'berjalan', 'terlambat'])->pluck('detail_mobil_id')->all();
+
             $mobil = DB::table('detail_mobils')->where('mobil_id', $mobilId)->whereNull('deleted_at')
-                ->whereNotIn('id', function ($query) use ($waktuMulai, $waktuSelesai) {
-                    $query->select('*')
-                        ->from('rentals as rent')
-                        ->whereBetween('waktu_mulai', [$waktuMulai, $waktuSelesai])->orwhereBetween('waktu_selesai', [$waktuMulai, $waktuSelesai])->whereIn('status', ['pemesanan', 'berjalan', 'terlambat'])->select('detail_mobil_id');
-                })
-                ->get();
+                ->whereNotIn('id', $rental)->get();
 
             return response()->json([
                 'status' => 'success',
@@ -362,15 +358,10 @@ class RentalController extends AppBaseController
     public function cekKetersediaanSopir(Request $request)
     {
         try {
-            $waktuMulai = $request->waktu_mulai || Carbon::now()->timestamp;
-            $waktuSelesai = $request->waktu_selesai || Carbon::now()->timestamp;
-
-            $sopir = Sopir::whereNull('deleted_at')->whereNotIn('id', function ($query) use ($waktuMulai, $waktuSelesai) {
-                $query->select('*')
-                    ->from('rentals')
-                    ->whereBetween('waktu_mulai', [$waktuMulai, $waktuSelesai])->orwhereBetween('waktu_selesai', [$waktuMulai, $waktuSelesai])->whereIn('status', ['pemesanan', 'berjalan', 'terlambat'])->select('sopir_id');
-            })->get();
-
+            $waktuMulai = $request->waktu_mulai ?? Carbon::now()->timestamp;
+            $waktuSelesai = $request->waktu_selesai ?? Carbon::now()->timestamp;
+            $rental = Rental::whereRaw("((`waktu_mulai` <= $waktuMulai and `waktu_selesai` >=  $waktuSelesai ) or (`waktu_mulai` >= $waktuMulai and `waktu_selesai` <= $waktuSelesai) or (`waktu_mulai` BETWEEN $waktuMulai and $waktuSelesai ) or ( `waktu_selesai` BETWEEN $waktuMulai and $waktuSelesai ))")->whereIn('status', ['pemesanan', 'berjalan', 'terlambat'])->pluck('sopir_id')->all();
+            $sopir = Sopir::whereNotIn('id', $rental)->get();
             return response()->json([
                 'status' => 'success',
                 'data' => $sopir

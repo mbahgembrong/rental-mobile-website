@@ -49,47 +49,33 @@
             sideBySide: true,
             minDate: moment(),
 
-        })
-    </script>
-@endpush
-
-
-<!-- Waktu Selesai Field -->
-<div class="form-group col-sm-6" id="form_waktu_selesai">
-    {!! Form::label('waktu_selesai', 'Waktu Selesai:') !!}
-    {!! Form::text('waktu_selesai', null, ['class' => 'form-control', 'id' => 'waktu_selesai']) !!}
-</div>
-
-@push('scripts')
-    <script type="text/javascript">
-        $('#waktu_selesai').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            useCurrent: true,
-            icons: {
-                time: "fa fa-clock-o",
-                date: "fa fa-calendar",
-                up: "fa fa-arrow-up",
-                down: "fa fa-arrow-down",
-                previous: "fa fa-chevron-left",
-                next: "fa fa-chevron-right",
-                today: "fa fa-clock-o",
-                clear: "fa fa-trash-o"
-            },
-            sideBySide: true,
-            minDate: moment()
-        })
-        $('#waktu_selesai').prop('disabled', true)
-        $('#form_waktu_mulai').on('dp.change', function(e) {
-            $('#waktu_selesai').prop('disabled', false)
-            $('#waktu_selesai').datetimepicker();
-            $('#waktu_selesai').data('DateTimePicker').minDate(e.date);
         });
     </script>
 @endpush
+
+
+<!-- Duration Field -->
+<div class="form-group col-sm-6" id="form_duration">
+    {!! Form::label('duration', 'Durasi :') !!}
+    <div class="input-group mb-3">
+        {!! Form::text('duration', null, [
+            'class' => 'form-control',
+            'id' => 'duration',
+            'aria-describedby' => 'addon-duration',
+            'placeholder' => 'Durasi',
+        ]) !!}
+        <span class="input-group-text" id="addon-duration">Jam</span>
+    </div>
+</div>
+<div class="form-group col-sm-6" id="form_waktu_selesai">
+    {!! Form::label('waktu_selesai', 'Waktu Selesai:') !!}
+    {!! Form::text('waktu_selesai', null, ['class' => 'form-control', 'id' => 'waktu_selesai', 'readonly']) !!}
+</div>
 <!-- Detail Mobil Id Field -->
-<div class="form-group col-sm-12" id="form_detail_mobil_id">
+<div class="form-group col-sm-6" id="form_detail_mobil_id">
     {!! Form::label('detail_mobil_id', 'Detail Mobil:') !!}
-    {!! Form::select('detail_mobil_id', [], null, ['class' => 'form-control']) !!}
+    <input type="hidden" name="detail_mobil_id" value="">
+    {!! Form::text('detail_mobil_plat', null, ['class' => 'form-control', 'readonly']) !!}
 </div>
 
 
@@ -129,18 +115,10 @@
             $('#form_detail_mobil_id').hide();
             $('#form_sopir_id').hide();
             $('select[name="sopir_id"]').hide();
-            $('#form_waktu_mulai').hide();
             $('#form_waktu_selesai').hide();
+            $('#form_waktu_mulai').hide();
+            $('#form_duration').hide();
             $('#form_grand_total').hide();
-            // if ({{ json_encode($errors->any() || 0) }}) {
-            //     $('#form_mobil_id').show();
-            //     $('#form_detail_mobil_id').show();
-            //     $('#form_sopir_id').show();
-            //     $('select[name="sopir_id"]').show();
-            //     $('#form_waktu_mulai').show();
-            //     $('#form_waktu_selesai').show();
-            //     $('#form_grand_total').show();
-            // }
             let grandTotal = 0;
             let totalCar = 0;
             let totalSopir = 0;
@@ -174,8 +152,6 @@
                                     mobil.harga + ' / ' + mobil.satuan + '</option>'
                                 );
                             });
-                            $('#form_waktu_mulai').show();
-                            $('#form_waktu_selesai').show();
                             $('#form_detail_mobil_id select').find('option')
                                 .remove()
                                 .end()
@@ -210,26 +186,55 @@
             $('#form_mobil_id').on('change', function() {
                 var mobilId = $(this).find('select').val();
                 waktuMulai = moment($('#waktu_mulai').val()).unix();
-                waktuSelesai = moment($('#waktu_selesai').val()).unix();
-                updateGrandTotal()
+                if (typeCar == 'hari') {
+                    waktuSelesai = moment($('#waktu_mulai').val()).add(countTime, 'days').unix();
+                } else {
+                    waktuSelesai = moment($('#waktu_mulai').val()).add(countTime, 'hours').unix();
+                }
+                $('#addon-duration').html(typeCar);
+                $('#form_waktu_mulai').show();
+                $('#form_duration').show();
+
                 if (mobilId && waktuMulai && waktuSelesai)
                     cekKetersediaanMobil(mobilId, waktuMulai, waktuSelesai);
             });
             $('#form_waktu_mulai').on('dp.change', function(e) {
                 var mobilId = $('#form_mobil_id').find('select').val();
                 waktuMulai = moment(e.date.format(e.date._f)).unix();
-                waktuSelesai = moment($('#waktu_selesai').val()).unix();
-                updateGrandTotal()
+                if (typeCar == 'hari') {
+                    waktuSelesai = moment($('#waktu_mulai').val()).add(countTime, 'days').unix();
+                } else {
+                    waktuSelesai = moment($('#waktu_mulai').val()).add(countTime, 'hours').unix();
+                }
                 if (mobilId && waktuMulai && waktuSelesai)
                     cekKetersediaanMobil(mobilId, waktuMulai, waktuSelesai);
             });
-            $('#form_waktu_selesai').on('dp.change', function(e) {
-                var mobilId = $('#form_mobil_id').find('select').val();
-                waktuMulai = moment($('#waktu_mulai').val()).unix();
-                waktuSelesai = moment(e.date.format(e.date._f)).unix();
-                updateGrandTotal()
-                if (mobilId && waktuMulai && waktuSelesai)
-                    cekKetersediaanMobil(mobilId, waktuMulai, waktuSelesai);
+            $('input[name="duration"]').on('keyup', function(e) {
+                countTime = $(this).val();
+                if (countTime == '') {
+                    countTime = 0;
+                }
+                if (!`${countTime}`.match(/^\d+$/)) {
+                    countTime = 0;
+                    Swal.fire(
+                        'Oops!',
+                        'Durasi harus angka!',
+                        'error'
+                    );
+                    $(this).val(countTime)
+                } else {
+                    var mobilId = $('#form_mobil_id').find('select').val();
+                    countTime = parseInt(countTime);
+                    if (typeCar == 'hari') {
+                        waktuSelesai = moment($('#waktu_mulai').val()).add(countTime, 'days').unix();
+                    } else {
+                        waktuSelesai = moment($('#waktu_mulai').val()).add(countTime, 'hours').unix();
+                    }
+                    console.log(mobilId, waktuMulai, waktuSelesai);
+                    if (mobilId && waktuMulai && waktuSelesai)
+                        cekKetersediaanMobil(mobilId, waktuMulai, waktuSelesai);
+
+                }
             });
             // cek ketersedian mobil
             function cekKetersediaanMobil(mobilId, waktuMulai, waktuSelesai) {
@@ -242,26 +247,25 @@
                         waktu_selesai: waktuSelesai
                     },
                     success: function(data) {
-                        console.log(data);
                         if (data.status == 'success') {
+                            console.log(data.data, countTime);
                             if (data.data.length > 0) {
-                                $('#form_detail_mobil_id').show();
-                                $('#form_sopir_id').show();
-                                $('#form_detail_mobil_id select').find('option')
-                                    .remove()
-                                    .end()
-                                $('#form_detail_mobil_id select').append(
-                                    '<option value="" disabled selected>Pilih Detail Mobil</option>'
-                                );
-                                data.data.forEach(mobil => {
-                                    $('#form_detail_mobil_id select').append('<option value="' +
-                                        mobil.id + '">' + mobil.plat + ' - ' +
-                                        mobil.tahun_mobil + '</option>'
-                                    );
-                                });
+                                console.log(data.data, countTime);
+                                if (countTime != 0) {
+                                    updateGrandTotal()
+                                    $('#form_sopir_id').show();
+                                    $('#form_waktu_selesai').show();
+                                    $('#form_detail_mobil_id').show();
+                                    $('input[name="waktu_selesai"]').val(moment.unix(waktuSelesai)
+                                        .format('YYYY-MM-DD HH:mm:ss'))
+                                    $('input[name="detail_mobil_id"]').val(data.data[0].id)
+                                    $('input[name="detail_mobil_plat"]').val(data.data[0].plat)
+                                    cekKetersedianSopir()
+                                }
                             } else {
                                 $('#form_detail_mobil_id').hide();
                                 $('#form_sopir_id').hide();
+                                $('#form_waktu_selesai').hide();
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Oops...',
@@ -290,11 +294,10 @@
                 priceSopir = {{ env('PRICE_SOPIR', 100000) }};
                 updateGrandTotal()
             })
+
             // cek ketersedian sopir
             function cekKetersedianSopir() {
-                $('select[name="sopir_id"]').find('option')
-                    .remove()
-                    .end();
+
 
                 $.ajax({
                     url: "{{ route('rentals.cekKetersediaanSopir') }}",
@@ -305,27 +308,36 @@
                     },
                     success: function(data) {
                         if (data.status == 'success') {
-                            if (data.data.length > 0) {
-                                $('select[name="sopir_id"]').append(
-                                    '<option value="" disabled selected>Pilih Sopir</option>'
-                                );
-                                data.data.forEach(sopir => {
-                                    $('select[name="sopir_id"]').append('<option value="' +
-                                        sopir.id + '">' + sopir.nama + '</option>'
+                            $('select[name="sopir_id"]').click(function(e) {
+                                e.preventDefault();
+                                $(this).find('option')
+                                    .remove()
+                                    .end();
+                                if (data.data.length > 0) {
+
+                                    $(this).append(
+                                        '<option value="" disabled selected>Pilih Sopir</option>'
                                     );
-                                });
-                            } else {
-                                $('select[name="sopir_id"]').hide();
-                                $('select[name="sopir_id"]').val('');
-                                $('#radioSopir').attr('checked', false)
-                                $('#radioNonSopir').attr('checked', true)
-                                priceSopir = 0;
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'Sopir tidak tersedia!',
-                                });
-                            }
+                                    data.data.forEach(sopir => {
+                                        $(this).append(
+                                            '<option value="' +
+                                            sopir.id + '">' + sopir.nama +
+                                            '</option>'
+                                        );
+                                    });
+                                } else {
+                                    $(this).hide();
+                                    $(this).val('');
+                                    $('#radioSopir').attr('checked', false)
+                                    $('#radioNonSopir').attr('checked', true)
+                                    priceSopir = 0;
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Sopir tidak tersedia!',
+                                    });
+                                }
+                            });
                         }
                     },
                 });
