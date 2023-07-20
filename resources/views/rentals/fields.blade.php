@@ -186,6 +186,7 @@
             $('#form_mobil_id').on('change', function() {
                 var mobilId = $(this).find('select').val();
                 waktuMulai = moment($('#waktu_mulai').val()).unix();
+                typeCar = $(this).find('select').find('option:selected').data('satuan');
                 if (typeCar == 'hari') {
                     waktuSelesai = moment($('#waktu_mulai').val()).add(countTime, 'days').unix();
                 } else {
