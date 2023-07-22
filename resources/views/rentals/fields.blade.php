@@ -329,9 +329,9 @@
                                     .remove()
                                     .end();
                                 if (sopir.length > 0) {
-                                    // $(this).append(
-                                    //     '<option value="" disabled selected>Pilih Sopir</option>'
-                                    // );
+                                    $(this).append(
+                                        '<option value="" disabled >Pilih Sopir</option>'
+                                    );
                                     sopir.forEach(sopir => {
                                         $(this).append(
                                             '<option value="' +
