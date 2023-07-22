@@ -62,6 +62,13 @@ Route::prefix('mobil')->group(function () {
     Route::get('/{idKategori}', [App\Http\Controllers\MobilController::class, 'getMobil'])->name('mobils.getmobil');
 });
 
+Route::prefix('notifications')->group(
+    function () {
+        Route::get('/', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
+        Route::get('/{id}', [App\Http\Controllers\NotificationController::class, 'show'])->name('notifications.show');
+    }
+);
+
 
 Auth::routes();
 
@@ -80,12 +87,7 @@ Route::prefix('/admin')->group(function () {
 
         Route::resource('detailMobils', App\Http\Controllers\DetailMobilController::class);
         Route::resource('rentals', App\Http\Controllers\RentalController::class);
-        Route::prefix('notifications')->group(
-            function () {
-                Route::get('/', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
-                Route::get('/{id}', [App\Http\Controllers\NotificationController::class, 'show'])->name('notifications.show');
-            }
-        );
+
         Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index'])->name('laporan');
 
     });

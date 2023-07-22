@@ -89,7 +89,7 @@ class RentalController extends AppBaseController
                 null,
                 "Pemesanan Rental",
                 "Rental dengan id " . $rental->id . " telah melakukan pemesanan",
-                route('rentals.show', ['id' => $rental->id])
+                route('rentals.show',  $rental->id)
             );
             return redirect(route('pelangan.rentals.index'));
         } else
@@ -257,7 +257,7 @@ class RentalController extends AppBaseController
             $rental->pelanggan_id,
             "Pembayaran Rental",
             "Rental dengan id " . $rental->id . " telah divalidasi",
-            route('rentals.index')
+            route('pelangan.rentals.index')
         );
         return redirect(route('rentals.index'));
     }

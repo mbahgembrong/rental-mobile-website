@@ -51,14 +51,14 @@ class RentalScedule extends Command
                 $value->save();
                 Log::info($value->id . ' - change status pemesanan (batal)');
                 $this->info($value->id . ' - change status pemesanan (batal)');
-                NotificationService::add("pelanggan", $rental->pelanggan_id, "Pembatalan rental", "Rental dengan id " . $value->id . " telah dibatalkan karena tidak melakukan pembayaran dalam waktu 5 menit setelah melakukan pemesanan", route('rentals.index'));
+                NotificationService::add("pelanggan", $rental->pelanggan_id, "Pembatalan rental", "Rental dengan id " . $value->id . " telah dibatalkan karena tidak melakukan pembayaran dalam waktu 5 menit setelah melakukan pemesanan", route('pelangan.rentals.index'));
             } elseif ($value->status == 'pemesanan' && $value->where('waktu_selesai', '<=', (Carbon::now()->timestamp))) {
                 $value->status = 'batal';
                 $value->save();
                 Log::info($value->id . ' - change status pemesanan (batal)');
                 $this->info($value->id . ' - change status pemesanan (batal)');
                 NotificationService::add("pelanggan", "Pembatalan rental", $rental->pelanggan_id, "
-                Rental dengan id " . $value->id . " telah dibatalkan karena tidak melakukan pembayaran dalam waktu 5 menit setelah melakukan pemesanan", route('rentals.index'));
+                Rental dengan id " . $value->id . " telah dibatalkan karena tidak melakukan pembayaran dalam waktu 5 menit setelah melakukan pemesanan", route('pelangan.rentals.index'));
             }
         }
         return 1;

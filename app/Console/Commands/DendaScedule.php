@@ -52,7 +52,7 @@ class DendaScedule extends Command
             Log::info($rental->id . ' - change status pemesanan (terlambat)');
             $this->info($rental->id . ' - change status pemesanan (terlambat)');
             if (!NotificationService::isTerlambatNotify($rental->pelanggan_id, $rental->id)) {
-                NotificationService::add("pelanggan", $rental->pelanggan_id, "Terlambat", "Rental dengan id " . $rental->id . " telah terlambat", route('rentals.index'));
+                NotificationService::add("pelanggan", $rental->pelanggan_id, "Terlambat", "Rental dengan id " . $rental->id . " telah terlambat", route('pelangan.rentals.index'));
             }
         }
         // return 1
