@@ -5,7 +5,7 @@
 - form plat di pilihkan oleh sistem saat pemesanan rental (fix)
 - form waktu_selesai diganti menjadi durasi, dan waktu selesai dihide dan otomatis ditampilkan (fix)
 - add separator titik in harga(fix)
-- add fitur notifikasi
+- add fitur notifikasi(fix)
 - add tabel addons_rental (kerusakan, bensin) (fix)
 - add collumn keterangan in tabel mobil kaki
 - add catatan kaki minimal dp 50% in pembayaran pelanggan (fix)

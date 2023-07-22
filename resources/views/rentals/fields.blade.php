@@ -299,6 +299,15 @@
                     priceSopir = {{ env('PRICE_SOPIR_HOUR', 1000) }};
                 }
                 priceSopir = {{ env('PRICE_SOPIR_DAY', 100000) }};
+                // $(this).find('option').
+                // each(function() {
+                //     // if ($(this).val() == $(this).parent().val()) {
+                //     //     priceSopir = $(this).data('price');
+                //     // }
+                //     if ($(this).val() == '') {
+                //         $(this).attr('selected', false)
+                //     }
+                // });
                 updateGrandTotal()
             })
 
@@ -320,9 +329,9 @@
                                     .remove()
                                     .end();
                                 if (sopir.length > 0) {
-                                    $(this).append(
-                                        '<option value="" disabled selected>Pilih Sopir</option>'
-                                    );
+                                    // $(this).append(
+                                    //     '<option value="" disabled selected>Pilih Sopir</option>'
+                                    // );
                                     sopir.forEach(sopir => {
                                         $(this).append(
                                             '<option value="' +
