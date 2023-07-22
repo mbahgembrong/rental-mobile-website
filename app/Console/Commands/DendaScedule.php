@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Rental;
+use App\Services\NotificationService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -50,6 +51,9 @@ class DendaScedule extends Command
             $rental->save();
             Log::info($rental->id . ' - change status pemesanan (terlambat)');
             $this->info($rental->id . ' - change status pemesanan (terlambat)');
+            if (!NotificationService::isTerlambatNotify($rental->pelanggan_id, $rental->id)) {
+                NotificationService::add("pelanggan", $rental->pelanggan_id, "Terlambat", "Rental dengan id " . $rental->id . " telah terlambat", route('rentals.index'));
+            }
         }
         // return 1
     }

@@ -14,6 +14,7 @@ use App\Models\Pelanggan;
 use App\Models\Rental;
 use App\Models\Sopir;
 use App\Models\Ulasan;
+use App\Services\NotificationService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
@@ -34,8 +35,6 @@ class RentalController extends AppBaseController
      */
     public function index(Request $request)
     {
-
-
         /** @var Rental $rentals */
         if (Auth::guard('pelanggan')->check()) {
             $rentals = Rental::where('pelanggan_id', Auth::guard('pelanggan')->user()->id)->orderBy('created_at', 'desc')->get();
@@ -84,9 +83,16 @@ class RentalController extends AppBaseController
         $rental = Rental::create($input);
 
         Flash::success('Rental saved successfully.');
-        if (Auth::guard('pelanggan')->check())
+        if (Auth::guard('pelanggan')->check()) {
+            NotificationService::add(
+                "admin",
+                null,
+                "Pemesanan Rental",
+                "Rental dengan id " . $rental->id . " telah melakukan pemesanan",
+                route('rentals.show', ['id' => $rental->id])
+            );
             return redirect(route('pelangan.rentals.index'));
-        else
+        } else
             return redirect(route('rentals.index'));
     }
 
@@ -188,7 +194,6 @@ class RentalController extends AppBaseController
                 'bayar' => 'integer|min:1'
             ]);
 
-        // dd($request->all());
         $rental = Rental::find($id);
 
         if (empty($rental)) {
@@ -215,9 +220,17 @@ class RentalController extends AppBaseController
         Flash::success('Rental bayar successfully.');
 
         if (Auth::guard('pelanggan')->check()) {
+            NotificationService::add(
+                "admin",
+                null,
+                "Pembayaran Rental",
+                "Rental dengan id " . $rental->id . " telah melakukan pembayaran",
+                route('rentals.bayar', ['id' => $rental->id])
+            );
             return redirect(route('pelangan.rentals.index'));
-        } else
+        } else {
             return redirect(route('rentals.index'));
+        }
     }
 
     public function validasi($id)
@@ -239,6 +252,13 @@ class RentalController extends AppBaseController
             $rental->save();
         }
         Flash::success('Rental validasi successfully.');
+        NotificationService::add(
+            "pelanggan",
+            $rental->pelanggan_id,
+            "Pembayaran Rental",
+            "Rental dengan id " . $rental->id . " telah divalidasi",
+            route('rentals.index')
+        );
         return redirect(route('rentals.index'));
     }
     public function status(Request $request)

@@ -70,6 +70,13 @@
         </button>
 
         <ul class="nav navbar-nav ml-auto">
+            {{-- Notify --}}
+            <li class="dropdown dropdown-list-toggle show" id="notification">
+                <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"
+                    aria-expanded="true"><i class="fa fa-bell"></i></a>
+
+            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link" style="margin-right: 10px" data-toggle="dropdown" href="#" role="button"
                     aria-haspopup="true" aria-expanded="false">
@@ -149,5 +156,16 @@ https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js
 @include('layouts.datatables_js')
 
 @stack('scripts')
+<script>
+    $(function() {
+        $.ajax({
+            type: "GET",
+            url: "{{ route('notifications.index') }}",
+            success: function(response) {
+                $('#notification').append(response);
+            }
+        });
+    })
+</script>
 
 </html>
