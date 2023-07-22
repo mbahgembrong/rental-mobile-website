@@ -162,15 +162,23 @@
 @endif
 {{-- form pembayaran --}}
 @isset($bayar)
+    @php
+        $kurangBayar =
+            $rental->grand_total -
+            $rental
+                ->detailPembayaran()
+                ->whereNotNull('user_validasi_id')
+                ->orderBy('created_at', 'DESC')
+                ->sum('jumlah');
+    @endphp
     <div class="form-group col-sm-6 ">
         {!! Form::label('kurang_bayar', 'Kurang Bayar :  ') !!}
         <p style="display: contents;" id="kurangBayar">Rp. -
-            {{ $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->kurang ?? $rental->grand_total }}
+            {{ $kurangBayar }}
         </p>
     </div>
-
     @if (
-        $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first() != null &&
+        $rental->detailPembayaran()->orderBy('created_at', 'DESC')->count() != 0 &&
             $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->user_validasi_id == null)
         <form action="{{ route('rentals.validasi', $rental->id) }}" method="post" class="col-sm-12 row">
             @csrf
@@ -205,22 +213,35 @@
             enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="grand_total" value="{{ $rental->grand_total }}">
-            <!-- Grand Total Field -->
-            <div class="form-group col-sm-12" id="form_bayar">
-                {!! Form::label('bayar', 'Bayar:') !!}
-                {!! Form::number('bayar', null, ['class' => 'form-control']) !!}
-            </div>
             @if (Auth::guard('pelanggan')->check())
+                <div class="m-2 alert alert-warning col-sm-12" role="alert">
+                    Pembayaran minimal <b>50%</b> dari grand total, pembayaran dapat dilakukan dengan transfer ke rekening
+                    BRI
+                    <b>627001003192500</b> an <b>Wijaya Rental Car</b>.
+                </div>
+                <div class="form-group col-sm-12" id="form_bayar">
+                    {!! Form::label('bayar', 'Bayar:') !!}
+                    {!! Form::number(
+                        'bayar',
+                        $kurangBayar == $rental->grand_total ? ($rental->grand_total * 50) / 100 : $kurangBayar,
+                        ['class' => 'form-control', 'readonly'],
+                    ) !!}
+                </div>
                 <div class="form-group col-sm-12" id="form_bukti">
                     {!! Form::label('bukti', 'Bukti Pembayaran:') !!}
                     {!! Form::file('bukti') !!}
                     <div class="clearfix"></div>
                 </div>
+            @else
+                <div class="form-group col-sm-12" id="form_bayar">
+                    {!! Form::label('bayar', 'Bayar:') !!}
+                    {!! Form::number('bayar', $rental->grand_total, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group col-sm-12" id="form_kembalian">
+                    {!! Form::label('kembalian', 'Kembalian:') !!}
+                    {!! Form::text('kembalian', null, ['class' => 'form-control', 'readonly']) !!}
+                </div>
             @endif
-            <div class="form-group col-sm-12" id="form_kembalian">
-                {!! Form::label('kembalian', 'Kembalian:') !!}
-                {!! Form::text('kembalian', null, ['class' => 'form-control', 'readonly']) !!}
-            </div>
             <!-- Submit Field -->
             <div class="form-group col-sm-12">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
@@ -264,4 +285,60 @@
             </script>
         @endpush
     @endif
+@endisset
+{{-- Form addon --}}
+@isset($addon)
+    <form action="{{ route('rentals.store_addon', ['id' => $rental->id]) }}" method="post" class="col-sm-12 row">
+        @csrf
+        <div class="form-group col-sm-12" id="layanan">
+            <label for="jenis_kelamin" class="form-label">Add On</label>
+            <div class="form-group fieldGroup" data-id="1">
+                <div class="input-group">
+                    <input type="text" name="keterangan[]" class="form-control keterangan"
+                        placeholder="keterangan" />
+                    <input type="number" name="jumlah[]" class="form-control jumlah" placeholder="Masukkan jumlah" />
+                    <div class="input-group-addon ml-3">
+                        <a href="javascript:void(0)" class="btn btn-success addMore"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Submit Field -->
+        <div class="form-group col-sm-12">
+            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+            <a href="{{ route('rentals.index') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+    @push('scripts')
+        <script>
+            $(function() {
+                $(document).on('click', '.addMore', function() {
+                    var data = $(this).parents('.fieldGroup').data('id') + 1;
+                    var fieldHTML = '<div class="form-group fieldGroup" data-id="' + data + '">' +
+                        ' <div class="input-group">' +
+                        ' <input type="text" name="keterangan[]" class="form-control keterangan" placeholder="keterangan" />' +
+                        '<input type="number" name="jumlah[]" class="form-control jumlah" placeholder="Masukkan jumlah" />' +
+                        '<div class="input-group-addon ml-3">' +
+                        '<a href="javascript:void(0)" class="btn btn-danger remove"><i class="fa fa-minus btn-danger remove"></i></a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                    $('.fieldGroup:last').after(fieldHTML);
+                });
+                $(document).on('click', '.remove', function() {
+                    $(this).parents('.fieldGroup').remove();
+                });
+                if ({!! $rental->addon->count() !!}) {
+                    const addOns = {!! json_encode($rental->addon) !!};
+                    addOns.forEach((addOn, index) => {
+                        if (index != 0) {
+                            $('.addMore').click();
+                        }
+                        $('.keterangan:last').val(addOn.keterangan);
+                        $('.jumlah:last').val(addOn.jumlah);
+                    });
+                }
+            })
+        </script>
+    @endpush
 @endisset

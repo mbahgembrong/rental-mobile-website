@@ -48,8 +48,10 @@ Route::prefix('/pelanggan')->group(function () {
 
 Route::prefix('rental')->group(function () {
     Route::get('bayar/{id}', [App\Http\Controllers\RentalController::class, 'bayar'])->name('rentals.bayar');
+    Route::get('addon/{id}', [App\Http\Controllers\RentalController::class, 'addon'])->name('rentals.addon');
     Route::get('struk/{id}', [App\Http\Controllers\RentalController::class, 'struk'])->name('rentals.struk');
     Route::post('bayar/{id}', [App\Http\Controllers\RentalController::class, 'pembayaran'])->name('rentals.pembayaran');
+    Route::post('addon/{id}', [App\Http\Controllers\RentalController::class, 'storeAddon'])->name('rentals.store_addon');
     Route::post('validasi/{id}', [App\Http\Controllers\RentalController::class, 'validasi'])->name('rentals.validasi');
     Route::post('ulasan/{id}', [App\Http\Controllers\RentalController::class, 'ulasan'])->name('rentals.ulasan');
     Route::post('status', [App\Http\Controllers\RentalController::class, 'status'])->name('rentals.status');

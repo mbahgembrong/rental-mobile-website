@@ -142,4 +142,14 @@ class Rental extends Model
     {
         return $this->hasOne(Ulasan::class, 'rental_id')->withTrashed();
     }
+
+    /**
+     * Get all of the addon for the Rental
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function addon()
+    {
+        return $this->hasMany(AddonRental::class, 'rental_id');
+    }
 }

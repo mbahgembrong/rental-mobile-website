@@ -128,6 +128,7 @@
             let typeCar = 'hari';
             let waktuMulai = 0;
             let waktuSelesai = 0;
+            let sopir = [];
             // script pencarian mobil
             $('#form_kategori_id').on('change', function() {
                 var kategori_id = $(this).find('select').val();
@@ -210,7 +211,7 @@
                 if (mobilId && waktuMulai && waktuSelesai)
                     cekKetersediaanMobil(mobilId, waktuMulai, waktuSelesai);
             });
-            $('input[name="duration"]').on('keyup', function(e) {
+            $('input[name="duration"]').on('change', function(e) {
                 countTime = $(this).val();
                 if (countTime == '') {
                     countTime = 0;
@@ -303,8 +304,6 @@
 
             // cek ketersedian sopir
             function cekKetersedianSopir() {
-
-
                 $.ajax({
                     url: "{{ route('rentals.cekKetersediaanSopir') }}",
                     type: "GET",
@@ -314,17 +313,17 @@
                     },
                     success: function(data) {
                         if (data.status == 'success') {
+                            sopir = data.data;
                             $('select[name="sopir_id"]').click(function(e) {
                                 e.preventDefault();
                                 $(this).find('option')
                                     .remove()
                                     .end();
-                                if (data.data.length > 0) {
-
+                                if (sopir.length > 0) {
                                     $(this).append(
                                         '<option value="" disabled selected>Pilih Sopir</option>'
                                     );
-                                    data.data.forEach(sopir => {
+                                    sopir.forEach(sopir => {
                                         $(this).append(
                                             '<option value="' +
                                             sopir.id + '">' + sopir.nama +

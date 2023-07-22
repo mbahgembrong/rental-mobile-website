@@ -50,7 +50,7 @@
                     <p id="modalBodyCarDetailDenda"></p>
                 </div>
 
-                <div class="form-group col-sm-12" id="layanan">
+                {{-- <div class="form-group col-sm-12" id="layanan">
                     <label for="jenis_kelaminModal" class="form-label">Detail Mobil</label>
                     <div class="table-responsive-sm">
                         <table class="table table-striped" id="modalBodyCarDetailMobil">
@@ -70,15 +70,12 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    {{-- <td>
-                                        <span class="badge bg-"> </span>
-                                    </td> --}}
                                 </tr>
 
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>

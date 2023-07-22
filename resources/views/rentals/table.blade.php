@@ -34,7 +34,11 @@
                             class="badge bg-{{ $rental->status == 'pemesanan' ? 'primary' : ($rental->status == 'berjalan' ? 'secondary' : ($rental->status == 'selesai' ? 'success' : ($rental->status == 'terlambat' ? 'warning' : 'danger'))) }}">{{ $rental->status }}{{ $rental->status == 'telambat' ? ' : ' . $rental->denda : '' }}</span>
                     </td>
                     <td> <span
-                            class="badge bg-{{ $rental->status_pembayaran == 'lunas' ? 'success' : 'danger' }}">{{ $rental->status_pembayaran != 'lunas'? 'Kurang : -' .($rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->kurang ??$rental->grand_total): 'Lunas' }}</span>
+                            class="badge bg-{{ $rental->status_pembayaran == 'lunas' ? 'success' : 'danger' }}">{{ $rental->status_pembayaran != 'lunas'
+                                ? 'Kurang : -' .
+                                    ($rental->grand_total -
+                                        $rental->detailPembayaran()->whereNotNull('user_validasi_id')->orderBy('created_at', 'DESC')->sum('jumlah'))
+                                : 'Lunas' }}</span>
                     </td>
                     <td>Rp. {{ $rental->grand_total }}</td>
                     <td>
@@ -97,55 +101,68 @@
                     icon: 'warning',
                     confirmButtonText: "Ya!",
                     showCancelButton: true,
+                    ...(status != 'pemesanan' && {
+                        showDenyButton: true,
+                        denyButtonColor: '#f8bb86',
+                        denyButtonText: `Tambah Addon`
+                    }),
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        $.ajax({
-                            url: "{{ route('rentals.status') }}",
-                            type: "POST",
-                            data: {
-                                id: id,
-                                _token: "{{ csrf_token() }}",
-                                status: status == 'pemesanan' ? 'berjalan' : 'selesai'
-                            },
-                            success: function(data) {
-                                // console.log(data);
-                                if (data.status == 'success') {
-                                    Swal.fire({
-                                        title: "Berhasil!",
-                                        text: `Mobil telah ${status == 'pemesanan' ? 'berjalan' : 'selesai'} !`,
-                                        icon: 'success',
-                                        confirmButtonText: "Ok!",
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload();
-                                        }
-                                    }).catch((err) => {
-                                        console.log(err);
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        title: "Gagal !",
-                                        text: `${data.message} !`,
-                                        icon: 'warning',
-                                        confirmButtonText: "Ok!",
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload();
-                                        }
-                                    }).catch((err) => {
-                                        console.log(err);
-                                    });
-                                }
-                            },
-                            error: function(err) {
-                                console.log(err);
-                            }
-                        })
+                        changeProses(id, status);
+                    }
+                    if (result.isDenied) {
+                        window.location.href = `{{ url('/') }}/rental/addon/${id}`;
                     }
                 }).catch((err) => {
                     console.log(err);
                 })
             })
+
+            function changeProses(id, status) {
+                $.ajax({
+                    url: "{{ route('rentals.status') }}",
+                    type: "POST",
+                    data: {
+                        id: id,
+                        _token: "{{ csrf_token() }}",
+                        status: status == 'pemesanan' ? 'berjalan' : 'selesai'
+                    },
+                    success: function(data) {
+                        // console.log(data);
+                        if (data.status == 'success') {
+                            Swal.fire({
+                                title: "Berhasil!",
+                                text: `Mobil telah ${status == 'pemesanan' ? 'berjalan' : 'selesai'} !`,
+                                icon: 'success',
+                                confirmButtonText: "Ok!",
+
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            }).catch((err) => {
+                                console.log(err);
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Gagal !",
+                                text: `${data.message} !`,
+                                icon: 'warning',
+                                confirmButtonText: "Ok!",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            }).catch((err) => {
+                                console.log(err);
+                            });
+                        }
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                })
+            }
         })
     </script>
 @endpush

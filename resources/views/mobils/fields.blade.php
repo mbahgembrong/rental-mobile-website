@@ -83,7 +83,7 @@
                     '<input type="text" name="stnk[]" class="form-control stnk" placeholder="Masukkan stnk" />' +
                     '<input type="text" name="tahun_mobil[]" class="form-control tahun_mobil" placeholder="Tahun Mobil" />' +
                     '<div class="input-group-addon ml-3">' +
-                    '<a href="javascript:void(0)" class="btn btn-danger remove"><i class="fa  btn-danger remove"></i></a>' +
+                    '<a href="javascript:void(0)" class="btn btn-danger remove"><i class="fa fa-minus btn-danger remove"></i></a>' +
                     '</div>' +
                     '</div>' +
                     '</div>';

@@ -32,9 +32,9 @@ class UpdatePelangganRequest extends FormRequest
         $rules['hp'] = 'required|digits_between:10,15|numeric|unique:pelanggans,hp,' . $pelanggan;
         $rules['email'] = 'required|email|unique:pelanggans,email,' . $pelanggan;
         $rules['password'] = 'nullable|min:8';
-        $rules['foto'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
-        $rules['ktp'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
-        $rules['ktp'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        $rules['foto'] = 'required|image|mimes:jpeg,png,jpg,gif,svg';
+        $rules['ktp'] = 'required|image|mimes:jpeg,png,jpg,gif,svg';
+        $rules['ktp'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg';
         return $rules;
     }
 }

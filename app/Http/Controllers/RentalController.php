@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateRentalRequest;
 use App\Http\Requests\UpdateRentalRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\AddonRental;
 use App\Models\DetailMobil;
 use App\Models\DetailPembayaranRental;
 use App\Models\KategoriMobil;
@@ -294,6 +295,56 @@ class RentalController extends AppBaseController
             return redirect(route('pelanggan.rentals.index'));
         }
         return view('rentals.struk', compact('rental'));
+    }
+
+    public function addon($id, Request $request)
+    {
+        $rental = Rental::find($id);
+
+        if (empty($rental)) {
+            Flash::error('Rental not found');
+
+            return redirect(route('rentals.index'));
+        }
+        $addon = true;
+        return view('rentals.show', compact(['addon']))->with('rental', $rental);
+    }
+    public function storeAddon($id, Request $request)
+    {
+        $request->validate([
+            'keterangan.*' => 'required|string',
+            'jumlah.*' => 'required|integer|min:1'
+        ]);
+        $rental = Rental::find($id);
+
+        if (empty($rental)) {
+            Flash::error('Rental not found');
+
+            return redirect(route('rentals.index'));
+        }
+        $rental->addon->each(function ($addon) {
+            $addon->delete();
+        });
+        foreach ($request->keterangan as $key => $keterangan) {
+            $addon = new AddonRental;
+            $addon->rental_id = $rental->id;
+            $addon->keterangan = $keterangan;
+            $addon->jumlah = $request->jumlah[$key];
+            $addon->save();
+        }
+        $jumlah = $rental->addon->sum('jumlah');
+        $rental->grand_total = $rental->denda + $rental->total + $jumlah;
+        $payment = $rental
+            ->detailPembayaran()
+            ->whereNotNull('user_validasi_id')
+            ->orderBy('created_at', 'DESC')
+            ->sum('jumlah');
+        if ($rental->grand_total > $payment) {
+            $rental->status_pembayaran = 'belum';
+        }
+        $rental->save();
+        Flash::success('Rental addon successfully.');
+        return redirect(route('rentals.index'));
     }
 
     /**

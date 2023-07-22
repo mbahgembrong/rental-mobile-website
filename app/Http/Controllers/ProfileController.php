@@ -21,7 +21,7 @@ class ProfileController extends AppBaseController
     public function updateFoto(Request $request)
     {
         $request->validate([
-            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'foto' => 'required|image|mimes:jpeg,png,jpg',
         ]);
         $input = $request->all();
         $pelanggan = Pelanggan::find(Auth::guard('pelanggan')->user()->id);
