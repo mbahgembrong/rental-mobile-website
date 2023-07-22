@@ -23,12 +23,12 @@
                     <td>{{ date('d/m/Y', $rental->waktu_mulai) }}</td>
                     <td>{{ date('d/m/Y', $rental->waktu_selesai) }}</td>
                     <td>
-                        Rp. {{ $rental->denda }}
+                        Rp. {{ number_format($rental->denda, 2, ',', '.') }}
                     </td>
                     {{-- <td>
                         Rp. {{ $rental->total }}
                     </td> --}}
-                    <td>Rp. {{ $rental->grand_total }}</td>
+                    <td>Rp. {{ number_format($rental->grand_total, 2, ',', '.') }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -36,7 +36,7 @@
             <tr>
                 <td colspan="6"></td>
                 <td>Total : </td>
-                <td>Rp. {{ $rentals->sum('grand_total') }}</td>
+                <td>Rp. {{number_format($rentals->sum('grand_total') , 2, ',', '.') }}</td>
             </tr>
         </tfoot>
     </table>
