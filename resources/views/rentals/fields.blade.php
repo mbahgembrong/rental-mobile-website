@@ -129,6 +129,7 @@
             let waktuMulai = 0;
             let waktuSelesai = 0;
             let sopir = [];
+            let sopirId = '';
             // script pencarian mobil
             $('#form_kategori_id').on('change', function() {
                 var kategori_id = $(this).find('select').val();
@@ -303,10 +304,8 @@
                 $(this).find('option').
                 each(function() {
                     if ($(this).val() == $(this).parent().val()) {
-                        $(this).attr('selected', true)
-                    } else {
-                        $(this).attr('selected', false)
-                    }
+                        sopirId = $(this).val();
+                    } 
                 });
                 updateGrandTotal()
             })
@@ -330,13 +329,11 @@
                                     .end();
                                 if (sopir.length > 0) {
                                     $(this).append(
-                                        '<option value="" disabled >Pilih Sopir</option>'
+                                        '<option value="" disabled selected>Pilih Sopir</option>'
                                     );
                                     sopir.forEach(sopir => {
                                         $(this).append(
-                                            '<option value="' +
-                                            sopir.id + '">' + sopir.nama +
-                                            '</option>'
+                                            `<option value="${sopir.id}"  ${sopirId == sopir.id ? "selected" : ''}>${sopir.nama}</option>`
                                         );
                                     });
                                 } else {
