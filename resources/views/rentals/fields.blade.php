@@ -299,15 +299,15 @@
                     priceSopir = {{ env('PRICE_SOPIR_HOUR', 1000) }};
                 }
                 priceSopir = {{ env('PRICE_SOPIR_DAY', 100000) }};
-                // $(this).find('option').
-                // each(function() {
-                //     // if ($(this).val() == $(this).parent().val()) {
-                //     //     priceSopir = $(this).data('price');
-                //     // }
-                //     if ($(this).val() == '') {
-                //         $(this).attr('selected', false)
-                //     }
-                // });
+
+                $(this).find('option').
+                each(function() {
+                    if ($(this).val() == $(this).parent().val()) {
+                        $(this).attr('selected', true)
+                    } else {
+                        $(this).attr('selected', false)
+                    }
+                });
                 updateGrandTotal()
             })
 
