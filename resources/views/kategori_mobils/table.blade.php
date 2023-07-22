@@ -5,7 +5,7 @@
                 <th>#</th>
                 <th>Nama</th>
                 <th>Foto</th>
-                <th aria-colspan="3">Action</th>
+                <th aria-colspan="3">Aksi</th>
             </tr>
         </thead>
         <tbody>

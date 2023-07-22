@@ -25,14 +25,14 @@
 <!-- Harga Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('harga', 'Harga:') !!}
-    <p>{{ $mobil->harga . ' / ' . $mobil->satuan }}</p>
+    <p>{{ number_format($mobil->harga, 2, ',', '.') . ' / ' . $mobil->satuan }}</p>
 </div>
 
 
 <!-- Denda Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('denda', 'Denda:') !!}
-    <p>{{ $mobil->denda . ' / ' . $mobil->satuan }}</p>
+    <p>{{ number_format($mobil->denda, 2, ',', '.') . ' / ' . $mobil->satuan }}</p>
 </div>
 <div class="form-group col-sm-12">
     {!! Form::label('foto', 'Foto:') !!}

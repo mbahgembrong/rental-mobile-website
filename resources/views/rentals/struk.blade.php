@@ -916,6 +916,7 @@
                                                                  </tr>
                                                              </tbody>
                                                          </table>
+                                                         {{-- Detail --}}
                                                          <table class="row"
                                                              style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%;">
                                                              <tbody>
@@ -1003,7 +1004,9 @@
                                                                                      style="color:#4d4d4d;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;">
                                                                                      <p class="text-right"
                                                                                          style="color:#6e6e6e;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0;margin-bottom:4px;padding:0;text-align:right;">
-                                                                                         Rp. {{ $rental->total }}</p>
+                                                                                         Rp.
+                                                                                         {{ number_format($rental->total, 2, ',', '.') }}
+                                                                                     </p>
                                                                                  </th>
                                                                              </tr>
                                                                          </table>
@@ -1038,7 +1041,8 @@
                                                                                          style="color:#4d4d4d;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;">
                                                                                          <p class="text-right"
                                                                                              style="color:#6e6e6e;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0;margin-bottom:4px;padding:0;text-align:right;">
-                                                                                             Rp. {{ $rental->denda }}
+                                                                                             Rp.
+                                                                                             {{ number_format($rental->denda, 2, ',', '.') }}
                                                                                          </p>
                                                                                      </th>
                                                                                  </tr>
@@ -1046,9 +1050,81 @@
                                                                          </th>
                                                                      </tr>
                                                                  @endif
-
                                                              </tbody>
                                                          </table>
+                                                         {{-- Addon --}}
+                                                         @if ($rental->addon->count() != 0)
+                                                             <table class="row"
+                                                                 style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%;">
+                                                                 <tbody>
+                                                                     <tr
+                                                                         style="padding:0;text-align:left;vertical-align:top;">
+                                                                         <th class="small-12 large-12 columns first last"
+                                                                             style="color:#4d4d4d;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0 auto;padding:0;padding-bottom:0;padding-left:50px;padding-right:50px;text-align:left;width:564px;">
+                                                                             <table
+                                                                                 style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                                                                 <tr
+                                                                                     style="padding:0;text-align:left;vertical-align:top;">
+                                                                                     <th
+                                                                                         style="color:#4d4d4d;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;">
+                                                                                         <h3
+                                                                                             style="color:#4d4d4d;font-family:Helvetica, Arial, sans-serif;font-size:16px;font-weight:700;letter-spacing:-.03px;line-height:1.3;margin:0;margin-bottom:8px;margin-top:8px;padding:0;text-align:left;word-wrap:normal;">
+                                                                                             Addon Rental</h3>
+                                                                                     </th>
+                                                                                     <th class="expander"
+                                                                                         style="color:#4d4d4d;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0;padding:0 !important;text-align:left;visibility:hidden;width:0;">
+                                                                                     </th>
+                                                                                 </tr>
+                                                                             </table>
+                                                                         </th>
+                                                                     </tr>
+                                                                 </tbody>
+                                                             </table>
+                                                             <table class="row booking-confirmation-fare"
+                                                                 style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%;">
+                                                                 <tbody>
+                                                                     @foreach ($rental->addon as $addon)
+                                                                         <tr
+                                                                             style="padding:0;text-align:left;vertical-align:top;">
+                                                                             <th class="small-7 large-7 columns first"
+                                                                                 style="color:#4d4d4d;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0 auto;padding:0;padding-bottom:0;padding-left:50px;padding-right:8px;text-align:left;width:322.33px;">
+                                                                                 <table
+                                                                                     style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                                                                     <tr
+                                                                                         style="padding:0;text-align:left;vertical-align:top;">
+                                                                                         <th
+                                                                                             style="color:#4d4d4d;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;">
+                                                                                             <p
+                                                                                                 style="color:#6e6e6e;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0;margin-bottom:4px;padding:0;text-align:left;">
+                                                                                                 {{ $addon->keterangan }}
+                                                                                             </p>
+                                                                                         </th>
+                                                                                     </tr>
+                                                                                 </table>
+                                                                             </th>
+                                                                             <th class="small-5 large-5 columns last"
+                                                                                 style="color:#4d4d4d;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0 auto;padding:0;padding-bottom:0;padding-left:8px;padding-right:50px;text-align:left;width:225.67px;">
+                                                                                 <table
+                                                                                     style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                                                                     <tr
+                                                                                         style="padding:0;text-align:left;vertical-align:top;">
+                                                                                         <th
+                                                                                             style="color:#4d4d4d;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;">
+                                                                                             <p class="text-right"
+                                                                                                 style="color:#6e6e6e;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0;margin-bottom:4px;padding:0;text-align:right;">
+                                                                                                 Rp.
+                                                                                                 {{ number_format($addon->jumlah, 2, ',', '.') }}
+                                                                                             </p>
+                                                                                         </th>
+                                                                                     </tr>
+                                                                                 </table>
+                                                                             </th>
+                                                                         </tr>
+                                                                     @endforeach
+                                                                 </tbody>
+                                                             </table>
+
+                                                         @endif
                                                          <table class="spacer"
                                                              style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;">
                                                              <tbody>
@@ -1060,6 +1136,7 @@
                                                                  </tr>
                                                              </tbody>
                                                          </table>
+                                                         {{-- grand Total --}}
                                                          <table class="row"
                                                              style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%;">
                                                              <tbody>
@@ -1090,7 +1167,8 @@
                                                                                      style="color:#4d4d4d;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;">
                                                                                      <p class="booking-confirmation-total text-right"
                                                                                          style="color:#000;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:700;line-height:1.3;margin:0;margin-bottom:16px;margin-top:16px;padding:0;text-align:right;">
-                                                                                         Rp. {{ $rental->grand_total }}
+                                                                                         Rp.
+                                                                                         {{ number_format($rental->grand_total, 2, ',', '.') }}
                                                                                      </p>
                                                                                  </th>
                                                                              </tr>

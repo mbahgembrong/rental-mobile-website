@@ -236,15 +236,15 @@
                                         <h2 class="mb-0"><a href="#">{{ $mobil->nama }}</a></h2>
                                         <div class="d-flex mb-3">
                                             <span class="cat">{{ $mobil->merk }}</span>
-                                            <p class="price ml-auto">Rp. {{ $mobil->harga }}
+                                            <p class="price ml-auto">Rp. {{ number_format($mobil->harga, 2, ',', '.') }}
                                                 <span>/{{ $mobil->satuan }}</span>
                                             </p>
                                         </div>
                                         <p class="d-flex mb-0 d-block"><a
                                                 href=" {{ Auth::guard('web')->check() ? route('rentals.create', ['mobil_id' => $mobil->id]) : route('pelanggan.rentals.create', ['mobil_id' => $mobil->id]) }}"
-                                                class="btn btn-primary py-2 mr-1">Rental
-                                                now</a> <a class="btn btn-secondary py-2 ml-1 car-detail"
-                                                data-car='{!! json_encode($mobil) !!}'>Details</a>
+                                                class="btn btn-primary py-2 mr-1">Rental</a> <a
+                                                class="btn btn-secondary py-2 ml-1 car-detail"
+                                                data-car='{!! json_encode($mobil) !!}'>Detail</a>
                                         </p>
                                     </div>
                                 </div>
@@ -271,8 +271,9 @@
                 $('#modal-car-detail #modalBodyCarDetailJenis').text(detailCar.jenis);
                 $('#modal-car-detail #modalBodyCarDetailMerk').text(detailCar.merk);
                 $('#modal-car-detail #modalBodyCarDetailHarga').text(
-                    `Rp. ${detailCar.harga} / ${detailCar.satuan}`);
-                $('#modal-car-detail #modalBodyCarDetailDenda').text(`Rp. ${detailCar.denda}`);
+                    `Rp. ${detailCar.harga.toLocaleString('en-US')} / ${detailCar.satuan}`);
+                $('#modal-car-detail #modalBodyCarDetailDenda').text(
+                    `Rp. ${detailCar.denda.toLocaleString('en-US')}`);
 
                 let carsDetail = [];
                 $.each(detailCar.detail_mobils, function(key, value) {

@@ -38,7 +38,7 @@
     </div>
     <div class="form-group col-sm-6">
         {!! Form::label('waktu_rental', ' Total Peminjaman:') !!}
-        <p>Rp. {{ $rental->total }}
+        <p>Rp. {{ number_format($rental->total, 2, ',', '.') }}
         </p>
     </div>
     <div class="form-group col-sm-6">
@@ -48,14 +48,14 @@
     </div>
     <div class="form-group col-sm-6">
         {!! Form::label('denda', ' Denda:') !!}
-        <p>Rp. {{ $rental->denda }}
+        <p>Rp. {{ number_format($rental->denda, 2, ',', '.') }}
         </p>
     </div>
 @endif
 <!-- Grand Total Field -->
 <div class="form-group col-sm-6 ">
     {!! Form::label('grand_total', 'Grand Total :  ') !!}
-    <p style="display: contents;">Rp. {{ $rental->grand_total }}</p>
+    <p style="display: contents;">Rp. {{ number_format($rental->grand_total, 2, ',', '.') }}</p>
 </div>
 {{-- form selesai --}}
 @if ($rental->status == 'selesai' && ($rental->ulasan()->first() != null || Auth::guard('pelanggan')->check()))
@@ -174,7 +174,7 @@
     <div class="form-group col-sm-6 ">
         {!! Form::label('kurang_bayar', 'Kurang Bayar :  ') !!}
         <p style="display: contents;" id="kurangBayar">Rp. -
-            {{ $kurangBayar }}
+            {{ number_format($kurangBayar, 2, ',', '.') }}
         </p>
     </div>
     @if (
@@ -263,7 +263,7 @@
                             // $('input[type="submit"]').prop('disabled', false);
                         } else {
                             $('label[for="kembalian"]').text('Kurang Bayar : ')
-                            kembalian.val(`Rp. - ${grand_total - bayar}`);
+                            kembalian.val(`Rp. - ${(grand_total - bayar).toLocaleString('en-US')}`);
                             // $('input[type="submit"]').prop('disabled', true);
                         }
                     })

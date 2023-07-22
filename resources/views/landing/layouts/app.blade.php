@@ -45,16 +45,13 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item {{ Request::is('/') ? 'active' : '' }}"><a
-                            href="{{ route('landing.index', []) }}" class="nav-link">Home</a>
+                            href="{{ route('landing.index', []) }}" class="nav-link">Beranda</a>
                     </li>
                     <li class="nav-item {{ Request::is('about*') ? 'active' : '' }}"><a
-                            href="{{ route('landing.about', []) }}" class="nav-link">About</a>
-                    </li>
-                    {{-- <li class="nav-item {{ Request::is('service*') ? 'active' : '' }}"><a
-                            href="{{ route('landing.service', []) }}" class="nav-link">Services</a> --}}
+                            href="{{ route('landing.about', []) }}" class="nav-link">Tentang Kami</a>
                     </li>
                     <li class="nav-item {{ Request::is('car*') ? 'active' : '' }}"><a
-                            href="{{ route('landing.car', []) }}" class="nav-link">Cars</a></li>
+                            href="{{ route('landing.car', []) }}" class="nav-link">Mobil</a></li>
                     {{-- <li class="nav-item {{ Request::is('contact*') ? 'active' : '' }}"><a
                             href="{{ route('landing.contact', []) }}" class="nav-link">Contact</a></li> --}}
 
@@ -91,40 +88,14 @@
                                     src="{{ asset('img/logo.svg') }}" width="100" height="100"
                                     style="width: 8em; margin: -2em 0px;"></a></h2>
                         <p>Rental mobil Kediri. harga sewa murah mengutamakan kenyamanan pelanggan.</p>
-                        {{-- <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul> --}}
                     </div>
                 </div>
-                {{-- <div class="col-md">
-                    <div class="ftco-footer-widget mb-4 ml-md-5">
-                        <h2 class="ftco-heading-2">Information</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">About</a></li>
-                            <li><a href="#" class="py-2 d-block">Services</a></li>
-                            <li><a href="#" class="py-2 d-block">Term and Conditions</a></li>
-                            <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
-                            <li><a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
-                        </ul>
-                    </div>
-                </div> --}}
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Pembayaran Bank BRI</h2>
                         <h6 class="ftco-heading-6">627001003192500 an Wijaya Rental Car</h6>
 
                     </div>
-                    {{-- <div class="ftco-footer-widget mb-4">
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">FAQ</a></li>
-                            <li><a href="#" class="py-2 d-block">Payment Option</a></li>
-                            <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
-                            <li><a href="#" class="py-2 d-block">How it works</a></li>
-                            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-                        </ul>
-                    </div> --}}
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
@@ -145,8 +116,6 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
-
-
                     Copyright &copy;
                     <script>
                         document.write(new Date().getFullYear());

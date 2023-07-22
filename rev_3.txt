@@ -1,10 +1,10 @@
 - bug cek ketersediaan mobil dan sopir masih error bisa double upload (fix)
 - perubahan pembatalan itu status menjadi 5 menit setelah pemesanan (fix)
-- merubah bahasa ke indonesia semua
+- merubah bahasa ke indonesia semua(fix)
 - plat di hide di pelanggan (fix)
 - form plat di pilihkan oleh sistem saat pemesanan rental (fix)
 - form waktu_selesai diganti menjadi durasi, dan waktu selesai dihide dan otomatis ditampilkan (fix)
-- add separator titik in harga
+- add separator titik in harga(fix)
 - add fitur notifikasi
 - add tabel addons_rental (kerusakan, bensin) (fix)
 - add collumn keterangan in tabel mobil kaki

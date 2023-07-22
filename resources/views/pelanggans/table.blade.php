@@ -11,7 +11,7 @@
                 <th>Alamat</th>
                 {{-- <th>Ktp</th>
                 <th>Foto</th> --}}
-                <th aria-colspan="3">Action</th>
+                <th aria-colspan="3">Aksi</th>
             </tr>
         </thead>
         <tbody>

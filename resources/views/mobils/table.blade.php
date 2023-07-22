@@ -10,7 +10,7 @@
                 <th>Harga</th>
                 <th>Denda</th>
                 <th>Stock</th>
-                <th aria-colspan="3">Action</th>
+                <th aria-colspan="3">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -24,12 +24,13 @@
                     <td>{{ $mobil->nama }}</td>
                     <td>{{ $mobil->jenis }}</td>
                     <td>{{ $mobil->merk }}</td>
-                    <td>Rp. {{ $mobil->harga . ' / ' . $mobil->satuan }}</td>
-                    <td>Rp. {{ $mobil->denda . ' / ' . $mobil->satuan }}</td>
+                    <td>Rp. {{ number_format($mobil->harga, 2, ',', '.') . ' / ' . $mobil->satuan }}</td>
+                    <td>Rp. {{ number_format($mobil->denda, 2, ',', '.') . ' / ' . $mobil->satuan }}</td>
                     <td>
                         <span
                             class="badge bg-{{ count($mobil->detailMobils->where('status', 'tersedia')->whereNull('deleted_at')) > 0 ? 'success' : 'danger' }}">
-                            {{ count($mobil->detailMobils->where('status', 'tersedia')->whereNull('deleted_at')) }} Buah</span>
+                            {{ count($mobil->detailMobils->where('status', 'tersedia')->whereNull('deleted_at')) }}
+                            Buah</span>
                     </td>
                     <td>
                         {!! Form::open(['route' => ['mobils.destroy', $mobil->id], 'method' => 'delete']) !!}

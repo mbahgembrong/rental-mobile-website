@@ -12,7 +12,7 @@
                 <th>Status</th>
                 <th>Status Pembayaran</th>
                 <th>Grand Total</th>
-                <th aria-colspan="3">Action</th>
+                <th aria-colspan="3">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -36,11 +36,16 @@
                     <td> <span
                             class="badge bg-{{ $rental->status_pembayaran == 'lunas' ? 'success' : 'danger' }}">{{ $rental->status_pembayaran != 'lunas'
                                 ? 'Kurang : -' .
-                                    ($rental->grand_total -
-                                        $rental->detailPembayaran()->whereNotNull('user_validasi_id')->orderBy('created_at', 'DESC')->sum('jumlah'))
+                                    number_format(
+                                        $rental->grand_total -
+                                            $rental->detailPembayaran()->whereNotNull('user_validasi_id')->orderBy('created_at', 'DESC')->sum('jumlah'),
+                                        2,
+                                        ',',
+                                        '.',
+                                    )
                                 : 'Lunas' }}</span>
                     </td>
-                    <td>Rp. {{ $rental->grand_total }}</td>
+                    <td>Rp. {{ number_format($rental->grand_total, 2, ',', '.') }}</td>
                     <td>
                         {!! Form::open([
                             'route' => [Auth::guard('pelanggan')->check() ? 'pelanggan.rentals.destroy' : 'rentals.destroy', $rental->id],

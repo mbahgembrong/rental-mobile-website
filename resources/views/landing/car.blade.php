@@ -6,9 +6,8 @@
         <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
                 <div class="col-md-9 ftco-animate pb-5">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('landing.index') }}">Home <i
-                                    class="ion-ios-arrow-forward"></i></a></span> <span>Cars <i
-                                class="ion-ios-arrow-forward"></i></span></p>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('landing.index') }}">Beranda <i
+                                    class="ion-ios-arrow-forward"></i></a></span> <span>Mobil </span></p>
                     <h1 class="mb-3 bread">Pilih Mobil mu</h1>
                 </div>
             </div>
@@ -50,13 +49,14 @@
                                 <h2 class="mb-0"><a href="car-single.html">{{ $mobil->nama }}</a></h2>
                                 <div class="d-flex mb-3">
                                     <span class="cat">{{ $mobil->merk }}</span>
-                                    <p class="price ml-auto">Rp. {{ $mobil->harga }} <span>/{{ $mobil->satuan }}</span></p>
+                                    <p class="price ml-auto">Rp. {{ number_format($mobil->harga, 2, ',', '.') }}
+                                        <span>/{{ $mobil->satuan }}</span></p>
                                 </div>
                                 <p class="d-flex mb-0 d-block">
                                     <a href=" {{ Auth::guard('web')->check() ? route('rentals.create', ['mobil_id' => $mobil->id]) : route('pelanggan.rentals.create', ['mobil_id' => $mobil->id]) }}"
-                                        class="btn btn-primary py-2 mr-1">Book now</a>
+                                        class="btn btn-primary py-2 mr-1">Rental</a>
                                     <a class="btn btn-secondary py-2 ml-1 car-detail"
-                                        data-car='{!! json_encode($mobil) !!}'>Details</a>
+                                        data-car='{!! json_encode($mobil) !!}'>Detail</a>
                                 </p>
                             </div>
                         </div>
@@ -108,8 +108,8 @@
                 $('#modal-car-detail #modalBodyCarDetailJenis').text(detailCar.jenis);
                 $('#modal-car-detail #modalBodyCarDetailMerk').text(detailCar.merk);
                 $('#modal-car-detail #modalBodyCarDetailHarga').text(
-                    `Rp. ${detailCar.harga} / ${detailCar.satuan}`);
-                $('#modal-car-detail #modalBodyCarDetailDenda').text(`Rp. ${detailCar.denda}`);
+                    `Rp. ${detailCar.harga.toLocaleString('en-US')} / ${detailCar.satuan}`);
+                $('#modal-car-detail #modalBodyCarDetailDenda').text(`Rp. ${detailCar.denda.toLocaleString('en-US')}`);
 
                 let carsDetail = [];
                 $.each(detailCar.detail_mobils, function(key, value) {

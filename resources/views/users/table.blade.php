@@ -8,7 +8,7 @@
                 <th>Email</th>
                 <th>Role</th>
                 <th>Alamat</th>
-                <th aria-colspan="3">Action</th>
+                <th aria-colspan="3">Aksi</th>
             </tr>
         </thead>
         <tbody>
