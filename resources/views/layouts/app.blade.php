@@ -71,12 +71,11 @@
 
         <ul class="nav navbar-nav ml-auto">
             {{-- Notify --}}
-            <li class="dropdown dropdown-list-toggle show" id="notification">
-                <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"
-                    aria-expanded="true"><i class="fa fa-bell"></i></a>
-
+            <li class="nav-item dropdown dropdown-list-toggle " id="notification">
+                <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg"
+                    aria-expanded="true"><i class="fa fa-bell"></i>
+                </a>
             </li>
-
             <li class="nav-item dropdown">
                 <a class="nav-link" style="margin-right: 10px" data-toggle="dropdown" href="#" role="button"
                     aria-haspopup="true" aria-expanded="false">
@@ -162,7 +161,12 @@ https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js
             type: "GET",
             url: "{{ route('notifications.index') }}",
             success: function(response) {
-                $('#notification').append(response);
+                if (response.data.count != 0) {
+                    $('#notification a').append(
+                        ` <span class="badge rounded-pill position-absolute top-0 end-0 badge-danger">${response.data.count}</span>`
+                    );
+                    $('#notification').append(response.data.html);
+                }
             }
         });
     })

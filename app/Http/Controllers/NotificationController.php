@@ -15,13 +15,26 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        if (Auth::guard('pelanggan')->check()) {
-            $notifications = NotificationService::getNotify(Auth::guard('pelanggan')->user()->id);
-        } else {
-            $notifications = NotificationService::getNotify();
+        try {
+            if (Auth::guard('pelanggan')->check()) {
+                $notifications = NotificationService::getNotify(Auth::guard('pelanggan')->user()->id);
+            } else {
+                $notifications = NotificationService::getNotify();
+            }
+            $html = View::make('layouts.notification', compact('notifications'));
+            return response([
+                'message' => 'success',
+                'data' => [
+                    'count' => $notifications->count(),
+                    'html' => $html->render()
+                ]
+            ], 200);
+            // return View::make('layouts.notification', compact('notifications'));
+        } catch (\Throwable $th) {
+            return response([
+                'message' => $th->getMessage()
+            ], 500);
         }
-
-        return View::make('layouts.notification', compact('notifications'));
     }
 
 
