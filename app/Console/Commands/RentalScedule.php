@@ -53,7 +53,7 @@ class RentalScedule extends Command
                 Log::info($value->id . ' - change status pemesanan (batal) 1');
                 $this->info($value->id . ' - change status pemesanan (batal)');
                 NotificationService::add("pelanggan", $rental->pelanggan_id, "Pembatalan rental", "Rental dengan  " . $value->detailMobil->mobil->nama . " telah dibatalkan karena tidak melakukan pembayaran dalam waktu 5 menit setelah melakukan pemesanan", route('pelangan.rentals.index'));
-            } 
+            }
         }
         // notify pada pelanggan 30 menit sebelum berjalan
         $rental = Rental::where('status', 'pemesanan')->where('waktu_mulai',  (Carbon::now()->timestamp+ 1800))->get();
