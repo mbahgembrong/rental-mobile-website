@@ -253,7 +253,7 @@
             <script>
                 $(function() {
                     const grand_total =
-                        {{ $rental->detailPembayaran()->orderBy('created_at', 'DESC')->first()->kurang ?? $rental->grand_total }};
+                        {{ $kurangBayar }};
                     $('#form_bayar').on('keyup', 'input', function(e) {
                         const bayar = $(this).val();
                         const kembalian = $('#form_kembalian input');
