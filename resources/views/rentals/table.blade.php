@@ -8,7 +8,7 @@
                 <th>Sopir</th>
                 <th>Waktu Mulai</th>
                 <th>Waktu Selesai</th>
-                <th>Jenis Transaksi</th>
+                {{-- <th>Jenis Transaksi</th> --}}
                 <th>Status</th>
                 <th>Status Pembayaran</th>
                 <th>Grand Total</th>
@@ -27,9 +27,9 @@
                     <td>{{ isset($rental->sopir_id) ? $rental->sopir->nama : '-' }}</td>
                     <td>{{ date('d/m/Y H:m:i', $rental->waktu_mulai) }}</td>
                     <td>{{ date('d/m/Y H:m:i', $rental->waktu_selesai) }}</td>
-                    <td> <span
+                    {{-- <td> <span
                             class="badge bg-{{ $rental->jenis_transaksi == 'offline' ? 'success' : 'primary' }}">{{ $rental->jenis_transaksi }}</span>
-                    </td>
+                    </td> --}}
                     <td> <span
                             class="badge bg-{{ $rental->status == 'pemesanan' ? 'primary' : ($rental->status == 'berjalan' ? 'secondary' : ($rental->status == 'selesai' ? 'success' : ($rental->status == 'terlambat' ? 'warning' : 'danger'))) }}">{{ $rental->status }}{{ $rental->status == 'telambat' ? ' : ' . $rental->denda : '' }}</span>
                     </td>
