@@ -75,7 +75,7 @@ class RentalController extends AppBaseController
         $input = $request->all();
         $input["waktu_peminjaman"] = Carbon::now()->timestamp;
         $input["waktu_mulai"] = Carbon::createFromFormat('Y-m-d H:i:s', $input['waktu_mulai'])->timestamp;
-        // $input["waktu_selesai"] = Carbon::createFromFormat('Y-m-d H:i:s', $input['waktu_selesai'])->timestamp;
+        $input["waktu_selesai"] = Carbon::createFromFormat('Y-m-d H:i:s', $input['waktu_selesai'])->timestamp;
         $input['waktu_denda'] = 0;
         $input['denda'] = 0;
 
