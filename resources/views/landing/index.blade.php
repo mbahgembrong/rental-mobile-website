@@ -69,12 +69,12 @@
                                     </script>
                                 @endpush
 
-                                <div class="form-group ml-2">
+                                {{-- <div class="form-group ml-2">
                                     <label for="waktu_selesai" class="label">Tanggal Selesai</label>
                                     <input type="text" class="form-control" name="waktu_selesai" id="waktu_selesai"
                                         placeholder="Date">
-                                </div>
-                                @push('scripts')
+                                </div> --}}
+                                {{-- @push('scripts')
                                     <script type="text/javascript">
                                         $('#waktu_selesai').datetimepicker({
                                             format: 'YYYY-MM-DD HH:mm:ss',
@@ -99,7 +99,7 @@
                                             $('#waktu_selesai').data('DateTimePicker').minDate(e.date);
                                         });
                                     </script>
-                                @endpush
+                                @endpush --}}
                                 <div class="form-group">
                                     <input type="submit" value="Sewa Mobil Sekarang" class="btn btn-secondary py-3 px-4">
                                 </div>

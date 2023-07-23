@@ -190,14 +190,14 @@
                             });
                             $('#form_mobil_id select').val("{{ $request->mobil_id }}").change()
                             $('#form_waktu_mulai').show();
-                            $('#form_waktu_selesai').show();
+                            // $('#form_waktu_selesai').show();
                         }
                     }
                 });
                 $('#waktu_mulai').data('DateTimePicker').minDate(moment('{{ $request->waktu_mulai }}'));
-                $('#waktu_selesai').data('DateTimePicker').minDate(moment('{{ $request->waktu_selesai }}'));
-                cekKetersediaanMobil("{{ $request->mobil_id }}", moment('{{ $request->waktu_mulai }}').unix(),
-                    moment('{{ $request->waktu_selesai }}').unix());
+                // $('#waktu_selesai').data('DateTimePicker').minDate(moment('{{ $request->waktu_selesai }}'));
+                // cekKetersediaanMobil("{{ $request->mobil_id }}", moment('{{ $request->waktu_mulai }}').unix(),
+                //     moment('{{ $request->waktu_selesai }}').unix());
             }
 
         })

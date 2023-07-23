@@ -75,7 +75,7 @@ class RentalController extends AppBaseController
         $input = $request->all();
         $input["waktu_peminjaman"] = Carbon::now()->timestamp;
         $input["waktu_mulai"] = Carbon::createFromFormat('Y-m-d H:i:s', $input['waktu_mulai'])->timestamp;
-        $input["waktu_selesai"] = Carbon::createFromFormat('Y-m-d H:i:s', $input['waktu_selesai'])->timestamp;
+        // $input["waktu_selesai"] = Carbon::createFromFormat('Y-m-d H:i:s', $input['waktu_selesai'])->timestamp;
         $input['waktu_denda'] = 0;
         $input['denda'] = 0;
 
@@ -270,7 +270,7 @@ class RentalController extends AppBaseController
                 'message' => 'Rental not found'
             ], 404);
         }
-        if ($request->status == 'selesai' && $rental->status_pembayaran != 'lunas') {
+        if (($request->status == 'selesai'|| $request->status == 'berjalan') && $rental->status_pembayaran != 'lunas') {
             return response([
                 'status' => 'error',
                 'message' => 'Rental Pembayaran belum lunas'
@@ -343,16 +343,17 @@ class RentalController extends AppBaseController
             return redirect(route('rentals.index'));
         }
         $rental->addon->each(function ($addon) {
-            $addon->delete();
+            $addon->forceDelete();
         });
+        $jumlah =0;
         foreach ($request->keterangan as $key => $keterangan) {
             $addon = new AddonRental;
             $addon->rental_id = $rental->id;
             $addon->keterangan = $keterangan;
             $addon->jumlah = $request->jumlah[$key];
+            $jumlah += $addon->jumlah;
             $addon->save();
         }
-        $jumlah = $rental->addon->sum('jumlah');
         $rental->grand_total = $rental->denda + $rental->total + $jumlah;
         $payment = $rental
             ->detailPembayaran()
