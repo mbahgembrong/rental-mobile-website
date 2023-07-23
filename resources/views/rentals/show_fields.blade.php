@@ -20,14 +20,14 @@
 <!-- Waktu Mulai Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('waktu_mulai', 'Waktu Mulai:') !!}
-    <p>{{ $rental->detailMobil->mobil->satuan == 'hari' ? date('d/m/Y', $rental->waktu_mulai) : date('d/m/Y H:i', $rental->waktu_mulai) }}
+    <p>{{ $rental->detailMobil->mobil->satuan == 'hari' ? date('d/m/Y  H:m:i', $rental->waktu_mulai) : date('d/m/Y H:i', $rental->waktu_mulai) }}
     </p>
 </div>
 
 <!-- Waktu Selesai Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('waktu_selesai', 'Waktu Selesai:') !!}
-    <p>{{ $rental->detailMobil->mobil->satuan == 'hari' ? date('d/m/Y', $rental->waktu_selesai) : date('d/m/Y H:i', $rental->waktu_selesai) }}
+    <p>{{ $rental->detailMobil->mobil->satuan == 'hari' ? date('d/m/Y  H:m:i', $rental->waktu_selesai) : date('d/m/Y H:i', $rental->waktu_selesai) }}
     </p>
 </div>
 @if ($rental->waktu_denda > 0)

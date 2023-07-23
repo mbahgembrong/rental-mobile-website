@@ -25,8 +25,8 @@
                     <td>{{ $rental->pelanggan->nama }}</td>
                     <td>{{ $rental->detailMobil->mobil->nama . ' / ' . $rental->detailMobil->plat }}</td>
                     <td>{{ isset($rental->sopir_id) ? $rental->sopir->nama : '-' }}</td>
-                    <td>{{ date('d/m/Y', $rental->waktu_mulai) }}</td>
-                    <td>{{ date('d/m/Y', $rental->waktu_selesai) }}</td>
+                    <td>{{ date('d/m/Y H:m:i', $rental->waktu_mulai) }}</td>
+                    <td>{{ date('d/m/Y H:m:i', $rental->waktu_selesai) }}</td>
                     <td> <span
                             class="badge bg-{{ $rental->jenis_transaksi == 'offline' ? 'success' : 'primary' }}">{{ $rental->jenis_transaksi }}</span>
                     </td>
