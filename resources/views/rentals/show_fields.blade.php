@@ -263,7 +263,7 @@
                             // $('input[type="submit"]').prop('disabled', false);
                         } else {
                             $('label[for="kembalian"]').text('Kurang Bayar : ')
-                            kembalian.val(`Rp. - ${(grand_total - bayar).toLocaleString('en-US')}`);
+                            kembalian.val(`Rp. - ${(grand_total - bayar).toLocaleString('id-ID')}`);
                             // $('input[type="submit"]').prop('disabled', true);
                         }
                     })

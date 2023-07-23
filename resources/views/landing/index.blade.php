@@ -271,9 +271,9 @@
                 $('#modal-car-detail #modalBodyCarDetailJenis').text(detailCar.jenis);
                 $('#modal-car-detail #modalBodyCarDetailMerk').text(detailCar.merk);
                 $('#modal-car-detail #modalBodyCarDetailHarga').text(
-                    `Rp. ${detailCar.harga.toLocaleString('en-US')} / ${detailCar.satuan}`);
+                    `Rp. ${detailCar.harga.toLocaleString('id-ID')} / ${detailCar.satuan}`);
                 $('#modal-car-detail #modalBodyCarDetailDenda').text(
-                    `Rp. ${detailCar.denda.toLocaleString('en-US')}`);
+                    `Rp. ${detailCar.denda.toLocaleString('id-ID')}  / ${detailCar.satuan}`);
 
                 let carsDetail = [];
                 $.each(detailCar.detail_mobils, function(key, value) {
