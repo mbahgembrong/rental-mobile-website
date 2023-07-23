@@ -235,7 +235,7 @@
             @else
                 <div class="form-group col-sm-12" id="form_bayar">
                     {!! Form::label('bayar', 'Bayar:') !!}
-                    {!! Form::number('bayar', $rental->grand_total, ['class' => 'form-control']) !!}
+                    {!! Form::number('bayar', $kurangBayar, ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group col-sm-12" id="form_kembalian">
                     {!! Form::label('kembalian', 'Kembalian:') !!}
