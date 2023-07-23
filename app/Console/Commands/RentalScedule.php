@@ -42,6 +42,7 @@ class RentalScedule extends Command
      */
     public function handle()
     {
+        // status pembatalan 5 menit diambil dari second
         $rental = Rental::where('status', 'pemesanan')->where('waktu_peminjaman', '<=', (Carbon::now()->timestamp - 300))->get();
         // prin in console
         Log::info('change status pemesanan');

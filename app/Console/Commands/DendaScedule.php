@@ -41,7 +41,8 @@ class DendaScedule extends Command
      */
     public function handle()
     {
-        $rental = Rental::whereIn('status', ['berjalan', 'terlambat'])->where('waktu_selesai', '<', (Carbon::now()->timestamp + 30))->get();
+        // toleransi waktu denda 30 menit diambil dari second
+        $rental = Rental::whereIn('status', ['berjalan', 'terlambat'])->where('waktu_selesai', '<', (Carbon::now()->timestamp + 1800))->get();
         foreach ($rental as $rental) {
             $rental->status = 'terlambat';
             $rental->status_pembayaran = 'belum';
