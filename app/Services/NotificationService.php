@@ -27,7 +27,7 @@ class NotificationService
 
     public static function isTerlambatNotify($pelangganId, $rentalId)
     {
-        $notification = Notification::where('pelanggan_id', $pelangganId)->where('role', 'pelanggan')->where('title', 'Terlambat')->where('message', 'Rental dengan id ' . $rentalId . ' telah terlambat')->first();
+        $notification = Notification::where('pelanggan_id', $pelangganId)->where('role', 'pelanggan')->where('title', 'Terlambat')->where('message', 'Rental dengan ' . $rentalId . ' telah terlambat')->first();
         if ($notification != null)
             return true;
         else

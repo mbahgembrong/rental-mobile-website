@@ -169,6 +169,31 @@ https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js
                 }
             }
         });
+        $('#notification a').click(function(e) {
+            e.preventDefault();
+            console.log($('#notificationsDropdown').hasClass('show'));
+            if ($('#notificationsDropdown').hasClass('show')) {
+                $('#notificationsDropdown').removeClass('show');
+            } else {
+                $('#notificationsDropdown').addClass('show');
+            }
+        });
+        setInterval(() => {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('notifications.index') }}",
+                success: function(response) {
+                    if (response.data.count != 0) {
+                        $('#notificationsDropdown').remove();
+                        $('#notification a span').remove();
+                        $('#notification a').append(
+                            ` <span class="badge rounded-pill position-absolute top-0 end-0 badge-danger">${response.data.count}</span>`
+                        );
+                        $('#notification').append(response.data.html);
+                    }
+                }
+            });
+        }, 60000);
     })
 </script>
 

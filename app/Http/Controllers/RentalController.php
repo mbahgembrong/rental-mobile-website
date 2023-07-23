@@ -88,7 +88,7 @@ class RentalController extends AppBaseController
                 "admin",
                 null,
                 "Pemesanan Rental",
-                "Rental dengan id " . $rental->id . " telah melakukan pemesanan",
+                "Rental dengan " . $rental->detailMobil->mobil->nama . " telah melakukan pemesanan",
                 route('rentals.show',  $rental->id)
             );
             return redirect(route('pelangan.rentals.index'));
@@ -224,7 +224,7 @@ class RentalController extends AppBaseController
                 "admin",
                 null,
                 "Pembayaran Rental",
-                "Rental dengan id " . $rental->id . " telah melakukan pembayaran",
+                "Rental dengan " . $rental->detailMobil->mobil->nama . " telah melakukan pembayaran",
                 route('rentals.bayar', ['id' => $rental->id])
             );
             return redirect(route('pelangan.rentals.index'));
@@ -256,7 +256,7 @@ class RentalController extends AppBaseController
             "pelanggan",
             $rental->pelanggan_id,
             "Pembayaran Rental",
-            "Rental dengan id " . $rental->id . " telah divalidasi",
+            "Rental dengan " . $rental->detailMobil->mobil->nama . " telah divalidasi",
             route('pelangan.rentals.index')
         );
         return redirect(route('rentals.index'));
@@ -270,7 +270,7 @@ class RentalController extends AppBaseController
                 'message' => 'Rental not found'
             ], 404);
         }
-        if (($request->status == 'selesai'|| $request->status == 'berjalan') && $rental->status_pembayaran != 'lunas') {
+        if (($request->status == 'selesai' || $request->status == 'berjalan') && $rental->status_pembayaran != 'lunas') {
             return response([
                 'status' => 'error',
                 'message' => 'Rental Pembayaran belum lunas'
@@ -345,7 +345,7 @@ class RentalController extends AppBaseController
         $rental->addon->each(function ($addon) {
             $addon->forceDelete();
         });
-        $jumlah =0;
+        $jumlah = 0;
         foreach ($request->keterangan as $key => $keterangan) {
             $addon = new AddonRental;
             $addon->rental_id = $rental->id;
@@ -392,8 +392,9 @@ class RentalController extends AppBaseController
         if ($rental->status != 'batal') {
             $rental->status = 'batal';
             $rental->save();
-
             Flash::success('Rental canceled successfully.');
+            // if (!Auth::guard('pelanggan')->check())
+            //     NotificationService::add("pelanggan", $rental->pelanggan_id, "Pembatalan rental", "Rental dengan  " . $rental->detailMobil->mobil->nama . " telah dibatalkan karena dibatalkan oleh admin", route('pelangan.rentals.index'));
         } else {
             $rental->delete();
             Flash::success('Rental deleted successfully.');

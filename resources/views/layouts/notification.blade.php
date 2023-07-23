@@ -1,4 +1,4 @@
- <div class="dropdown-menu dropdown-list dropdown-menu-right ">
+ <div class="dropdown-menu dropdown-list dropdown-menu-right" id="notificationsDropdown">
      <div class="dropdown-header bg-light dark:bg-white dark:bg-opacity-10"><strong>You have
              {{ $notifications->count() }}
              messages</strong></div>
@@ -13,6 +13,5 @@
      @endforeach
 
      {{--  --}}
-     <a class="dropdown-item text-center border-top" href="#"><strong>View all
-             messages</strong></a>
+     <a class="dropdown-item text-center border-top" ><strong></strong></a>
  </div>
