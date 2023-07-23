@@ -246,7 +246,7 @@ class RentalController extends AppBaseController
         $detailPembayaran = $rental->detailPembayaran()->whereNull('user_validasi_id')->first();
         $detailPembayaran->user_validasi_id = Auth::user()->id;
         $detailPembayaran->save();
-        $totalBayar = $rental->detailPembayaran()->sum('jumlah');
+        $totalBayar = $rental->detailPembayaran()->whereNotNull('user_validasi_id')->sum('jumlah');
         if ($totalBayar >= $rental->grand_total) {
             $rental->status_pembayaran = 'lunas';
             $rental->save();
